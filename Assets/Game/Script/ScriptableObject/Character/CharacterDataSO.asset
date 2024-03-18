@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae802b816f37d3d44bf119202e3a2c17, type: 3}
+  m_Name: CharacterDataSO
+  m_EditorClassIdentifier: 
+  characterDataList:
+  - characterType: 0
+    characterModelPrefab: {fileID: 1265346787747520, guid: 33327bc9948cc644ca0f4b1963219c08, type: 3}
+    health: 100
+    damage: 5
+    movementSpeed: 5
+    characterCost: 0
+    basicSkill: {fileID: 11400000, guid: 2a2e14efdef64d840a1018a87fc01458, type: 2}
+  - characterType: 1
+    characterModelPrefab: {fileID: 921037747157138857, guid: d06151b1df32db7489e2b391db88d7ee, type: 3}
+    health: 90
+    damage: 10
+    movementSpeed: 6
+    characterCost: 1000
+    basicSkill: {fileID: 11400000, guid: 504be9e284d61a145828ad7f57375435, type: 2}
+  - characterType: 2
+    characterModelPrefab: {fileID: 3537138265564915085, guid: e58f98123e4ff9a4abc5bdeb41666b63, type: 3}
+    health: 80
+    damage: 8
+    movementSpeed: 3
+    characterCost: 500
+    basicSkill: {fileID: 11400000, guid: 2a2e14efdef64d840a1018a87fc01458, type: 2}

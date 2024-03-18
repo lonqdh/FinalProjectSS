@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77f8b2c47046a84e88382359c24313e, type: 3}
+  m_Name: MaleGoblinSkill
+  m_EditorClassIdentifier: 
+  chargeEffectPrefab: {fileID: 3274725942559288099, guid: b2bf381784d555348881d0fd477a21d4, type: 3}
+  skillType: 0
+  skillName: MaleGoblinSkill
+  description: basic male goblin enemy skill
+  damage: 5
+  cooldown: 3
+  projectile: {fileID: 261340076083426675, guid: fd6515b973220634fb68b104a8915686, type: 3}
+  projectileSpeed: 2
