@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: fcca3979b2faa7942b97b6f126b33e96
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - skillData: {instanceID: 0}
+  - attacker: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

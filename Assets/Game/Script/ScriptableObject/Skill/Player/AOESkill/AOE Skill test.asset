@@ -16,7 +16,8 @@ MonoBehaviour:
   skillType: 1
   skillName: orbital beam
   description: xx
-  damage: 0
+  damage: 3
   cooldown: 3
+  castTime: 2
   aoeSkill: {fileID: 4807201907434721570, guid: 50dc3d09cb896c44ab37cb16cb25db80, type: 3}
   radius: 3

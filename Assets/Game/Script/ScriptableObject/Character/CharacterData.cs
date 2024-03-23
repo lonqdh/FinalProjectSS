@@ -21,4 +21,6 @@ public class CharacterData
     public int characterCost;
 
     public SkillData basicSkill;
+    //public Skill basicSkill;
+
 }

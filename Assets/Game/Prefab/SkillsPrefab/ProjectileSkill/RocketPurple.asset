@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77f8b2c47046a84e88382359c24313e, type: 3}
+  m_Name: RocketPurple
+  m_EditorClassIdentifier: 
+  chargeEffectPrefab: {fileID: 0}
+  skillType: 0
+  skillName: PurpleRocket
+  description: 
+  damage: 20
+  cooldown: 8
+  castTime: 1
+  attacker: {fileID: 0}
+  projectile: {fileID: 3674368389280433376, guid: b19eb620c1f17fe41961e296599d3f8e, type: 3}
+  maxDistance: 20
+  projectileSpeed: 280

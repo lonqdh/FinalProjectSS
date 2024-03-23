@@ -21,6 +21,7 @@ public class EnemyData
     public float movementSpeed;
     public SkillData enemySkill;
     public int enemyLevel; // de thiet lap spawn dua tren progress cua match
+    public float attackRange;
 
     //public SkillData basicSkill;
 }

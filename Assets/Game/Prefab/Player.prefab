@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6696098310313123017}
   - component: {fileID: 2130835464417292881}
   - component: {fileID: 374344107484676928}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ChargePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,20 +116,24 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 100018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.04
+      value: 4.7164307
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.057731118
+      value: 0.100805
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60.5
+      value: 2.1490974
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalRotation.w
@@ -331,7 +335,7 @@ MonoBehaviour:
   RotateTowardMouse: 1
   RotationSpeed: 5
   Camera: {fileID: 0}
-  gravityScale: 6
+  gravityScale: 20
 --- !u!95 &10605917844715231 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: d288a0e4a2d923b46898986e979da643, type: 3}

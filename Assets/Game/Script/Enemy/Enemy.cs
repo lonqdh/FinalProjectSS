@@ -1,33 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
+using Lean.Pool;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class Enemy : Character
 {
     [SerializeField] internal EnemyData enemyData;
     private IState<Enemy> currentState;
-    [SerializeField] private Player target;
-    [SerializeField] private float enemyAttackRange;
+    public Player target;
     public NavMeshAgent agent;
-    public bool isAttacking;
+    //public bool isAttacking;
+    internal SkillData skill;
+    [SerializeField] private float rotateSpeed = 5f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        target = LevelManager.Instance.player;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (!IsDead && GameManager.Instance.IsState(GameState.Gameplay))
+        //{
+        //base.Update();
+        if (target != null)
+        {
+            // Calculate the direction vector from the enemy to the target
+            Vector3 targetDirection = (target.transform.position - transform.position).normalized;
+
+            // Ignore the y-component to keep the enemy's rotation level
+            targetDirection.y = 0f;
+
+            // Rotate the enemy towards the target direction
+            if (targetDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            }
+            //transform.LookAt(target.transform);
+        }
+
+        if (currentState != null)
+        {
+            currentState.OnExecute(this);
+        }
+
+        //thang duoi nay de freeze bot until vao game
+        //if (currentState != null && GameManager.Instance.IsState(GameState.Gameplay))
+        //{
+        //    currentState.OnExecute(this);
+        //}
+
+        //DetectEnemies();
+        //}
     }
 
     void OnDespawn()
     {
+        LeanPool.Despawn(this);
         LevelManager.Instance.killCount++;
     }
 
@@ -36,33 +68,14 @@ public class Enemy : Character
     public void OnInit(EnemyData enemyData)
     {
         this.enemyData = enemyData;
-        this.enemyData.enemyType = enemyData.enemyType;
-        this.enemyData.damage = enemyData.damage;
-        this.enemyData.health = enemyData.health;
-        //this.enemyData.enemyModelPrefab = enemyData.enemyModelPrefab;
-        this.enemyData.movementSpeed = enemyData.movementSpeed;
-        this.enemyData.enemySkill = enemyData.enemySkill;
-
+        this.health = enemyData.health;
+        this.damage = enemyData.damage;
+        this.movementSpeed = enemyData.movementSpeed;
+        skill = enemyData.enemySkill;
         ChangeState(new ChaseState());
     }
 
-    //protected override void Attack(Transform target)
-    //{
-    //    base.Attack(target);
-    //    StartCoroutine(ResumePatrolling());
-    //}
-
-    //private IEnumerator ResumePatrolling()
-    //{
-    //    yield return new WaitForSeconds(2f);
-
-    //    isAttacking = false;
-    //    if (!IsDead)
-    //    {
-    //        agent.isStopped = false;
-    //        ChangeState(new PatrolState());
-    //    }
-    //}
+  
 
     public void ChangeState(IState<Enemy> state)
     {

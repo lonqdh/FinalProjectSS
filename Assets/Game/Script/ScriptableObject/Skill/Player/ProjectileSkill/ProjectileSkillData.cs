@@ -1,3 +1,5 @@
+using Lean.Common;
+using Lean.Pool;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,43 +9,43 @@ using UnityEngine;
 //[Serializable]
 public class ProjectileSkillData : SkillData
 {
-    //public GameObject impactParticle;
-    //public GameObject projectileParticle;
-    //public GameObject muzzleParticle;
-    //public GameObject[] trailParticles;
-    //public GameObject projectilePrefab;
-
-
-    //public Projectile projectile;
-    //[Header("Adjust if not using Sphere Collider")]
-    //public float colliderRadius = 1f;
-    //[Range(0f, 1f)]
-    //public float collideOffset = 0.15f;
-    //public string skillName;
-    //public SkillType skillType;
-    //public int damage;
-    //public float cooldown;
-
-
     public Projectile projectile;
+    public float maxDistance;
     public float projectileSpeed;
 
-    public override void Activate(Vector3 position, Transform chargePos)
+    public override void Activate(Vector3 position, Transform chargePos, Character attacker)
     {
-        throw new NotImplementedException();
+        // //Calculate the direction towards the target position
+        //Vector3 direction = (position - chargePos.position).normalized;
+
+        // // Instantiate the projectile with the correct rotation
+        // Projectile newProjectile = Instantiate(projectile, chargePos.position, Quaternion.LookRotation(direction));
+        // this.attacker = attacker;
+        // newProjectile.rb.AddForce(direction * projectileSpeed);
+
+
+        // Debug.Log("Attacker : " + this.attacker);
+
+        Vector3 direction = (position - chargePos.position).normalized;
+
+        // Ensure the vertical component of the direction is not negative (pointing downward)
+        //direction.y = Mathf.Max(direction.y, 0f);
+
+        direction.y = 0; // set cho projectile luon luon bay 1 duong thang neu projectile khong useGravity
+
+        // Normalize the direction vector
+        direction.Normalize();
+
+        // Instantiate the projectile with the correct rotation
+        Projectile newProjectile = Instantiate(projectile, chargePos.position, Quaternion.LookRotation(direction));
+
+        // Set the attacker of the projectile
+        newProjectile.attacker = attacker;
+
+        // Apply force to the projectile in the modified direction
+        newProjectile.rb.AddForce(direction * projectileSpeed);
+
+        Debug.Log("Attacker: " + attacker);
     }
-
-
-
-    //public override void Activate(Vector3 position)
-    //{
-    //    // Implement projectile skill activation logic here
-    //    if (visualEffectPrefab != null)
-    //    {
-    //        Instantiate(visualEffectPrefab, position, Quaternion.identity);
-    //        Instantiate(projectile, position, Quaternion.identity);
-    //    }
-    //    // Implement projectile logic (e.g., instantiate and launch a projectile)
-    //    Debug.Log("Projectile skill activated!");
-    //}
+    
 }

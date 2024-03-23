@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e77f8b2c47046a84e88382359c24313e, type: 3}
-  m_Name: ProjectileSKillTest
+  m_Name: FireballRed
   m_EditorClassIdentifier: 
-  visualEffectPrefab: {fileID: 5182977674002597525, guid: b440a2f266fe8754eaa195b8082cad42, type: 3}
+  chargeEffectPrefab: {fileID: 0}
   skillType: 0
-  skillName: zz
-  description: xx
+  skillName: Fireball
+  description: 
+  damage: 5
   cooldown: 3
-  projectile: {fileID: 2636729735972633731, guid: dd4e55b467108e345952887dea56f0b3, type: 3}
-  projectileSpeed: 3
+  castTime: 1
+  projectile: {fileID: 5975958326143304557, guid: 5b39e173778831f4f8ab1cc2d41fff5d, type: 3}
+  maxDistance: 16
+  projectileSpeed: 200

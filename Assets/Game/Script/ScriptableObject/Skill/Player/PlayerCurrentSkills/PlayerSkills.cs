@@ -5,15 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player Skills", menuName = "Player/Player Skills")]
 public class PlayerSkills : ScriptableObject
 {
-    public List<SkillData> skills = new List<SkillData>();
+    public List<SkillData> currentSkills = new List<SkillData>();
     private const int MaxSkillCount = 6;
 
     // Method to add a skill to the player's skill list
     public void AddSkill(SkillData skill)
     {
-        if (skills.Count < MaxSkillCount)
+        if (currentSkills.Count < MaxSkillCount)
         {
-            skills.Add(skill);
+            currentSkills.Add(skill);
         }
         else
         {
@@ -24,9 +24,9 @@ public class PlayerSkills : ScriptableObject
     // Method to replace an existing skill with a new one
     public void ReplaceSkill(int index, SkillData newSkill)
     {
-        if (index >= 0 && index < skills.Count)
+        if (index >= 0 && index < currentSkills.Count)
         {
-            skills[index] = newSkill;
+            currentSkills[index] = newSkill;
         }
         else
         {
@@ -37,9 +37,9 @@ public class PlayerSkills : ScriptableObject
     // Method to activate a skill by index
     public void ActivateSkill(int index)
     {
-        if (index >= 0 && index < skills.Count)
+        if (index >= 0 && index < currentSkills.Count)
         {
-            SkillData skill = skills[index];
+            SkillData skill = currentSkills[index];
             // Implement skill activation logic here
             Debug.Log("Activating skill: " + skill.skillName);
         }
@@ -48,4 +48,50 @@ public class PlayerSkills : ScriptableObject
             Debug.LogWarning("Invalid skill index.");
         }
     }
+
+    
 }
+
+//public List<Skill> skills = new List<Skill>();
+    //private const int MaxSkillCount = 6;
+
+    //// Method to add a skill to the player's skill list
+    //public void AddSkill(Skill skill)
+    //{
+    //    if (skills.Count < MaxSkillCount)
+    //    {
+    //        skills.Add(skill);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("Cannot add more skills. Maximum skill count reached.");
+    //    }
+    //}
+
+    //// Method to replace an existing skill with a new one
+    //public void ReplaceSkill(int index, Skill newSkill)
+    //{
+    //    if (index >= 0 && index < skills.Count)
+    //    {
+    //        skills[index] = newSkill;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("Invalid skill index.");
+    //    }
+    //}
+
+    //// Method to activate a skill by index
+    //public void ActivateSkill(int index)
+    //{
+    //    if (index >= 0 && index < skills.Count)
+    //    {
+    //        Skill skill = skills[index];
+    //        // Implement skill activation logic here
+    //        Debug.Log("Activating skill: " + skill.skillData.skillName);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("Invalid skill index.");
+    //    }
+    //}

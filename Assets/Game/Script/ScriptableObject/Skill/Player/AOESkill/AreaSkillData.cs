@@ -19,7 +19,7 @@ public class AreaSkillData : SkillData
     public AreaOfEffect aoeSkill;
     public float radius;
 
-    public override void Activate(Vector3 position, Transform chargePos)
+    public override void Activate(Vector3 position, Transform chargePos, Character attacker)
     {
         // Implement area of effect skill activation logic here
         if (aoeSkill != null)
@@ -29,8 +29,8 @@ public class AreaSkillData : SkillData
             //    LeanPool.Spawn(chargeEffectPrefab.gameObject, chargePos.position, chargePos.rotation);
             //}
 
-            AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, position,aoeSkill.transform.rotation);
-            
+            AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, position, aoeSkill.transform.rotation);
+
             //Instantiate(visualEffectPrefab, position, Quaternion.identity);
         }
         // Implement area of effect logic (e.g., apply damage in an area)

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77f8b2c47046a84e88382359c24313e, type: 3}
+  m_Name: SkullMissilePurple
+  m_EditorClassIdentifier: 
+  chargeEffectPrefab: {fileID: 0}
+  skillType: 0
+  skillName: SkullMissile
+  description: 
+  damage: 16
+  cooldown: 5
+  castTime: 1
+  attacker: {fileID: 0}
+  projectile: {fileID: 373966260773400295, guid: 89f054daa309bbc4380e8a062c77bd9c, type: 3}
+  maxDistance: 20
+  projectileSpeed: 250
