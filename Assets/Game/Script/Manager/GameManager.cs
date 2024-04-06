@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
         //setup tong quan game
         //setup data
         ChangeState(GameState.MainMenu);
-            
+
         if (SaveManager.Instance.HasData<UserData>())
         {
             Debug.Log("Load Data");
@@ -32,12 +32,14 @@ public class GameManager : Singleton<GameManager>
             UserData = new UserData();
             SaveManager.Instance.SaveData(UserData);
         }
+        
     }
 
 
     public void ChangeState(GameState gameState)
     {
         state = gameState;
+        Debug.Log(state);
     }
 
     public bool IsState(GameState gameState)

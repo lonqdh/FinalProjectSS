@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: SkullMissilePurple
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: ae983a1b94209314287ecab790358682, type: 3}
   skillType: 0
   skillName: SkullMissile
   description: 
   damage: 16
   cooldown: 5
-  castTime: 1
-  attacker: {fileID: 0}
+  rangeRadius: 15
+  castTime: 2
   projectile: {fileID: 373966260773400295, guid: 89f054daa309bbc4380e8a062c77bd9c, type: 3}
   maxDistance: 20
   projectileSpeed: 250

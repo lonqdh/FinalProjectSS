@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: RocketPurple
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: a3dff7316e24a05458b5d55e665d31a1, type: 3}
   skillType: 0
   skillName: PurpleRocket
   description: 
   damage: 20
-  cooldown: 8
+  cooldown: 3
+  rangeRadius: 20
   castTime: 1
-  attacker: {fileID: 0}
   projectile: {fileID: 3674368389280433376, guid: b19eb620c1f17fe41961e296599d3f8e, type: 3}
   maxDistance: 20
   projectileSpeed: 280

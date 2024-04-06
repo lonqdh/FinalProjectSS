@@ -15,17 +15,25 @@ MonoBehaviour:
   enemyDataList:
   - enemyType: 0
     enemy: {fileID: 1899042223193882511, guid: bea62bf02be26a64d95f381df3ad3760, type: 3}
-    health: 100
+    health: 5
     damage: 5
-    movementSpeed: 3
+    movementSpeed: 2
     enemySkill: {fileID: 11400000, guid: 982a00e1f80b7a6479d85b738cf8cfc6, type: 2}
-    enemyLevel: 0
+    enemyLevel: 1
     attackRange: 3
   - enemyType: 1
     enemy: {fileID: 6732161313865444781, guid: ef76556b8d5c1e740a07f75412f18ed7, type: 3}
-    health: 80
+    health: 10
     damage: 8
+    movementSpeed: 2.5
+    enemySkill: {fileID: 11400000, guid: 747e4841a11131040b6f095484f9adaa, type: 2}
+    enemyLevel: 2
+    attackRange: 5
+  - enemyType: 1
+    enemy: {fileID: 3166922181812030084, guid: d1850093cf3c6644e80c26d62bf57ff2, type: 3}
+    health: 20
+    damage: 10
     movementSpeed: 3
-    enemySkill: {fileID: 11400000, guid: cc075173b759abf42b86836777c75be9, type: 2}
-    enemyLevel: 0
+    enemySkill: {fileID: 11400000, guid: 768c34d2bb0d8674fa894c3c491f5e81, type: 2}
+    enemyLevel: 3
     attackRange: 5

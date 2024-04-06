@@ -9,13 +9,6 @@ using UnityEngine;
 //[Serializable]
 public class AreaSkillData : SkillData
 {
-    //public GameObject visualEffectPrefab; // Visual effect to instantiate when the skill is activated
-    //public float radius; // Radius of the area of effect
-    //public string skillName;
-    //public SkillType skillType;
-    //public int damage;
-    //public float cooldown;
-
     public AreaOfEffect aoeSkill;
     public float radius;
 
@@ -24,16 +17,10 @@ public class AreaSkillData : SkillData
         // Implement area of effect skill activation logic here
         if (aoeSkill != null)
         {
-            //if(chargeEffectPrefab != null)
-            //{
-            //    LeanPool.Spawn(chargeEffectPrefab.gameObject, chargePos.position, chargePos.rotation);
-            //}
-
             AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, position, aoeSkill.transform.rotation);
-
-            //Instantiate(visualEffectPrefab, position, Quaternion.identity);
+            aoe.attacker = attacker;
         }
-        // Implement area of effect logic (e.g., apply damage in an area)
-        Debug.Log("Area of effect skill activated!");
+        
     }
 }
+

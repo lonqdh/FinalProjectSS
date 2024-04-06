@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8388824042253830261}
   - component: {fileID: 9314585149800557}
   - component: {fileID: 8640849908481229277}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StormMissile
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.35
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8640849908481229277
 MonoBehaviour:
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: 747e4841a11131040b6f095484f9adaa, type: 2}
+  attacker: {fileID: 0}
   impactParticle: {fileID: 2695938950007877682, guid: 56cd45f92f23796489f7cd4d407ac05f, type: 3}
   projectileParticle: {fileID: 2434221572446746926, guid: 725c884c28608694ba0541587358ca48, type: 3}
   muzzleParticle: {fileID: 205910734199310658, guid: 5b1aff045981d6e429f7c17a0456ae31, type: 3}

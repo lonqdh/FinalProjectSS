@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1951404528731691565}
   - component: {fileID: 4884003362221584371}
   - component: {fileID: 5975958326143304557}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireballRed
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.15
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5975958326143304557
 MonoBehaviour:
@@ -103,4 +103,3 @@ MonoBehaviour:
   colliderRadius: 1
   collideOffset: 0.15
   rb: {fileID: 1951404528731691565}
-  upwardOffsetValue: 30

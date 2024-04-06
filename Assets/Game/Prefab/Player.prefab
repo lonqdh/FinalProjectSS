@@ -125,15 +125,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.7164307
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.100805
+      value: 0.992
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.1490974
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_LocalRotation.w
@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 11e6035fa80aef1428ec1ed6cf4dd782, type: 2}
+    - target: {fileID: 9500000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -236,6 +240,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6142845113714467692}
+    - targetCorrespondingSourceObject: {fileID: 100018, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7491137782708315993}
   m_SourcePrefab: {fileID: 100100000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
 --- !u!4 &10605917836957997 stripped
 Transform:
@@ -322,22 +329,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeSkillPos: {fileID: 6696098310313123017}
+  health: 90
+  damage: 10
+  movementSpeed: 6
+  rb: {fileID: 4093208060074656154}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  anim: {fileID: 0}
+  isAlive: 1
   characterData:
-    characterType: 0
-    characterModelPrefab: {fileID: 0}
-    health: 0
-    damage: 0
-    movementSpeed: 0
-    characterCost: 0
-    basicSkill: {fileID: 0}
+    characterType: 1
+    characterModelPrefab: {fileID: 921037747157138857, guid: d06151b1df32db7489e2b391db88d7ee, type: 3}
+    health: 90
+    damage: 10
+    movementSpeed: 6
+    characterCost: 1000
+    basicSkill: {fileID: 11400000, guid: 27567ac3e2f59ee40a23d54dd6b0ba36, type: 2}
+  playerSkills: {fileID: 11400000, guid: 4bd0c94d0e0fe674b8d6b22508f72dda, type: 2}
   characterModelInstance: {fileID: 0}
-  anim: {fileID: 10605917844715231}
   RotateTowardMouse: 1
   RotationSpeed: 5
   Camera: {fileID: 0}
   gravityScale: 20
---- !u!95 &10605917844715231 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
-  m_PrefabInstance: {fileID: 10605917837345727}
+  playerExperience: {fileID: 7491137782708315993}
+  healthBar: {fileID: 0}
+  experienceBar: {fileID: 0}
+  skillCooldownUIList: []
+--- !u!114 &7491137782708315993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10605917837444365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9501ab8507b296042acc8443cd2fcd76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  currentExp: 0
+  expToLevelUp: 10

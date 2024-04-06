@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AntiMatterMissile
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: a5f46431495700544b5f1cf51c66eccb, type: 3}
   skillType: 0
   skillName: AntiMatterMissile
   description: 

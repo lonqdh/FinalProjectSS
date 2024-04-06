@@ -1,9 +1,10 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Player Skills", menuName = "Player/Player Skills")]
-public class PlayerSkills : ScriptableObject
+//[CreateAssetMenu(fileName = "New Player Skills", menuName = "Player/Player Skills")]
+public class PlayerSkills : Singleton<PlayerSkills>
 {
     public List<SkillData> currentSkills = new List<SkillData>();
     private const int MaxSkillCount = 6;
@@ -14,11 +15,25 @@ public class PlayerSkills : ScriptableObject
         if (currentSkills.Count < MaxSkillCount)
         {
             currentSkills.Add(skill);
+
+            //UIManager.Instance.acquiredSkillImageList.Add(skill.skillIcon);
+            var newSkill = Instantiate(UIManager.Instance.acquiredSkillPrefab);
+            newSkill.transform.SetParent(UIManager.Instance.acquiredSkillGroup.transform);
+            newSkill.sprite = skill.skillIcon;
+            //newSkill.GetComponent<SkillCooldown>().skill = skill;
+            //newSkill.GetComponent<SkillCooldown>().skillIcon.sprite = newSkill.sprite;
+            //newSkill.GetComponent<SkillCooldown>().cooldownTime = skill.cooldown;
+
+
+            //var newSkillCooldownUI = newSkill.GetComponent<SkillCooldown>();
+            //newSkillCooldownUI.skillIcon.sprite = newSkill.sprite;
+            //newSkillCooldownUI.cooldownTime = skill.cooldown;
         }
-        else
-        {
-            Debug.LogWarning("Cannot add more skills. Maximum skill count reached.");
-        }
+        //else
+        //{
+        //    int skillIndexInList = currentSkills.IndexOf(skill);
+        //    ReplaceSkill(skillIndexInList, skill);
+        //}
     }
 
     // Method to replace an existing skill with a new one
@@ -51,47 +66,3 @@ public class PlayerSkills : ScriptableObject
 
     
 }
-
-//public List<Skill> skills = new List<Skill>();
-    //private const int MaxSkillCount = 6;
-
-    //// Method to add a skill to the player's skill list
-    //public void AddSkill(Skill skill)
-    //{
-    //    if (skills.Count < MaxSkillCount)
-    //    {
-    //        skills.Add(skill);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Cannot add more skills. Maximum skill count reached.");
-    //    }
-    //}
-
-    //// Method to replace an existing skill with a new one
-    //public void ReplaceSkill(int index, Skill newSkill)
-    //{
-    //    if (index >= 0 && index < skills.Count)
-    //    {
-    //        skills[index] = newSkill;
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Invalid skill index.");
-    //    }
-    //}
-
-    //// Method to activate a skill by index
-    //public void ActivateSkill(int index)
-    //{
-    //    if (index >= 0 && index < skills.Count)
-    //    {
-    //        Skill skill = skills[index];
-    //        // Implement skill activation logic here
-    //        Debug.Log("Activating skill: " + skill.skillData.skillName);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Invalid skill index.");
-    //    }
-    //}

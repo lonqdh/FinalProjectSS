@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 801449412756729954}
   - component: {fileID: 1711920608187138724}
   - component: {fileID: 7479196049573954005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4918,7 +4918,7 @@ GameObject:
   - component: {fileID: 552318597533413233}
   - component: {fileID: 2422343107756428189}
   - component: {fileID: 4276977633196173762}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChargeupDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9785,7 +9785,7 @@ GameObject:
   - component: {fileID: 6697327464944869118}
   - component: {fileID: 707440345122978088}
   - component: {fileID: 3966340063093934900}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14692,7 +14692,7 @@ GameObject:
   - component: {fileID: 6644386901710682645}
   - component: {fileID: 2759484325221287442}
   - component: {fileID: 7530818321938133450}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireDustFlat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19600,9 +19600,11 @@ GameObject:
   - component: {fileID: 4715250478095068125}
   - component: {fileID: 1478355346972860685}
   - component: {fileID: 4807201907434721570}
-  m_Layer: 0
+  - component: {fileID: 4627170390864974084}
+  - component: {fileID: 8751875224878014783}
+  m_Layer: 7
   m_Name: OrbitalBeamScarlet
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19615,7 +19617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5970938864607659780}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19630,7 +19632,7 @@ Transform:
   - {fileID: 8249799432175131983}
   - {fileID: 9128480723556690283}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &4715250478095068125
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -24508,6 +24510,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0733fa16803914cb0f00586689c496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillData: {fileID: 11400000, guid: 504be9e284d61a145828ad7f57375435, type: 2}
+  attacker: {fileID: 0}
+--- !u!136 &4627170390864974084
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5970938864607659780}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 6.5
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.95}
+--- !u!54 &8751875224878014783
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5970938864607659780}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6117731402406519553
 GameObject:
   m_ObjectHideFlags: 0
@@ -24519,7 +24573,7 @@ GameObject:
   - component: {fileID: 8249799432175131983}
   - component: {fileID: 3450016864738818969}
   - component: {fileID: 2368317164539673688}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EndDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29444,7 +29498,7 @@ GameObject:
   - component: {fileID: 2898099629209212142}
   - component: {fileID: 4704016946466591824}
   - component: {fileID: 1129801992593635922}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireCone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34440,7 +34494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9128480723556690283}
   - component: {fileID: 1585737321581807794}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackRangeRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34525,7 +34579,7 @@ GameObject:
   - component: {fileID: 8499547184988241572}
   - component: {fileID: 3397516556820565907}
   - component: {fileID: 7586164273213504420}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39621,7 +39675,7 @@ GameObject:
   - component: {fileID: 1750214708023108139}
   - component: {fileID: 3866698438088941808}
   - component: {fileID: 8017318839949634104}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChargeupOuter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

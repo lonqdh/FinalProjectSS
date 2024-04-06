@@ -20,6 +20,11 @@ public class Projectile : Skill
     private float rad;
     private float dist;
     private Vector3 dir;
+    private int experienceLayerNum = 8;
+    private int skillLayerNum = 7;
+
+
+    //public Character shooter;
 
     //public int projectileSpeed;
 
@@ -56,25 +61,28 @@ public class Projectile : Skill
 
         if (Physics.SphereCast(transform.position, rad, dir, out hit, dist))
         {
-            transform.position = hit.point + (hit.normal * collideOffset);
+            if (hit.collider.gameObject.layer != attacker.gameObject.layer && hit.collider.gameObject.layer != experienceLayerNum && hit.collider.gameObject.layer != skillLayerNum)
+            {
+                transform.position = hit.point + (hit.normal * collideOffset);
 
-            GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
+                GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
 
-            Destroy(projectileParticle, 3f);
-            Destroy(impactP, 5.0f);
-            Destroy(gameObject);
-            //dung despawn se loi~
-            //LeanPool.Despawn(projectileParticle, 3f);
-            //LeanPool.Despawn(impactP, 5.0f);
-            //LeanPool.Despawn(gameObject);
-            //else if (dist >= projectileSkillData.maxDistance)
-            //{
-            //    // If the projectile reaches its maximum distance without hitting anything, despawn it
-            //    Destroy(projectileParticle, 3f);
-            //    Destroy(gameObject);
-            //    //LeanPool.Despawn(projectileParticle, 3f);
-            //    //LeanPool.Despawn(gameObject);
-            //}
+                Destroy(projectileParticle, 3f);
+                Destroy(impactP, 5.0f);
+                Destroy(gameObject);
+                //dung despawn se loi~
+                //LeanPool.Despawn(projectileParticle, 3f);
+                //LeanPool.Despawn(impactP, 5.0f);
+                //LeanPool.Despawn(gameObject);
+                //else if (dist >= projectileSkillData.maxDistance)
+                //{
+                //    // If the projectile reaches its maximum distance without hitting anything, despawn it
+                //    Destroy(projectileParticle, 3f);
+                //    Destroy(gameObject);
+                //    //LeanPool.Despawn(projectileParticle, 3f);
+                //    //LeanPool.Despawn(gameObject);
+                //}
+            }
         }
     }
 }

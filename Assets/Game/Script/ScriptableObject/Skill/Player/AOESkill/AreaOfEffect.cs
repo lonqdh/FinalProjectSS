@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaOfEffect : MonoBehaviour
+public class AreaOfEffect : Skill
 {
     private CapsuleCollider capsuleCollider;
 
@@ -23,16 +23,6 @@ public class AreaOfEffect : MonoBehaviour
         LeanPool.Despawn(this);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the colliding object is the enemy
-        //Enemy enemy = other.GetComponent<Enemy>();
-        //if (enemy != null)
-        //{
-        //    // Decrease the enemy's health
-        //    enemy.TakeDamage(damageAmount);
-        //}
-
-    }
-
 }
+
+

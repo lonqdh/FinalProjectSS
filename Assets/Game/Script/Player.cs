@@ -1,3 +1,4 @@
+using Lean.Pool;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,9 +11,6 @@ public class Player : Character
 
     public GameObject characterModelInstance;
 
-    [SerializeField] private Animator anim;
-    protected string currentAnimName = "";
-
     private InputHandler _input;
 
     [SerializeField]
@@ -21,24 +19,29 @@ public class Player : Character
     [SerializeField]
     private float RotationSpeed;
 
-    [SerializeField]
-    private Camera Camera;
-
-    private Rigidbody rb;
+    public Camera Camera;
 
     [SerializeField] private float gravityScale;
 
     private Dictionary<SkillData, float> skillCooldowns = new Dictionary<SkillData, float>();
 
+    public PlayerExperience playerExperience;
+
+    public HealthBar healthBar;
+
+    public ExperienceBar experienceBar;
+
+    public List<SkillCooldown> skillCooldownUIList = new List<SkillCooldown>();
+
+
     private void Awake()
     {
         _input = GetComponent<InputHandler>();
-        rb = GetComponent<Rigidbody>();
-
     }
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         OnInit();
     }
 
@@ -50,45 +53,78 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-        var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
-        var movementVector = MoveTowardTarget(targetVector);
-
-
-
-        if (!RotateTowardMouse)
+        if (isAlive && GameManager.Instance.IsState(GameState.Gameplay))
         {
-            RotateTowardMovementVector(movementVector);
-        }
-        else
-        {
-            RotateFromMouseVector();
-        }
+            Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+            if (isAlive)
+            {
+                // Get the input vector from the input handler
+                var inputVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
 
-        if (movementVector.magnitude > 0.1f) // Player is moving
-        {
-            ChangeAnim("Run");
-        }
-        else // Player is idle
-        {
-            ChangeAnim("Idle");
-        }
+                // Move the player toward the input direction
+                var movementVector = MoveTowardTarget(inputVector);
 
-        UpdateSkillCooldowns();
-        ActivateAvailableSkills();
+                // Rotate the player based on the input or mouse direction
+                if (!RotateTowardMouse)
+                {
+                    RotateTowardMovementVector(movementVector);
+                }
+                else
+                {
+                    RotateFromMouseVector();
+                }
+
+                // Check if the player is moving
+                if (movementVector.magnitude > 0)
+                {
+                    // If moving, trigger the run animation
+                    //ChangeAnim("IsRun");
+                    UpdateAnimations(inputVector);
+                }
+                else // Player is idle
+                {
+                    ChangeAnim("IsIdle");
+                }
+                //UpdateAnimations();
+                // Update skill cooldowns and activate available skills
+                UpdateSkillCooldowns();
+                ActivateAvailableSkills();
+            }
+        }
 
     }
 
     public void OnInit()
     {
-        ChangeAnim("Idle");
+        base.OnInit();
+        playerSkills = LevelManager.Instance.currentSkillsList;
+        ChangeAnim("IsIdle");
         ChangeCharacter();
         ChangeStats();
+        healthBar.UpdateHealthBar(characterData.health, this.health);
     }
 
     protected override void OnHit(int damage)
     {
-        base.OnHit(damage);
-        Debug.Log("player's health : " + this.health);
+        //base.OnHit(damage);
+        health -= damage;
+        Debug.Log("Player's health: " + health);
+        healthBar.UpdateHealthBar(characterData.health, this.health);
+        if(health <= 0)
+        {
+            //this.GetComponent<Collider>().enabled = false;
+            isAlive = false;
+            ChangeAnim("IsDead");
+            Invoke("OnDespawn", 5f);
+            Debug.Log("Player has died!");
+        }
+    }
+
+    protected override void OnDespawn()
+    {
+        base.OnDespawn();
+        UIManager.Instance.FinishMatch();
     }
 
     private void RotateFromMouseVector()
@@ -107,18 +143,20 @@ public class Player : Character
 
     private Vector3 MoveTowardTarget(Vector3 targetVector)
     {
-        var speed = characterData.movementSpeed * Time.deltaTime;
+        var speed = movementSpeed * Time.deltaTime;
 
         targetVector = Quaternion.Euler(0, Camera.gameObject.transform.rotation.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
-        ChangeAnim("Run");
         return targetVector;
     }
 
     private void RotateTowardMovementVector(Vector3 movementDirection)
     {
-        if (movementDirection.magnitude == 0) { return; }
+        if (movementDirection.magnitude == 0)
+        {
+            return;
+        }
         var rotation = Quaternion.LookRotation(movementDirection);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, RotationSpeed);
     }
@@ -129,6 +167,10 @@ public class Player : Character
         if (characterModelInstance == null)
         {
             characterModelInstance = Instantiate(characterData.characterModelPrefab, transform.position, transform.rotation);
+
+            characterModelInstance.GetComponent<Animator>().runtimeAnimatorController = anim.runtimeAnimatorController;
+            //characterData.characterModelPrefab.GetComponent<Animator>().runtimeAnimatorController = anim.runtimeAnimatorController;
+            anim = characterModelInstance.GetComponent<Animator>();
             characterModelInstance.transform.parent = transform;
         }
 
@@ -141,36 +183,6 @@ public class Player : Character
         this.movementSpeed = characterData.movementSpeed;
         this.damage = characterData.damage;
     }
-
-    //void ActivateSkill()
-    //{
-    //    // Ensure the character has a basic skill assigned
-    //    if (characterData != null && characterData.basicSkill != null)
-    //    {
-    //        // Cast an AOE skill at the position of the mouse
-    //        Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
-    //        RaycastHit hit;
-
-    //        if (Physics.Raycast(ray, out hit))
-    //        {
-    //            // Activate the basic skill at the hit point
-    //            //characterData.basicSkill.Activate(hit.point, chargeSkillPos);
-
-
-
-
-    //            //characterData.basicSkill.Activate(hit.point, chargeSkillPos);
-
-    //            //LeanPool.Spawn(characterData.basicSkill.chargeEffectPrefab, chargeSkillPos.position, chargeSkillPos.rotation);
-
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("No basic skill assigned to the character.");
-    //    }
-    //}
-
     private void UpdateSkillCooldowns()
     {
         // Update cooldown for each skill
@@ -183,6 +195,88 @@ public class Player : Character
         }
     }
 
+    //private void ActivateAvailableSkills()
+    //{
+    //    // Iterate through the player's skills
+    //    for (int i = 0; i < playerSkills.currentSkills.Count; i++)
+    //    {
+    //        SkillData skill = playerSkills.currentSkills[i];
+
+    //        // Check if the skill is not on cooldown
+    //        if (!IsSkillOnCooldown(skill))
+    //        {
+    //            // Get the direction from the player to the mouse cursor
+    //            Vector3 mouseDirection = GetMouseDirection();
+
+    //            if (skill.skillType == SkillType.Projectile)
+    //            {
+    //                // Calculate the casting position based on the player's position and the mouse direction
+    //                Vector3 castPosition = transform.position + mouseDirection.normalized * skill.rangeRadius;
+
+    //                // Activate the skill at the calculated position
+    //                skill.Activate(castPosition, chargeSkillPos.transform, this);
+    //                skillCooldowns[skill] = skill.cooldown;
+    //            }
+    //            else if (skill.skillType == SkillType.AreaOfEffect)
+    //            {
+    //                float distanceToMouse = mouseDirection.magnitude;
+
+    //                if (distanceToMouse <= skill.rangeRadius)
+    //                {
+    //                    // Calculate the casting position based on the player's position and the mouse direction
+    //                    Vector3 castPosition = transform.position + mouseDirection.normalized * distanceToMouse;
+
+    //                    // Activate the skill at the calculated position
+    //                    skill.Activate(castPosition, chargeSkillPos.transform, this);
+    //                    skillCooldowns[skill] = skill.cooldown;
+    //                }
+
+    //                //Ray groundRay = Camera.ScreenPointToRay(_input.MousePosition);// dung cai nay de k bi cast tren khong trung khi o tren tang cao hon noi muon cast
+    //                //if (Physics.Raycast(groundRay, out RaycastHit groundHit, Mathf.Infinity) && distanceToMouse <= skill.rangeRadius)
+    //                //{
+    //                //    // Calculate the casting position based on the ground position
+    //                //    Vector3 castPosition = groundHit.point;
+
+    //                //    // Activate the skill at the calculated position
+    //                //    skill.Activate(castPosition, chargeSkillPos.transform, this);
+    //                //    skillCooldowns[skill] = skill.cooldown;
+    //                //}
+    //            }
+
+
+    //        }
+    //    }
+    //}
+
+    //private Vector3 GetMouseDirection()
+    //{
+    //    Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
+    //    Vector3 mouseDirection = Vector3.zero;
+
+    //    if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+    //    {
+    //        // Get the collider bounds of the hit object
+    //        Collider collider = hitInfo.collider;
+    //        Bounds bounds = collider.bounds;
+
+    //        // Calculate the lowest point of the collider (the feet)
+    //        Vector3 lowestPoint = bounds.center - Vector3.up * bounds.extents.y; //cach nay k dung min thi do lower performance khi minh tinh thu cong
+
+    //        // Set the mouse direction to the lowest point of the collider
+    //        mouseDirection = lowestPoint - transform.position;
+
+    //        // Ensure that the direction is horizontal (ignoring the vertical component)
+    //        mouseDirection.y = 0f;
+    //    }
+    //    else
+    //    {
+    //        // If the raycast doesn't hit anything, just use the direction from the player to the mouse cursor
+    //        mouseDirection = _input.MousePosition - Camera.WorldToScreenPoint(transform.position);
+    //    }
+
+    //    return mouseDirection;
+    //}
+
     private void ActivateAvailableSkills()
     {
         // Iterate through the player's skills
@@ -193,19 +287,32 @@ public class Player : Character
             // Check if the skill is not on cooldown
             if (!IsSkillOnCooldown(skill))
             {
-                // Activate the skill
-                //playerSkills.skills[i].skillData.Activate( , ,this);
-                //enemy.enemyData.enemySkill.Activate(enemy.target.transform.position, enemy.chargeSkillPos, enemy);
+                if (skill.skillType == SkillType.Projectile)
+                {
+                    // Get the direction from the player to the mouse cursor
+                    Vector3 mouseDirection = GetMouseDirection();
 
-                // Get the direction from the player to the mouse cursor
-                Vector3 mouseDirection = GetMouseDirection();
+                    // Calculate the casting position based on the player's position and the mouse direction
+                    Vector3 castPosition = transform.position + mouseDirection.normalized * skill.rangeRadius;
 
-                // Calculate the casting position based on the player's position and the mouse direction
-                Vector3 castPosition = transform.position + mouseDirection.normalized * skill.rangeRadius;
+                    // Activate the skill at the calculated position
+                    skill.Activate(castPosition, chargeSkillPos.transform, this);
+                    skillCooldowns[skill] = skill.cooldown;
+                }
+                else if (skill.skillType == SkillType.AreaOfEffect)
+                {
+                    float distanceToMouse = GetMouseDirectionAoE().magnitude;
 
-                // Activate the skill at the calculated position
-                skill.Activate(castPosition, chargeSkillPos.transform, this);
-                skillCooldowns[skill] = skill.cooldown;
+                    if (distanceToMouse <= skill.rangeRadius)
+                    {
+                        // Calculate the casting position based on the player's position and the mouse direction
+                        Vector3 castPosition = transform.position + GetMouseDirectionAoE().normalized * distanceToMouse;
+
+                        // Activate the skill at the calculated position
+                        skill.Activate(castPosition, chargeSkillPos.transform, this);
+                        skillCooldowns[skill] = skill.cooldown;
+                    }
+                }
             }
         }
     }
@@ -217,7 +324,33 @@ public class Player : Character
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
-            mouseDirection = hitInfo.point - transform.position;
+            //// Check if the hit collider belongs to the player
+            //if (hitInfo.collider.CompareTag("Player"))
+            //{
+            //    // Calculate the direction in front of the character
+            //    mouseDirection = transform.forward;
+            //}
+            //else
+            //{
+            //    // Get the collider bounds of the hit object
+            //    Collider collider = hitInfo.collider;
+            //    Bounds bounds = collider.bounds;
+
+            //    // Calculate the lowest point of the collider (the feet)
+            //    Vector3 lowestPoint = bounds.center - Vector3.up * bounds.extents.y;
+
+            //    // Set the mouse direction to the lowest point of the collider
+            //    mouseDirection = lowestPoint - transform.position;
+
+            //    // Ensure that the direction is horizontal (ignoring the vertical component)
+            //    mouseDirection.y = 0f;
+
+            //    //mouseDirection = transform.forward;
+
+            //}
+
+            mouseDirection = transform.forward;
+
         }
         else
         {
@@ -227,6 +360,48 @@ public class Player : Character
 
         return mouseDirection;
     }
+
+
+    private Vector3 GetMouseDirectionAoE()
+    {
+        Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
+        Vector3 mouseDirection = Vector3.zero;
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+        {
+            // Check if the hit collider belongs to the player
+            if (hitInfo.collider.CompareTag("Player"))
+            {
+                // Calculate the direction in front of the character
+                mouseDirection = transform.forward;
+            }
+            else
+            {
+                // Get the collider bounds of the hit object
+                Collider collider = hitInfo.collider;
+                Bounds bounds = collider.bounds;
+
+                // Calculate the lowest point of the collider (the feet)
+                Vector3 lowestPoint = bounds.center - Vector3.up * bounds.extents.y;
+
+                // Set the mouse direction to the lowest point of the collider
+                mouseDirection = lowestPoint - transform.position;
+
+                // Ensure that the direction is horizontal (ignoring the vertical component)
+                mouseDirection.y = 0f;
+            }
+        }
+        else
+        {
+            // If the raycast doesn't hit anything, just use the direction from the player to the mouse cursor
+            mouseDirection = _input.MousePosition - Camera.WorldToScreenPoint(transform.position);
+        }
+
+        return mouseDirection;
+    }
+
+
+
 
     bool IsSkillOnCooldown(SkillData skill)
     {
@@ -243,20 +418,49 @@ public class Player : Character
         }
     }
 
-    void AddSkill()
+    public void AddSkill()
     {
-        //playerSkills.AddSkill();
+        UIManager.Instance.OpenLevelUpUI();
     }
 
-
-
-    public void ChangeAnim(string animName)
+    private void UpdateAnimations(Vector3 inputVector)
     {
-        if (currentAnimName != animName)
+        // Calculate the angle between the player's forward direction and the movement direction
+        float angle = Vector3.SignedAngle(transform.forward, inputVector, Vector3.up);
+
+        // Set animation parameters based on the angle
+        if (angle > 45f && angle < 135f)
         {
-            anim.ResetTrigger(currentAnimName);
-            currentAnimName = animName;
-            anim.SetTrigger(currentAnimName);
+            // Move right animation
+            ChangeAnim("IsRunRight");
+        }
+        else if (angle < -45f && angle > -135f)
+        {
+            // Move left animation
+            ChangeAnim("IsRunLeft");
+        }
+        else if (angle >= 135f || angle <= -135f)
+        {
+            // Move backward animation
+            ChangeAnim("IsRunBackward");
+        }
+        else
+        {
+            ChangeAnim("IsRun");
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        ExperienceSphere exp = other.GetComponent<ExperienceSphere>();
+
+        if (exp != null)
+        {
+            playerExperience.AddExp(exp.experienceAmount);
+            experienceBar.UpdateUI();
+            LeanPool.Despawn(other);
+        }
+    }
+
 }

@@ -2273,7 +2273,8 @@ GameObject:
   - component: {fileID: 9010198740575872341}
   - component: {fileID: 1899042223193882511}
   - component: {fileID: -7928379072770199309}
-  - component: {fileID: -8309486545929995834}
+  - component: {fileID: 430182299714817900}
+  - component: {fileID: 5691699521466742629}
   m_Layer: 6
   m_Name: Enemy_Goblin_Male
   m_TagString: Untagged
@@ -2324,10 +2325,10 @@ Animator:
   m_GameObject: {fileID: 3683303773233487952}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b69174d668ba02d44b14a084b217670a, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa02aed1eb7725c4aa2510333f37c75f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -2348,6 +2349,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeSkillPos: {fileID: 2827193395021555013}
+  health: 0
+  damage: 0
+  movementSpeed: 0
+  rb: {fileID: 5691699521466742629}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  anim: {fileID: 9010198740575872341}
+  isAlive: 0
   enemyData:
     enemyType: 0
     enemy: {fileID: 0}
@@ -2359,6 +2369,9 @@ MonoBehaviour:
     attackRange: 0
   target: {fileID: 0}
   agent: {fileID: -7928379072770199309}
+  rotateSpeed: 5
+  blueExpSphere: {fileID: -4717528820282077609, guid: 0706f310b7fffa94b9239a143951c0b6, type: 3}
+  redExpSphere: {fileID: -6451215538299387037, guid: fefc80522c0498d4e95553a2384903ec, type: 3}
 --- !u!195 &-7928379072770199309
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2381,7 +2394,30 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &-8309486545929995834
+--- !u!136 &430182299714817900
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3683303773233487952}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Height: 2.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &5691699521466742629
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2404,7 +2440,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

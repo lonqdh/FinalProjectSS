@@ -15,17 +15,6 @@ public class ProjectileSkillData : SkillData
 
     public override void Activate(Vector3 position, Transform chargePos, Character attacker)
     {
-        // //Calculate the direction towards the target position
-        //Vector3 direction = (position - chargePos.position).normalized;
-
-        // // Instantiate the projectile with the correct rotation
-        // Projectile newProjectile = Instantiate(projectile, chargePos.position, Quaternion.LookRotation(direction));
-        // this.attacker = attacker;
-        // newProjectile.rb.AddForce(direction * projectileSpeed);
-
-
-        // Debug.Log("Attacker : " + this.attacker);
-
         Vector3 direction = (position - chargePos.position).normalized;
 
         // Ensure the vertical component of the direction is not negative (pointing downward)
@@ -41,11 +30,11 @@ public class ProjectileSkillData : SkillData
 
         // Set the attacker of the projectile
         newProjectile.attacker = attacker;
+        //newProjectile.shooter = attacker;
+
 
         // Apply force to the projectile in the modified direction
         newProjectile.rb.AddForce(direction * projectileSpeed);
-
-        Debug.Log("Attacker: " + attacker);
     }
     
 }

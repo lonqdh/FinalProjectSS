@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: StormMissile
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 3274725942559288099, guid: b2bf381784d555348881d0fd477a21d4, type: 3}
+  skillIcon: {fileID: 21300000, guid: 2718d4ac18f44194da22c445f488334e, type: 3}
   skillType: 0
   skillName: ShamanGoblinSkill
   description: basic male goblin enemy skill
   damage: 5
   cooldown: 5
+  rangeRadius: 10
   castTime: 2
   projectile: {fileID: 8640849908481229277, guid: cd11fe7296692bd40a2aab88cc3cb550, type: 3}
   maxDistance: 15

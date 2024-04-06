@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: FireballRed
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: 1c6660afe4b59f248a8d83c6a38a824f, type: 3}
   skillType: 0
   skillName: Fireball
   description: 
   damage: 5
   cooldown: 3
+  rangeRadius: 10
   castTime: 1
   projectile: {fileID: 5975958326143304557, guid: 5b39e173778831f4f8ab1cc2d41fff5d, type: 3}
   maxDistance: 16
