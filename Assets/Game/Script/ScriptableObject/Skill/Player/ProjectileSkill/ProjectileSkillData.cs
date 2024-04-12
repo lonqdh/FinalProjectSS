@@ -35,6 +35,8 @@ public class ProjectileSkillData : SkillData
 
         // Apply force to the projectile in the modified direction
         newProjectile.rb.AddForce(direction * projectileSpeed);
+
+        base.Activate(position, chargePos, attacker);
     }
     
 }

@@ -5,7 +5,7 @@ public class PlayerExperience : MonoBehaviour
     //[SerializeField] private Player player;
     public int level = 1;
     public int currentExp = 0;
-    public int expToLevelUp = 10;
+    public int expToLevelUp = 1;
 
     public void AddExp(int expAmount)
     {

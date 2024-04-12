@@ -1,6 +1,7 @@
 using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -13,6 +14,10 @@ public class LevelManager : Singleton<LevelManager>
     public EnemyDataSO enemyDataSO;
     public CameraFollow camera;
     public int killCount;
+
+    public List<Level> levelList = new List<Level>();
+    public Level currentLevel;
+    public int level = 1;
 
     public float spawnIntervalReduction = 0.1f;
     public float initialSpawnInterval = 5f;
@@ -27,15 +32,37 @@ public class LevelManager : Singleton<LevelManager>
     public PlayerSkills currentSkillsList;
     [SerializeField] private Transform playerSpawnPosition;
 
+    private Coroutine spawnEnemiesCoroutine;
+    private Coroutine playerProgressCoroutine;
+
+
     private NavMeshTriangulation navMeshData; // for spawning enemies
 
     private void Start()
     {
+        OnInit();
+    }
+
+    private void Update()
+    {
+        // Check if the player has reached the kill count threshold for transitioning to the next level
+        if (killCount == 10)
+        {
+            // Increment the level
+            killCount = 1;
+            level++;
+            LoadNextLevel();
+        }
+    }
+
+    private void OnInit()
+    {
+        LoadLevel(level);
         player = LeanPool.Spawn(playerPrefab);
-        player.transform.position = playerSpawnPosition.position;
-        
-        StartCoroutine(CalculatePlayerProgressRoutine());
-        StartCoroutine(SpawnEnemiesRoutine());
+        player.transform.position = currentLevel.spawnPoint.position;
+
+        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
         CalculateEligibleEnemies();
 
         // Cache NavMesh triangulation data
@@ -46,12 +73,18 @@ public class LevelManager : Singleton<LevelManager>
         camera.target = player.transform;
         player.Camera = camera.GetComponent<Camera>();
         //player.OnInit();
-
     }
 
-    private void Update()
+    private void LoadLevel(int level)
     {
+        if(currentLevel != null)
+        {
+            Destroy(currentLevel.gameObject);
+        }
 
+        currentLevel = Instantiate(levelList[level - 1]);
+
+        //StartCoroutine(BakeNavMeshCoroutine());
     }
 
     private IEnumerator SpawnEnemiesRoutine()
@@ -60,10 +93,11 @@ public class LevelManager : Singleton<LevelManager>
 
         while (true)
         {
-            if (GameManager.Instance.IsState(GameState.Gameplay))
+            if (GameManager.Instance.IsState(GameState.Gameplay) && killCount < 10)
             {
                 yield return new WaitForSeconds(currentSpawnInterval);
                 SpawnEnemies();
+                Debug.Log("VAI CHUONG");
             }
             else
             {
@@ -116,7 +150,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(3f);
             CalculatePlayerProgress();
         }
     }
@@ -135,6 +169,71 @@ public class LevelManager : Singleton<LevelManager>
             CalculateEligibleEnemies();
             ReduceSpawnInterval();
         }
+    }
+
+    private void LoadNextLevel()
+    {
+        // Destroy the current level
+        if (currentLevel != null)
+        {
+            Destroy(currentLevel.gameObject);
+        }
+
+        if (spawnEnemiesCoroutine != null)
+        {
+            StopCoroutine(spawnEnemiesCoroutine);
+        }
+        if (playerProgressCoroutine != null)
+        {
+            StopCoroutine(playerProgressCoroutine);
+        }
+
+        LeanPool.DespawnAll();
+        
+
+        // Instantiate the next level
+        currentLevel = Instantiate(levelList[level - 1]);
+
+        navMeshData = NavMesh.CalculateTriangulation(); //calculate triangulation lai de spawn o tren navmesh cua map moi, khong thi se van spawn tren navmesh cua level cu~
+        
+        LeanPool.Spawn(playerPrefab);
+        // Move the player to the spawn point
+
+        // Reset player's health and experience
+        player.health = player.characterData.health;
+        //player.playerExperience.ResetLevel();
+
+        // Update UI elements
+        healthBar.UpdateHealthBar(player.characterData.health, playerPrefab.health);
+        experienceBar.UpdateUI();
+
+        // Set the player's position to the spawn point of the new level
+        player.transform.position = currentLevel.spawnPoint.position;
+
+        // Reset player's kill count
+        killCount = 1;
+
+        // Perform any other initialization for the new level
+        // For example:
+        // - Reset enemy level and spawn interval
+        // - Calculate eligible enemies
+        // - Restart spawning enemies routine
+        // - Restart player progress calculation routine
+        // - Update UI elements
+        // ...
+
+        // Initialize player skills
+        //InitializePlayerSkills();
+
+
+
+        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
+
+        // Update UI elements if needed
+        // ...
+
+        Debug.Log("Next level loaded: " + level);
     }
 
     private void CalculateEligibleEnemies()
@@ -205,6 +304,26 @@ public class LevelManager : Singleton<LevelManager>
             Debug.LogWarning("Player spawn point is not assigned.");
         }
     }
+
+    //private IEnumerator BakeNavMeshCoroutine()
+    //{
+    //    // Wait for a short delay to ensure level objects are instantiated
+    //    yield return new WaitForSeconds(0.5f);
+    //    BakeNavMesh(currentLevel);
+    //}
+
+    //private void BakeNavMesh(Level level)
+    //{
+    //    NavMeshSurface navMeshSurface = level.GetComponent<NavMeshSurface>();
+    //    if (navMeshSurface != null)
+    //    {
+    //        navMeshSurface.BuildNavMesh();
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("NavMeshSurface not found in the current level.");
+    //    }
+    //}
 
 
     public void InitializePlayerSkills()

@@ -19,6 +19,8 @@ public class AreaSkillData : SkillData
         {
             AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, position, aoeSkill.transform.rotation);
             aoe.attacker = attacker;
+            
+            base.Activate(position, chargePos, attacker);
         }
         
     }

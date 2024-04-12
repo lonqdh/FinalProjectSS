@@ -31,7 +31,7 @@ public class Player : Character
 
     public ExperienceBar experienceBar;
 
-    public List<SkillCooldown> skillCooldownUIList = new List<SkillCooldown>();
+    //public List<SkillCooldown> skillCooldownUIList = new List<SkillCooldown>();
 
 
     private void Awake()
@@ -55,8 +55,8 @@ public class Player : Character
     {
         if (isAlive && GameManager.Instance.IsState(GameState.Gameplay))
         {
-            Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
-            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+            //Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
+            //Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
             if (isAlive)
             {
                 // Get the input vector from the input handler
@@ -298,6 +298,12 @@ public class Player : Character
                     // Activate the skill at the calculated position
                     skill.Activate(castPosition, chargeSkillPos.transform, this);
                     skillCooldowns[skill] = skill.cooldown;
+
+                    SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
+                    if (cooldownUI != null)
+                    {
+                        cooldownUI.StartCooldown(skill.cooldown);
+                    }
                 }
                 else if (skill.skillType == SkillType.AreaOfEffect)
                 {
@@ -311,6 +317,12 @@ public class Player : Character
                         // Activate the skill at the calculated position
                         skill.Activate(castPosition, chargeSkillPos.transform, this);
                         skillCooldowns[skill] = skill.cooldown;
+
+                        SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
+                        if (cooldownUI != null)
+                        {
+                            cooldownUI.StartCooldown(skill.cooldown);
+                        }
                     }
                 }
             }
@@ -461,6 +473,20 @@ public class Player : Character
             experienceBar.UpdateUI();
             LeanPool.Despawn(other);
         }
+    }
+
+    private SkillCooldown FindSkillCooldownUI(SkillData skill)
+    {
+        // Find the associated SkillCooldownUI component based on the skill
+        foreach (SkillCooldown cooldownUI in UIManager.Instance.skillCooldownUIList)
+        {
+            if (cooldownUI.skill == skill)
+            {
+                //Debug.Log("Found");
+                return cooldownUI;
+            }
+        }
+        return null; // Return null if no associated SkillCooldown component is found
     }
 
 }

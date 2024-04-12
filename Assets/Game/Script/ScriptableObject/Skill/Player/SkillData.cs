@@ -25,45 +25,11 @@ public abstract class SkillData : ScriptableObject
     public float rangeRadius;
     public int castTime;
 
-    //private float cooldownTimer = 0f;
-    //private bool isOnCooldown = false;
+    public event Action<SkillData> SkillActivated;
 
-    //public bool IsOnCooldown => isOnCooldown;
-    //public Character attacker;
-
-    public abstract void Activate(Vector3 position, Transform chargePos, Character attacker);
-
-    // Method to activate the skill
-    //public void ActivateSkill(Vector3 position, Transform chargePos, Character attacker)
-    //{
-    //    if (!isOnCooldown)
-    //    {
-    //        Activate(position, chargePos, attacker);
-    //        StartCooldown();
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Skill is still on cooldown.");
-    //    }
-    //}
-
-    //// Method to start the cooldown
-    //private void StartCooldown()
-    //{
-    //    cooldownTimer = cooldown;
-    //    isOnCooldown = true;
-    //    CooldownRoutine());
-    //}
-
-    //// Coroutine to handle cooldown countdown
-    //private IEnumerator CooldownRoutine()
-    //{
-    //    while (cooldownTimer > 0f)
-    //    {
-    //        cooldownTimer -= Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    isOnCooldown = false;
-    //}
+    public virtual void Activate(Vector3 position, Transform chargePos, Character attacker)
+    {
+        SkillActivated?.Invoke(this);
+    }
 
 }
