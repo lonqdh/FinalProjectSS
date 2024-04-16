@@ -3881,7 +3881,7 @@ MonoBehaviour:
     health: 0
     damage: 0
     movementSpeed: 0
-    enemySkill: {fileID: 0}
+    enemySkill: {fileID: 11400000, guid: 982a00e1f80b7a6479d85b738cf8cfc6, type: 2}
     enemyLevel: 0
     attackRange: 0
   target: {fileID: 0}
@@ -3889,6 +3889,7 @@ MonoBehaviour:
   rotateSpeed: 5
   blueExpSphere: {fileID: -4717528820282077609, guid: 0706f310b7fffa94b9239a143951c0b6, type: 3}
   redExpSphere: {fileID: -6451215538299387037, guid: fefc80522c0498d4e95553a2384903ec, type: 3}
+  hasSprayingSkill: 0
 --- !u!195 &5801154127643596829
 NavMeshAgent:
   m_ObjectHideFlags: 0

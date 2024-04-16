@@ -8,7 +8,8 @@ using UnityEngine;
 public enum SkillType
 {
     Projectile,
-    AreaOfEffect
+    AreaOfEffect,
+    Spray
 }
 
 

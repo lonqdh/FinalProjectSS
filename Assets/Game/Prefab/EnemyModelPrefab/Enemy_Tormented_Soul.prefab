@@ -3983,6 +3983,7 @@ MonoBehaviour:
   rotateSpeed: 5
   blueExpSphere: {fileID: -4717528820282077609, guid: 0706f310b7fffa94b9239a143951c0b6, type: 3}
   redExpSphere: {fileID: -6451215538299387037, guid: fefc80522c0498d4e95553a2384903ec, type: 3}
+  hasSprayingSkill: 0
 --- !u!195 &-7868849652514592012
 NavMeshAgent:
   m_ObjectHideFlags: 0

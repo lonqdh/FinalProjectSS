@@ -14,6 +14,7 @@ public class Enemy : Character
     public ExperienceSphere blueExpSphere;
     public ExperienceSphere redExpSphere;
     private float lessExpDropRate = 0.8f;
+    public bool hasSprayingSkill;
 
 
     // Start is called before the first frame update
@@ -82,6 +83,10 @@ public class Enemy : Character
         this.damage = enemyData.damage;
         this.movementSpeed = enemyData.movementSpeed;
         skill = enemyData.enemySkill;
+        if(skill.skillType == SkillType.Spray)
+        {
+            hasSprayingSkill = true;
+        }
         isAlive = true;
         ChangeState(new ChaseState());
     }

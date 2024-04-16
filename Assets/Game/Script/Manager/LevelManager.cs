@@ -12,6 +12,7 @@ public class LevelManager : Singleton<LevelManager>
     public Player player;
     public Player playerPrefab;
     public EnemyDataSO enemyDataSO;
+    public BossDataSO bossDataSO;
     public CameraFollow camera;
     public int killCount;
 
@@ -53,6 +54,11 @@ public class LevelManager : Singleton<LevelManager>
             level++;
             LoadNextLevel();
         }
+        
+        //if (killCount == 2)
+        //{
+        //    SpawnBoss();
+        //}
     }
 
     private void OnInit()
@@ -73,6 +79,8 @@ public class LevelManager : Singleton<LevelManager>
         camera.target = player.transform;
         player.Camera = camera.GetComponent<Camera>();
         //player.OnInit();
+
+        SpawnBoss();
     }
 
     private void LoadLevel(int level)
@@ -97,7 +105,6 @@ public class LevelManager : Singleton<LevelManager>
             {
                 yield return new WaitForSeconds(currentSpawnInterval);
                 SpawnEnemies();
-                Debug.Log("VAI CHUONG");
             }
             else
             {
@@ -168,6 +175,37 @@ public class LevelManager : Singleton<LevelManager>
             enemyLevel++;
             CalculateEligibleEnemies();
             ReduceSpawnInterval();
+        }
+    }
+
+    private void SpawnBoss()
+    {
+        // Randomly select an enemy to spawn
+        BossData bossToSpawn = bossDataSO.bossDataList[Random.Range(0, bossDataSO.bossDataList.Count)];
+
+        // Get a random point on the NavMesh
+        //Vector3 spawnPoint = GetRandomNavMeshPoint();
+        Vector3 spawnPoint = currentLevel.bossSpawnPoint.transform.position;
+
+        // Spawn the selected enemy at the spawn point
+        if (spawnPoint != Vector3.zero)
+        {
+            Boss newBoss = LeanPool.Spawn(bossToSpawn.boss, spawnPoint, Quaternion.identity);
+            if (newBoss != null)
+            {
+                newBoss.target = player;
+                newBoss.OnInit(bossToSpawn);
+                Debug.Log("Boss Spawned");
+                //Debug.Log("Spawned Enemy: " + enemyToSpawn.enemyType);
+            }
+            else
+            {
+                Debug.LogWarning("Enemy GameObject is missing Enemy script.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Failed to find a valid spawn point on the NavMesh for the enemy.");
         }
     }
 

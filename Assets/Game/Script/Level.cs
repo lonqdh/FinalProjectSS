@@ -5,4 +5,6 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     public Transform spawnPoint;
+    public Transform bossSpawnPoint;
+
 }

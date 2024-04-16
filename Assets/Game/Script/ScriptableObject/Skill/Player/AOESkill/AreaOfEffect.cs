@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AreaOfEffect : Skill
 {
-    private CapsuleCollider capsuleCollider;
+    public CapsuleCollider capsuleCollider;
 
     private void Start()
     {
