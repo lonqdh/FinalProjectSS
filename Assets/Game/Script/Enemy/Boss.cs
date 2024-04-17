@@ -23,6 +23,18 @@ public class Boss : Character
     private float lessExpDropRate = 0.8f;
     public bool hasSprayingSkill;
 
+    private BossDashSkill dashSkill;
+
+    private void Start()
+    {
+        //dashSkill = new BossDashSkill(this);
+    }
+
+    //public void ActivateDash()
+    //{
+    //    //dashSkill.ActivateDash();
+    //}
+
     void Update()
     {
         if (isAlive && GameManager.Instance.IsState(GameState.Gameplay) && target.isAlive)

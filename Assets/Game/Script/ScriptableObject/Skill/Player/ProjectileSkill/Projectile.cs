@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Lean.Pool;
 using UnityEngine;
 
 public class Projectile : Skill
@@ -24,10 +25,6 @@ public class Projectile : Skill
     private int skillLayerNum = 7;
 
 
-    //public Character shooter;
-
-    //public int projectileSpeed;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,6 +40,14 @@ public class Projectile : Skill
         //rb.velocity = transform.forward * projectileSpeed;
 
     }
+
+    //public void OnInit(Character attacker)
+    //{
+    //    transform.position = attacker.chargeSkillPos.position;
+
+    //    // Reset any other necessary properties of the projectile
+    //    rb.velocity = Vector3.zero;
+    //}
 
     void FixedUpdate()
     {
@@ -72,8 +77,8 @@ public class Projectile : Skill
                 Destroy(gameObject);
                 //dung despawn se loi~
                 //LeanPool.Despawn(projectileParticle, 3f);
-                //LeanPool.Despawn(impactP, 5.0f);
-                //LeanPool.Despawn(gameObject);
+                //LeanPool.Despawn(impactP, 3f);
+                //LeanPool.Despawn(gameObject, 3f);
                 //else if (dist >= projectileSkillData.maxDistance)
                 //{
                 //    // If the projectile reaches its maximum distance without hitting anything, despawn it

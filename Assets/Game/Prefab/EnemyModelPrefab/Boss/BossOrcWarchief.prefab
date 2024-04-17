@@ -4134,6 +4134,7 @@ GameObject:
   - component: {fileID: 6074644582977327422}
   - component: {fileID: 5237446131616779448}
   - component: {fileID: 5942902101674709545}
+  - component: {fileID: 3279661542629221792}
   - component: {fileID: 7137426000297497659}
   - component: {fileID: 2453074376186368951}
   - component: {fileID: 8857853293108971145}
@@ -4190,7 +4191,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7c6645dd352bddd4eb6e1c0deac5fbe0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -4232,6 +4233,23 @@ MonoBehaviour:
   agent: {fileID: 7137426000297497659}
   rotateSpeed: 5
   hasSprayingSkill: 0
+--- !u!114 &3279661542629221792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440738424975475013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e374e07e19622448406f92ee52c64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashForce: 10
+  dashUpwardForce: 0
+  dashDuration: 0.5
+  dashCooldown: 1.5
+  boss: {fileID: 5942902101674709545}
 --- !u!195 &7137426000297497659
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4241,7 +4259,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7440738424975475013}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

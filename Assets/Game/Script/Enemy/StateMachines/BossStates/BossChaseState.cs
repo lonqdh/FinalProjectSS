@@ -19,16 +19,18 @@ public class BossChaseState : IState<Boss>
     {
         if (boss.isAlive)
         {
-            // Calculate the direction to the target
-            Vector3 moveDirection = (boss.target.transform.position - boss.transform.position).normalized;
+            //// Calculate the direction to the target
+            //Vector3 moveDirection = (boss.target.transform.position - boss.transform.position).normalized;
 
-            // Set the boss's velocity based on its movement speed
-            boss.agent.velocity = moveDirection * boss.movementSpeed;
+            //// Set the boss's velocity based on its movement speed
+            //boss.agent.velocity = moveDirection * boss.movementSpeed;
 
             if (Vector3.Distance(boss.transform.position, boss.target.transform.position) <= boss.bossData.attackRange)
             {
                 // Change state to AttackState
                 //boss.ChangeState(new AttackState());
+                //boss.ActivateDash();
+                boss.ChangeState(new BossAttackState());
             }
             else
             {
