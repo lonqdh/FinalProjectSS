@@ -1,4 +1,5 @@
 using Lean.Pool;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -9,7 +10,8 @@ public class Character : MonoBehaviour
     public float movementSpeed;
     [SerializeField] internal Rigidbody rb;
     [SerializeField] internal LayerMask enemyLayer;
-
+    [SerializeField] internal GameObject hitVfx;
+    [SerializeField] internal GameObject deathVfx;
     [SerializeField] protected Animator anim;
     protected string currentAnimName = "";
     //[SerializeField] internal Collider collider;
@@ -32,6 +34,10 @@ public class Character : MonoBehaviour
     protected virtual void OnHit(int damage)
     {
         health -= damage;
+        GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform);
+        newHitVfx.transform.position = transform.position;
+        LeanPool.Despawn(newHitVfx, 3f);
+        
     }
     protected virtual void OnDespawn()
     {

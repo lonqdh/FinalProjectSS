@@ -107,13 +107,16 @@ public class Player : Character
 
     protected override void OnHit(int damage)
     {
-        //base.OnHit(damage);
-        health -= damage;
+        base.OnHit(damage);
+        //health -= damage;
         Debug.Log("Player's health: " + health);
         healthBar.UpdateHealthBar(characterData.health, this.health);
         if(health <= 0)
         {
             //this.GetComponent<Collider>().enabled = false;
+            GameObject newDeathVfx = LeanPool.Spawn(deathVfx, transform);
+            newDeathVfx.transform.position = transform.position;
+            LeanPool.Despawn(newDeathVfx, 5f);
             isAlive = false;
             ChangeAnim("IsDead");
             Invoke("OnDespawn", 5f);

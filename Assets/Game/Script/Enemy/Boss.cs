@@ -84,6 +84,8 @@ public class Boss : Character
         this.health = bossData.health;
         this.damage = bossData.damage;
         this.movementSpeed = bossData.movementSpeed;
+        this.hitVfx = bossData.hitVfx;
+        this.deathVfx = bossData.deathVfx;
         skill = bossData.bossSkills;
         isAlive = true;
         ChangeState(new BossChaseState());
@@ -99,14 +101,17 @@ public class Boss : Character
 
     protected override void OnHit(int damage)
     {
-        //base.OnHit(damage);
+        base.OnHit(damage);
 
-        health -= damage;
+        //health -= damage;
 
         if (health <= 0)
         {
             //Die();
             isAlive = false;
+            GameObject newDeathVfx = LeanPool.Spawn(deathVfx, transform);
+            newDeathVfx.transform.position = transform.position;
+            LeanPool.Despawn(newDeathVfx, 5f);
             ChangeAnim("IsDead");
             agent.SetDestination(transform.position);
             //DropExperienceSphere();

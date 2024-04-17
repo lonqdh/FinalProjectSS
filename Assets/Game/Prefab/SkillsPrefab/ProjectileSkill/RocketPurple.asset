@@ -20,7 +20,7 @@ MonoBehaviour:
   damage: 20
   cooldown: 3
   rangeRadius: 20
-  castTime: 1
+  castTime: 2
   projectile: {fileID: 3674368389280433376, guid: b19eb620c1f17fe41961e296599d3f8e, type: 3}
   maxDistance: 20
   projectileSpeed: 280

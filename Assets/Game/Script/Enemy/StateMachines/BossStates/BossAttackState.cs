@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossAttackState : IState<Boss>
@@ -84,7 +83,16 @@ public class BossAttackState : IState<Boss>
     private IEnumerator CastSkillWithDelay(SkillData skillData, Boss boss, bool useBossActivate2)
     {
         isCasting = true;
-        boss.ChangeAnim("IsAttack");
+        //boss.ChangeAnim("IsAttack");
+        if (useBossActivate2 == true)
+        {
+            boss.ChangeAnim("IsBossSpellAttack");
+        }
+        else
+        {
+            boss.ChangeAnim("IsBossSpellAttack2");
+        }
+
         yield return new WaitForSeconds(skillData.castTime);
 
         if (boss.isAlive)
@@ -108,7 +116,7 @@ public class BossAttackState : IState<Boss>
                 // Target moved out of attack range during casting, switch back to ChaseState
                 boss.ChangeState(new BossChaseState());
             }
-            boss.ChangeAnim("IsIdle");
+            //boss.ChangeAnim("IsIdle");
             isCasting = false;
         }
     }

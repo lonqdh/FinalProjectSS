@@ -82,6 +82,8 @@ public class Enemy : Character
         this.health = enemyData.health;
         this.damage = enemyData.damage;
         this.movementSpeed = enemyData.movementSpeed;
+        this.hitVfx = enemyData.hitVfx;
+        this.deathVfx = enemyData.deathVfx;
         skill = enemyData.enemySkill;
         if(skill.skillType == SkillType.Spray)
         {
@@ -93,14 +95,17 @@ public class Enemy : Character
 
     protected override void OnHit(int damage)
     {
-        //base.OnHit(damage);
+        base.OnHit(damage);
 
-        health -= damage;
+        //health -= damage;
 
         if (health <= 0)
         {
             //Die();
             isAlive = false;
+            GameObject newDeathVfx = LeanPool.Spawn(deathVfx, transform);
+            newDeathVfx.transform.position = transform.position;
+            LeanPool.Despawn(newDeathVfx, 5f);
             ChangeAnim("IsDead");
             agent.SetDestination(transform.position);
             DropExperienceSphere();

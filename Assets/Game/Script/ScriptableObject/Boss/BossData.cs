@@ -18,6 +18,8 @@ public class BossData
     public float damage;
     public float movementSpeed;
     public SkillData[] bossSkills;
+    public GameObject hitVfx;
+    public GameObject deathVfx;
     //public SkillData bossSkill1;
     //public SkillData bossSkill2;
     //public SkillData bossSkill3;
