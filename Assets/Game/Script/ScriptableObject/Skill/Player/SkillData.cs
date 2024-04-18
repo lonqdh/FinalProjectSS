@@ -9,7 +9,8 @@ public enum SkillType
 {
     Projectile,
     AreaOfEffect,
-    Spray
+    Spray,
+    Melee
 }
 
 
@@ -42,5 +43,6 @@ public abstract class SkillData : ScriptableObject
     {
         SkillActivated?.Invoke(this);
     }
+
 
 }

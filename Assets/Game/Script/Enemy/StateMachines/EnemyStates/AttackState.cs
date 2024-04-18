@@ -11,6 +11,10 @@ public class AttackState : IState<Enemy>
     {
         // Start attacking
         enemy.agent.isStopped = true;
+        // Stop the agent's rotation
+        enemy.agent.updateRotation = false;
+        // Set the enemy's velocity to zero to prevent sliding
+        enemy.rb.velocity = Vector3.zero;
         enemy.ChangeAnim("IsIdle");
     }
 

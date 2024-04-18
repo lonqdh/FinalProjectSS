@@ -290,7 +290,7 @@ public class Player : Character
             // Check if the skill is not on cooldown
             if (!IsSkillOnCooldown(skill))
             {
-                if (skill.skillType == SkillType.Projectile)
+                if (skill.skillType == SkillType.Projectile || skill.skillType == SkillType.Melee)
                 {
                     // Get the direction from the player to the mouse cursor
                     Vector3 mouseDirection = GetMouseDirection();

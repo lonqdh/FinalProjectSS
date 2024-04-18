@@ -18,7 +18,7 @@ MonoBehaviour:
     health: 5
     damage: 5
     movementSpeed: 2
-    enemySkill: {fileID: 11400000, guid: 982a00e1f80b7a6479d85b738cf8cfc6, type: 2}
+    enemySkill: {fileID: 11400000, guid: 65bb31052ddd1e548b5920cb0aa45c71, type: 2}
     enemyLevel: 1
     attackRange: 3
     hitVfx: {fileID: 2666623686672487351, guid: 95c8e1c8d6f014d438f87d31649d47d2, type: 3}

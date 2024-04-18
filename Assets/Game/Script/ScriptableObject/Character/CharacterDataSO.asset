@@ -26,7 +26,7 @@ MonoBehaviour:
     damage: 10
     movementSpeed: 3
     characterCost: 1000
-    basicSkill: {fileID: 11400000, guid: 27567ac3e2f59ee40a23d54dd6b0ba36, type: 2}
+    basicSkill: {fileID: 11400000, guid: 65bb31052ddd1e548b5920cb0aa45c71, type: 2}
   - characterType: 2
     characterModelPrefab: {fileID: 3537138265564915085, guid: e58f98123e4ff9a4abc5bdeb41666b63, type: 3}
     health: 80
