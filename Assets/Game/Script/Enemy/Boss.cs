@@ -81,9 +81,9 @@ public class Boss : Character
     public void OnInit(BossData bossData)
     {
         this.bossData = bossData;
-        this.health = bossData.health;
-        this.damage = bossData.damage;
-        this.movementSpeed = bossData.movementSpeed;
+        this.health = bossData.health + (LevelManager.Instance.player.playerExperience.level * 10);
+        this.damage = bossData.damage + (LevelManager.Instance.player.playerExperience.level * 3);
+        this.movementSpeed = bossData.movementSpeed + 0.25f;
         this.hitVfx = bossData.hitVfx;
         this.deathVfx = bossData.deathVfx;
         skill = bossData.bossSkills;

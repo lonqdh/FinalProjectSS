@@ -79,9 +79,9 @@ public class Enemy : Character
     public void OnInit(EnemyData enemyData)
     {
         this.enemyData = enemyData;
-        this.health = enemyData.health;
-        this.damage = enemyData.damage;
-        this.movementSpeed = enemyData.movementSpeed;
+        this.health = enemyData.health + (LevelManager.Instance.player.playerExperience.level * 10); // chinh stats enemy dua tren level hien tai cua nguoi choi
+        this.damage = enemyData.damage + (LevelManager.Instance.player.playerExperience.level * 3);
+        this.movementSpeed = enemyData.movementSpeed + 0.25f;
         this.hitVfx = enemyData.hitVfx;
         this.deathVfx = enemyData.deathVfx;
         skill = enemyData.enemySkill;

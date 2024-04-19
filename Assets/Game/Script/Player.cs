@@ -186,6 +186,14 @@ public class Player : Character
         this.movementSpeed = characterData.movementSpeed;
         this.damage = characterData.damage;
     }
+
+    public void LevelUp()
+    {
+        this.health += playerExperience.level * 10; // tang stats theo level
+        this.movementSpeed += 1f;
+        this.damage += playerExperience.level * 2;
+    }
+
     private void UpdateSkillCooldowns()
     {
         // Update cooldown for each skill

@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-using Lean.Pool;
 using UnityEngine;
 
 public class Projectile : Skill
@@ -29,8 +27,12 @@ public class Projectile : Skill
     {
         rb = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
-        projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
-        projectileParticle.transform.parent = transform;
+        if (projectileParticle != null)
+        {
+            projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
+            projectileParticle.transform.parent = transform;
+        }
+
         if (muzzleParticle)
         {
             muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
@@ -72,8 +74,10 @@ public class Projectile : Skill
 
                 GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
 
+
                 Destroy(projectileParticle, 3f);
                 Destroy(impactP, 5.0f);
+
                 Destroy(gameObject);
                 //dung despawn se loi~
                 //LeanPool.Despawn(projectileParticle, 3f);

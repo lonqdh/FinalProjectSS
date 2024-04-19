@@ -21,7 +21,7 @@ public class LevelManager : Singleton<LevelManager>
     public int level = 1;
 
     public float spawnIntervalReduction = 0.1f;
-    public float initialSpawnInterval = 5f;
+    public float initialSpawnInterval = 3f;
     public float minSpawnInterval = 1f;
     [SerializeField] private float currentSpawnInterval;
     public int minEnemyLevel = 1;
@@ -47,12 +47,14 @@ public class LevelManager : Singleton<LevelManager>
     private void Update()
     {
         // Check if the player has reached the kill count threshold for transitioning to the next level
-        if (killCount == 10)
+        if (killCount % 50 == 0)
         {
             // Increment the level
-            killCount = 1;
-            level++;
-            LoadNextLevel();
+            //killCount = 1;
+            //level++;
+            //LoadNextLevel();
+
+            SpawnBoss();
         }
         
         //if (killCount == 2)
@@ -276,12 +278,20 @@ public class LevelManager : Singleton<LevelManager>
 
     private void CalculateEligibleEnemies()
     {
-        eligibleEnemies.Clear();
-        foreach (EnemyData enemyData in enemyDataSO.enemyDataList)
+        //eligibleEnemies.Clear();
+        //foreach (EnemyData enemyData in enemyDataSO.enemyDataList)
+        //{
+        //    if (enemyData.enemyLevel <= enemyLevel)
+        //    {
+        //        eligibleEnemies.Add(enemyData);
+        //    }
+        //}
+
+        for(int i = 0; i < enemyDataSO.enemyDataList.Count; i++)
         {
-            if (enemyData.enemyLevel <= enemyLevel)
+            if (!eligibleEnemies.Contains(enemyDataSO.enemyDataList[i]) && enemyDataSO.enemyDataList[i].enemyLevel <= enemyLevel)
             {
-                eligibleEnemies.Add(enemyData);
+                eligibleEnemies.Add(enemyDataSO.enemyDataList[i]);
             }
         }
     }
