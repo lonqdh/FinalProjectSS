@@ -9,14 +9,13 @@ public class UIManager : Singleton<UIManager>
 {
     //Panels
     public GameObject levelUpUI;
-    //public GameObject replaceSkillUI;
     public GameObject openingGameUI;
     public GameObject mainMenuUI;
     public GameObject gameplayUI;
     public GameObject finishGameUI;
+    public GameObject heroShopUI;
 
     //SkillAcquiredIconCooldown
-    //public List<Sprite> acquiredSkillImageList;
     public SkillCooldown acquiredSkillPrefab;
     public GameObject acquiredSkillGroup;
 
@@ -25,6 +24,8 @@ public class UIManager : Singleton<UIManager>
     public Button startGameButton;
     public Button retryGameButton;
     public Button replaceSkillButton;
+    public Button heroShopButton;
+    public Button closeHeroShopButton;
 
     //Texts
     public TextMeshProUGUI nextLevelText;
@@ -45,6 +46,8 @@ public class UIManager : Singleton<UIManager>
         startGameButton.onClick.AddListener(EnterMatch);
         retryGameButton.onClick.AddListener(RestartMatch);
         replaceSkillButton.onClick.AddListener(ChangeToReplaceSkillUI);
+        heroShopButton.onClick.AddListener(OpenHeroShopUI);
+        closeHeroShopButton.onClick.AddListener(CloseHeroShopUI);
     }
 
     public void OpenLevelUpUI()
@@ -53,6 +56,17 @@ public class UIManager : Singleton<UIManager>
         levelUpUI.SetActive(true);
         addOrReplaceSkillsText.text = "Choose Skill To Acquire";
         SkillsChoosingContent.Instance.SpawnSkills();
+    }
+
+    public void OpenHeroShopUI()
+    {
+        heroShopUI.SetActive(true);
+        HeroShopContent.Instance.SpawnCharacters();
+    }
+
+    public void CloseHeroShopUI()
+    {
+        heroShopUI.SetActive(false);
     }
 
     public void ChangeToReplaceSkillUI()
@@ -73,6 +87,7 @@ public class UIManager : Singleton<UIManager>
 
     public void EnterMainMenuUI()
     {
+        GameManager.Instance.ChangeState(GameState.MainMenu);
         openingGameUI.SetActive(false);
         mainMenuUI.SetActive(true);
         //mainMenuBackgroundEffect.SetActive(true);

@@ -11,6 +11,8 @@ public class PlayerSkills : Singleton<PlayerSkills>
     // Dictionary to map skills to their corresponding UI objects
     private Dictionary<SkillData, SkillCooldown> skillCooldownMap = new Dictionary<SkillData, SkillCooldown>();
 
+    public List<SkillCooldown> skillCooldownGameObjects = new List<SkillCooldown>();
+
     // Method to add a skill to the player's skill list
     public void AddSkill(SkillData skill)
     {
@@ -26,7 +28,19 @@ public class PlayerSkills : Singleton<PlayerSkills>
         {
             UpgradeSkill(skill);
         }
+    }
 
+    public void ResetSkill()
+    {
+        currentSkills.Clear();
+        UIManager.Instance.skillCooldownUIList.Clear();
+        foreach(SkillCooldown skillCooldown in skillCooldownGameObjects)
+        {
+            Destroy(skillCooldown.gameObject);
+        }
+        skillCooldownGameObjects.Clear();
+
+        skillCooldownMap.Clear();
     }
 
     public void UpgradeSkill(SkillData skill)
@@ -95,6 +109,7 @@ public class PlayerSkills : Singleton<PlayerSkills>
     private SkillCooldown InstantiateSkillUI(SkillData skill)
     {
         SkillCooldown newSkillUI = Instantiate(UIManager.Instance.acquiredSkillPrefab);
+        skillCooldownGameObjects.Add(newSkillUI);
         newSkillUI.transform.SetParent(UIManager.Instance.acquiredSkillGroup.transform);
         newSkillUI.skillIcon.sprite = skill.skillIcon;
         newSkillUI.skill = skill;

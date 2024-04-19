@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,23 +20,14 @@ public class SkillsChoosingContent : Singleton<SkillsChoosingContent>
     public void SpawnSkills()
     {
         GetRandomSkills();
-        
+
         for (int i = 0; i < 3; i++)
         {
-            //if (PlayerSkills.Instance.currentSkills.Contains(skillsList[i]))
-            //{
-            //    //PlayerSkills.Instance
-            //    Debug.Log("Upgrade Skills Stats");
-            //}
-            //else
-            //{
-                SkillsButton skillButton = Instantiate(skillBtnPrefab, skillItemParent);
-                skillButton.skillData = skillsList[i];
-                skillButton.skillImage.sprite = skillsList[i].skillIcon;
-                skillButton.skillName.text = skillsList[i].skillName;
-                skillsButtonList.Add(skillButton);
-            //Debug.Log("Replacable Skills Button Added : " +  skillButton.name);
-            //}
+            SkillsButton skillButton = Instantiate(skillBtnPrefab, skillItemParent);
+            skillButton.skillData = skillsList[i];
+            skillButton.skillImage.sprite = skillsList[i].skillIcon;
+            skillButton.skillName.text = skillsList[i].skillName;
+            skillsButtonList.Add(skillButton);
         }
     }
 
@@ -49,7 +39,7 @@ public class SkillsChoosingContent : Singleton<SkillsChoosingContent>
         }
         skillsButtonList.Clear();
         skillsList.Clear();
-        
+
         foreach (SkillData skillData in PlayerSkills.Instance.currentSkills)
         {
             SkillsButton skillButton = Instantiate(skillBtnPrefab, skillItemParent);
@@ -103,7 +93,7 @@ public class SkillsChoosingContent : Singleton<SkillsChoosingContent>
 
     private void GetRandomSkills()
     {
-        foreach(SkillsButton btn in skillsButtonList)
+        foreach (SkillsButton btn in skillsButtonList)
         {
             Destroy(btn.gameObject);
         }

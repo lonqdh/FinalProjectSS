@@ -310,7 +310,7 @@ public class LevelManager : Singleton<LevelManager>
         // Despawn all
         LeanPool.DespawnAll();
 
-        InitializePlayerSkills();
+        //InitializePlayerSkills();
 
         enemyLevel = minEnemyLevel;
         currentSpawnInterval = initialSpawnInterval;
@@ -340,8 +340,10 @@ public class LevelManager : Singleton<LevelManager>
             playerPrefab.transform.position = playerSpawnPosition.position;
 
             // Reset player's health and experience
-            player.health = player.characterData.health;
+            //player.health = player.characterData.health;
+            player.OnInit();
             player.playerExperience.ResetLevel();
+            //InitializePlayerSkills();
 
             // Update UI elements
             healthBar.UpdateHealthBar(player.characterData.health, playerPrefab.health);
@@ -376,7 +378,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void InitializePlayerSkills()
     {
-        player.playerSkills.currentSkills.Clear();
+        player.playerSkills.ResetSkill();
         player.playerSkills.AddSkill(player.characterData.basicSkill);
     }
 }
