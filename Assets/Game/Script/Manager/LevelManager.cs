@@ -78,6 +78,8 @@ public class LevelManager : Singleton<LevelManager>
         player.healthBar = this.healthBar;
         player.experienceBar = this.experienceBar;
         player.experienceBar.player = this.player;
+
+
         camera.target = player.transform;
         player.Camera = camera.GetComponent<Camera>();
         //player.OnInit();

@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    //Cameras
+    public GameObject mainCamera;
+    public GameObject heroShopCamera;
+
     //Panels
     public GameObject levelUpUI;
     public GameObject openingGameUI;
@@ -15,9 +19,14 @@ public class UIManager : Singleton<UIManager>
     public GameObject finishGameUI;
     public GameObject heroShopUI;
 
+    public GameObject heroShopUITest;
+
     //SkillAcquiredIconCooldown
     public SkillCooldown acquiredSkillPrefab;
+    public SkillRow skillRowPrefab;
     public GameObject acquiredSkillGroup;
+    public GameObject acquiredSkillRowGroup;
+
 
     //Buttons
     public Button openingStartGameButton;
@@ -37,6 +46,8 @@ public class UIManager : Singleton<UIManager>
     //Effects
     //public GameObject mainMenuBackgroundEffect;
     public List<SkillCooldown> skillCooldownUIList;
+    public List<SkillRow> skillRowList;
+
 
 
     private void Start()
@@ -47,6 +58,8 @@ public class UIManager : Singleton<UIManager>
         retryGameButton.onClick.AddListener(RestartMatch);
         replaceSkillButton.onClick.AddListener(ChangeToReplaceSkillUI);
         heroShopButton.onClick.AddListener(OpenHeroShopUI);
+        //heroShopButton.onClick.AddListener(OpenHeroShopUITest);
+
         closeHeroShopButton.onClick.AddListener(CloseHeroShopUI);
     }
 
@@ -113,6 +126,22 @@ public class UIManager : Singleton<UIManager>
     private void RestartMatch()
     {
         LevelManager.Instance.RestartGame();
+    }
+
+    public void OpenHeroShopUITest()
+    {
+        mainCamera.SetActive(false);
+        heroShopUITest.SetActive(true);
+        heroShopCamera.SetActive(true);
+        mainMenuUI.SetActive(false);
+        //HeroShopContent.Instance.SpawnCharacters();
+    }
+
+    public void CloseHeroShopUITest()
+    {
+        heroShopUITest.SetActive(false);
+        heroShopCamera.SetActive(false);
+        mainCamera.SetActive(true);
     }
 
 

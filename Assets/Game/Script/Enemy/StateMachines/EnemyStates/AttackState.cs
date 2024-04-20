@@ -55,19 +55,19 @@ public class AttackState : IState<Enemy>
 
         if (enemy.isAlive)
         {
-            if (IsTargetWithinAttackRange(enemy))
-            {
+            //if (IsTargetWithinAttackRange(enemy))
+            //{
                 // Cast the enemy skill at the target's position
                 enemy.enemyData.enemySkill.Activate(enemy.target.transform.position, enemy.chargeSkillPos, enemy);
                 yield return enemy.StartCoroutine(StartAttackCooldown(enemy.enemyData.enemySkill.cooldown, enemy)); // can phai co thang yield return o day, no co tac dung la bat buoc coroutine nay phai doi den khi coroutine startattackcooldown xong het moi tiep tuc execute ( de tranh bot spam cast skill, giup cooldown cho skill hoat dong )
-            }
-            else
-            {
-                // Target moved out of attack range during casting, switch back to ChaseState
-                enemy.ChangeState(new ChaseState());
-            }
-            //enemy.ChangeState(new ChaseState());
-            enemy.ChangeAnim("IsIdle");
+            //}
+            //else
+            //{
+            //    // Target moved out of attack range during casting, switch back to ChaseState
+            //    enemy.ChangeState(new ChaseState());
+            //}
+            ////enemy.ChangeState(new ChaseState());
+            //enemy.ChangeAnim("IsIdle");
             isCasting = false;
         }
     }

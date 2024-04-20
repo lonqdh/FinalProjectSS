@@ -579,7 +579,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990878580383029322}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4219,6 +4219,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
+  hitVfx: {fileID: 0}
+  deathVfx: {fileID: 0}
   anim: {fileID: 5237446131616779448}
   isAlive: 0
   bossData:
@@ -4228,6 +4230,8 @@ MonoBehaviour:
     damage: 0
     movementSpeed: 0
     bossSkills: []
+    hitVfx: {fileID: 0}
+    deathVfx: {fileID: 0}
     attackRange: 0
   target: {fileID: 0}
   agent: {fileID: 7137426000297497659}

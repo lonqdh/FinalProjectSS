@@ -6,24 +6,28 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Image healthbarSprite;
-    [SerializeField] private float reduceSpeed = 1;
-    private float target = 1;
-    //private Camera cam;
+    [SerializeField] private float fillSpeed = 1f;
+    [SerializeField] private Color fullHealthColor = Color.green;
+    [SerializeField] private Color lowHealthColor = Color.red;
 
-    private void Start()
-    {
-        //cam = Camera.main;
-    }
+    private float targetFillAmount = 1f;
+    private Color targetColor;
 
     private void Update()
     {
-        //transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
-        healthbarSprite.fillAmount = Mathf.MoveTowards(healthbarSprite.fillAmount, target, reduceSpeed * Time.deltaTime);
+        // Smoothly transition the fill amount
+        healthbarSprite.fillAmount = Mathf.MoveTowards(healthbarSprite.fillAmount, targetFillAmount, fillSpeed * Time.deltaTime);
+
+        // Smoothly transition the color
+        healthbarSprite.color = Color.Lerp(healthbarSprite.color, targetColor, fillSpeed * Time.deltaTime);
     }
 
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
-        target = currentHealth / maxHealth;
-        //healthbarSprite.fillAmount = currentHealth / maxHealth;
+        targetFillAmount = Mathf.Clamp01(currentHealth / maxHealth);
+
+        // Set the target color based on health percentage
+        float healthPercentage = currentHealth / maxHealth;
+        targetColor = Color.Lerp(lowHealthColor, fullHealthColor, healthPercentage);
     }
 }

@@ -108,11 +108,17 @@ public class PlayerSkills : Singleton<PlayerSkills>
     // Instantiate a SkillCooldown UI object for the given skill
     private SkillCooldown InstantiateSkillUI(SkillData skill)
     {
-        SkillCooldown newSkillUI = Instantiate(UIManager.Instance.acquiredSkillPrefab);
+        SkillCooldown newSkillUI = Instantiate(UIManager.Instance.acquiredSkillPrefab, UIManager.Instance.acquiredSkillGroup.transform);
         skillCooldownGameObjects.Add(newSkillUI);
-        newSkillUI.transform.SetParent(UIManager.Instance.acquiredSkillGroup.transform);
+        //newSkillUI.transform.SetParent(UIManager.Instance.acquiredSkillGroup.transform);
         newSkillUI.skillIcon.sprite = skill.skillIcon;
         newSkillUI.skill = skill;
+
+        SkillRow skillItem = Instantiate(UIManager.Instance.skillRowPrefab, UIManager.Instance.acquiredSkillRowGroup.transform);
+        skillItem.skillRowIcon.sprite = skill.skillIcon;
+        UIManager.Instance.skillRowList.Add(skillItem);
+
+
         return newSkillUI;
     }
 

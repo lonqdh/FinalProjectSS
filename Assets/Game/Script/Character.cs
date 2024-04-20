@@ -33,6 +33,12 @@ public class Character : MonoBehaviour
 
     protected virtual void OnHit(int damage)
     {
+        //Vector3 hitDirection = (transform.position - hitPoint).normalized;
+
+        //// Apply a force to simulate pushback
+        //rb.AddForce(hitDirection * pushbackForce, ForceMode.Impulse);
+
+
         health -= damage;
         GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform);
         newHitVfx.transform.position = transform.position;
