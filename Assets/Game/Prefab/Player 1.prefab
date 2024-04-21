@@ -218,6 +218,7 @@ MonoBehaviour:
   deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
   anim: {fileID: 1773057320954545746}
   isAlive: 1
+  pushbackForce: 15
   characterData:
     characterType: 1
     characterModelPrefab: {fileID: 921037747157138857, guid: d06151b1df32db7489e2b391db88d7ee, type: 3}

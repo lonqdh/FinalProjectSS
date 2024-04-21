@@ -51,7 +51,7 @@ public class AttackState : IState<Enemy>
     {
         isCasting = true;
         enemy.ChangeAnim("IsAttack");
-        yield return new WaitForSeconds(skillData.castTime);
+        //yield return new WaitForSeconds(skillData.castTime);
 
         if (enemy.isAlive)
         {

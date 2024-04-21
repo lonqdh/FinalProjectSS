@@ -24512,6 +24512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: 504be9e284d61a145828ad7f57375435, type: 2}
   attacker: {fileID: 0}
+  capsuleCollider: {fileID: 4627170390864974084}
 --- !u!136 &4627170390864974084
 CapsuleCollider:
   m_ObjectHideFlags: 0

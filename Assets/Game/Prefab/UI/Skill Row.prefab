@@ -768,6 +768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRowIcon: {fileID: 6551594759542714887}
+  skillRowData: {fileID: 0}
+  skillRowName: {fileID: 5566838465262176084}
+  skillRowDescription: {fileID: 2580076295581885087}
 --- !u!1 &6219534205765390481
 GameObject:
   m_ObjectHideFlags: 0

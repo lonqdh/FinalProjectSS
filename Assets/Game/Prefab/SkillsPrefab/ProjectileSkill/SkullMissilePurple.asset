@@ -24,5 +24,5 @@ MonoBehaviour:
   projectile: {fileID: 373966260773400295, guid: 89f054daa309bbc4380e8a062c77bd9c, type: 3}
   maxDistance: 20
   projectileSpeed: 250
-  numberOfProjectiles: 5
+  numberOfProjectiles: 10
   spreadAngle: 45

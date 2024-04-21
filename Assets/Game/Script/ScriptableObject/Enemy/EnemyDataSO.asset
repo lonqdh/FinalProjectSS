@@ -15,12 +15,12 @@ MonoBehaviour:
   enemyDataList:
   - enemyType: 0
     enemy: {fileID: 1899042223193882511, guid: bea62bf02be26a64d95f381df3ad3760, type: 3}
-    health: 5
+    health: 100
     damage: 5
     movementSpeed: 2
     enemySkill: {fileID: 11400000, guid: 65bb31052ddd1e548b5920cb0aa45c71, type: 2}
     enemyLevel: 1
-    attackRange: 3
+    attackRange: 2
     hitVfx: {fileID: 2666623686672487351, guid: 95c8e1c8d6f014d438f87d31649d47d2, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
   - enemyType: 1

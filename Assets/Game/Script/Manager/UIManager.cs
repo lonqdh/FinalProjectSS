@@ -65,7 +65,7 @@ public class UIManager : Singleton<UIManager>
 
     public void OpenLevelUpUI()
     {
-        GameManager.Instance.ChangeState(GameState.MainMenu);
+        GameManager.Instance.ChangeState(GameState.LevelUp);
         levelUpUI.SetActive(true);
         addOrReplaceSkillsText.text = "Choose Skill To Acquire";
         SkillsChoosingContent.Instance.SpawnSkills();

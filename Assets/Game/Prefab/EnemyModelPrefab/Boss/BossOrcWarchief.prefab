@@ -4223,6 +4223,7 @@ MonoBehaviour:
   deathVfx: {fileID: 0}
   anim: {fileID: 5237446131616779448}
   isAlive: 0
+  pushbackForce: 5
   bossData:
     boss: {fileID: 0}
     bossType: 0

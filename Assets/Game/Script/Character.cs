@@ -1,5 +1,5 @@
 using Lean.Pool;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -17,10 +17,12 @@ public class Character : MonoBehaviour
     //[SerializeField] internal Collider collider;
     [SerializeField] internal bool isAlive;
 
-    private void Start()
-    {
-        //OnInit();
-    }
+    public int pushbackForce;
+
+    // Smooth knockback variables
+    public float knockbackDuration = 0.5f;
+    private Vector3 knockbackDirection;
+    private bool isKnockbackActive = false;
 
     protected virtual void OnInit()
     {
@@ -31,20 +33,37 @@ public class Character : MonoBehaviour
         //anim = GetComponent<Animator>();
     }
 
-    protected virtual void OnHit(int damage)
+    protected virtual void OnHit(int damage, Vector3 attackerPosition)
     {
-        //Vector3 hitDirection = (transform.position - hitPoint).normalized;
-
-        //// Apply a force to simulate pushback
-        //rb.AddForce(hitDirection * pushbackForce, ForceMode.Impulse);
-
-
+        // Reduce health
         health -= damage;
-        GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform);
-        newHitVfx.transform.position = transform.position;
+
+        // Instantiate hit VFX
+        GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform.position, Quaternion.identity);
         LeanPool.Despawn(newHitVfx, 3f);
-        
+
+        // Calculate knockback direction
+        knockbackDirection = (transform.position - attackerPosition).normalized;
+
+        // Start smooth knockback effect
+        StartCoroutine(StartKnockback());
     }
+
+    protected IEnumerator StartKnockback()
+    {
+        // Activate knockback flag
+        isKnockbackActive = true;
+
+        // Apply knockback force
+        rb.velocity = knockbackDirection * pushbackForce;
+
+        // Wait for knockback duration
+        yield return new WaitForSeconds(knockbackDuration);
+
+        // Deactivate knockback flag
+        isKnockbackActive = false;
+    }
+
     protected virtual void OnDespawn()
     {
         LeanPool.Despawn(this);
@@ -63,7 +82,7 @@ public class Character : MonoBehaviour
                 if (skill.attacker.gameObject.layer != enemyLayer)
                 {
                     // Process the collision by calling the OnHit method
-                    OnHit((int)(skill.attacker.damage + skill.skillData.damage));
+                    OnHit((int)(skill.attacker.damage + skill.skillData.damage), skill.attacker.transform.position);
                 }
             }
         }
@@ -71,7 +90,6 @@ public class Character : MonoBehaviour
         {
             return;
         }
-
     }
 
     public void ChangeAnim(string animName)

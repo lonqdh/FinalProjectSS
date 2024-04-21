@@ -7,11 +7,12 @@ public enum GameState
     MainMenu = 0,
     Gameplay = 1,
     Finish = 2,
+    LevelUp = 3,
 }
 
 public class GameManager : Singleton<GameManager>
 {
-    private GameState state;
+    [SerializeField] private GameState state;
     public UserData UserData;
 
     private void Awake()

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AOE Skill test
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 3274725942559288099, guid: bd723ae3d0723434189a70995c6a6bc5, type: 3}
+  skillIcon: {fileID: 21300000, guid: 501e5de203ccf46409a557c3bb33f11b, type: 3}
   skillType: 1
   skillName: orbital beam
   description: xx

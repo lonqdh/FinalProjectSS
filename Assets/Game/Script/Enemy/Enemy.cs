@@ -93,9 +93,9 @@ public class Enemy : Character
         ChangeState(new ChaseState());
     }
 
-    protected override void OnHit(int damage)
+    protected override void OnHit(int damage, Vector3 attackerPosition)
     {
-        base.OnHit(damage);
+        base.OnHit(damage, attackerPosition);
 
         //health -= damage;
 

@@ -105,9 +105,9 @@ public class Player : Character
         healthBar.UpdateHealthBar(characterData.health, this.health);
     }
 
-    protected override void OnHit(int damage)
+    protected override void OnHit(int damage, Vector3 attackerPosition)
     {
-        base.OnHit(damage);
+        base.OnHit(damage, attackerPosition);
         //health -= damage;
         Debug.Log("Player's health: " + health);
         healthBar.UpdateHealthBar(characterData.health, this.health);

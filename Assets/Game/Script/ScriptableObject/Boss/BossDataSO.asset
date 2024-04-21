@@ -19,10 +19,7 @@ MonoBehaviour:
     damage: 30
     movementSpeed: 5
     bossSkills:
-    - {fileID: 11400000, guid: 768c34d2bb0d8674fa894c3c491f5e81, type: 2}
-    - {fileID: 11400000, guid: 27567ac3e2f59ee40a23d54dd6b0ba36, type: 2}
-    - {fileID: 11400000, guid: 982a00e1f80b7a6479d85b738cf8cfc6, type: 2}
-    - {fileID: 11400000, guid: 728be9fbc84bbdc4aac3828bd59a32ac, type: 2}
+    - {fileID: 11400000, guid: 504be9e284d61a145828ad7f57375435, type: 2}
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
     attackRange: 10

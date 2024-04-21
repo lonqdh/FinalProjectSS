@@ -2831,8 +2831,11 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
+  hitVfx: {fileID: 0}
+  deathVfx: {fileID: 0}
   anim: {fileID: 3235576209012589074}
   isAlive: 0
+  pushbackForce: 15
   enemyData:
     enemyType: 0
     enemy: {fileID: 0}
@@ -2842,6 +2845,8 @@ MonoBehaviour:
     enemySkill: {fileID: 0}
     enemyLevel: 0
     attackRange: 0
+    hitVfx: {fileID: 0}
+    deathVfx: {fileID: 0}
   target: {fileID: 0}
   agent: {fileID: -331957984009819780}
   rotateSpeed: 5

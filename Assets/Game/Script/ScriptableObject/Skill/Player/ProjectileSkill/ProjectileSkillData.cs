@@ -77,53 +77,18 @@ public class ProjectileSkillData : SkillData
 
     public override void BossActivate2(Vector3 position, Transform chargePos, Boss attacker)
     {
-        //// Calculate direction towards the target position
-        //Vector3 direction = (position - chargePos.position).normalized;
-        ////direction.y = 0f; // Ensure the vertical component is 0 (if projectiles don't use gravity)
-
-        //// Calculate the initial velocity of the projectiles
-        //Vector3 initialVelocity = direction * projectileSpeed;
-
-        //float launchAngle = 15f;
-        //// Calculate the launch velocity using the launch angle
-        //float launchVelocity = Mathf.Sqrt(10 * 10 * Mathf.Sin(2 * launchAngle * Mathf.Deg2Rad) / -Physics.gravity.y);
-
-        //// Calculate the initial position of the projectiles
-        //Vector3 initialPosition = chargePos.position;
-
-        //// Iterate to spawn each projectile
-        //for (int i = 0; i < numberOfProjectiles; i++)
-        //{
-        //    // Calculate the launch direction for this projectile
-        //    Quaternion launchRotation = Quaternion.Euler(0f, i * (360f / numberOfProjectiles), 0f);
-        //    Vector3 launchDirection = launchRotation * direction;
-
-        //    // Instantiate the projectile with the correct rotation and position
-        //    //Projectile newProjectile = Instantiate(projectile, initialPosition, Quaternion.LookRotation(launchDirection));
-        //    Projectile newProjectile = LeanPool.Spawn(projectile, initialPosition, Quaternion.LookRotation(launchDirection));
-        //    //newProjectile.OnInit(attacker);
-        //    //newProjectile.StartCoroutine(Despawn(this));
-
-        //    // Set the attacker of the projectile
-        //    newProjectile.attacker = attacker;
-
-        //    // Apply the launch velocity to the projectile
-        //    newProjectile.rb.velocity = launchDirection * launchVelocity;
-        //}
-
-        //base.Activate(position, chargePos, attacker);
-
         // Calculate direction towards the target position
         Vector3 direction = (position - chargePos.position).normalized;
+        direction.y = 0f; // Ensure the vertical component is 0 (if projectiles don't use gravity)
 
         // Calculate the initial position of the projectiles
         Vector3 initialPosition = chargePos.position;
 
         // Calculate the angle between each projectile
-        float angleStep = 360f / /*numberOfProjectiles + */10;
+        float angleStep = 360f / numberOfProjectiles + 10;
 
         // Iterate to spawn each projectile
-        for (int i = 0; i < /*numberOfProjectiles + */10; i++)
+        for (int i = 0; i < numberOfProjectiles + 10; i++)
         {
             // Calculate the launch direction for this projectile
             Quaternion launchRotation = Quaternion.Euler(0f, i * angleStep, 0f);
@@ -142,9 +107,9 @@ public class ProjectileSkillData : SkillData
             // Apply the launch velocity to the projectile
             newProjectile.rb.velocity = launchVelocity;
         }
-
-        base.Activate(position, chargePos, attacker);
     }
+
+
 
     //private IEnumerator Despawn(Projectile projectile)
     //{

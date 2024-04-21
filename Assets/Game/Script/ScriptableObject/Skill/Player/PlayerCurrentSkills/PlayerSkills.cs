@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ public class PlayerSkills : Singleton<PlayerSkills>
             UIManager.Instance.skillCooldownUIList.Add(newSkillUI);
             skillCooldownMap.Add(skill, newSkillUI);
         }
-        else if(currentSkills.Contains(skill))
+        else if (currentSkills.Contains(skill))
         {
             UpgradeSkill(skill);
         }
@@ -34,7 +33,7 @@ public class PlayerSkills : Singleton<PlayerSkills>
     {
         currentSkills.Clear();
         UIManager.Instance.skillCooldownUIList.Clear();
-        foreach(SkillCooldown skillCooldown in skillCooldownGameObjects)
+        foreach (SkillCooldown skillCooldown in skillCooldownGameObjects)
         {
             Destroy(skillCooldown.gameObject);
         }
@@ -58,7 +57,7 @@ public class PlayerSkills : Singleton<PlayerSkills>
         upgradedSkillData.damage = skill.damage + 10f;
         upgradedSkillData.cooldown = skill.cooldown - 0.5f;
         upgradedSkillData.rangeRadius = skill.rangeRadius + 2f;
-        
+
 
         // Replace the original skill data with the upgraded one
         //ReplaceSkill(currentSkills.IndexOf(skill), upgradedSkillData);
@@ -114,10 +113,27 @@ public class PlayerSkills : Singleton<PlayerSkills>
         newSkillUI.skillIcon.sprite = skill.skillIcon;
         newSkillUI.skill = skill;
 
-        SkillRow skillItem = Instantiate(UIManager.Instance.skillRowPrefab, UIManager.Instance.acquiredSkillRowGroup.transform);
-        skillItem.skillRowIcon.sprite = skill.skillIcon;
-        UIManager.Instance.skillRowList.Add(skillItem);
 
+        SkillRow skillItem = Instantiate(UIManager.Instance.skillRowPrefab, UIManager.Instance.acquiredSkillRowGroup.transform);
+        skillItem.skillRowData = skill;
+        skillItem.skillRowName.text = skill.name;
+        skillItem.skillRowDescription.text = "Damage : " + skill.damage + " - Cooldown : " + skill.cooldown;
+        skillItem.skillRowIcon.sprite = skill.skillIcon;
+        
+        if (GameManager.Instance.IsState(GameState.MainMenu) && UIManager.Instance.skillRowList.Count > 0)
+        {
+            Destroy(UIManager.Instance.skillRowList[0].gameObject);
+            Debug.Log("Destroyed :" + UIManager.Instance.skillRowList[0]);
+            UIManager.Instance.skillRowList.RemoveAt(0);
+            
+            //return newSkillUI;
+        }
+
+        UIManager.Instance.skillRowList.Add(skillItem);
+        
+        
+
+        
 
         return newSkillUI;
     }
