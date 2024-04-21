@@ -14,7 +14,7 @@ public class Melee : Skill
 
     void OnEnable()
     {
-        Invoke("OnDespawn", 1.0f);
+        Invoke("OnDespawn", 0.1f);
     }
 
     void OnDespawn()

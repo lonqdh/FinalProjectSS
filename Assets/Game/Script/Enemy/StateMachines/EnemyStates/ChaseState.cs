@@ -74,7 +74,7 @@ public class ChaseState : IState<Enemy>
         // Start sprinting
         //enemy.ChangeAnim("IsSprint");
         float originalSpeed = enemy.agent.speed; // Store the original speed
-        enemy.agent.speed += 0.5f; // Speed up the agent
+        enemy.agent.speed += 0.15f; // Speed up the agent
 
         // Start the sprint duration countdown
         speedUpCoroutine = enemy.StartCoroutine(SprintDurationCountdown(originalSpeed, sprintDuration, enemy));

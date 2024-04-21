@@ -18,10 +18,10 @@ MonoBehaviour:
     health: 100
     damage: 5
     movementSpeed: 2
-    enemySkill: {fileID: 11400000, guid: 65bb31052ddd1e548b5920cb0aa45c71, type: 2}
+    enemySkill: {fileID: 11400000, guid: 3be808f7d541aa14083038f412497ac8, type: 2}
     enemyLevel: 1
-    attackRange: 2
-    hitVfx: {fileID: 2666623686672487351, guid: 95c8e1c8d6f014d438f87d31649d47d2, type: 3}
+    attackRange: 1
+    hitVfx: {fileID: 8483431786890429648, guid: 465f1babeb34b234eb60e63aead7885e, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
   - enemyType: 1
     enemy: {fileID: 6732161313865444781, guid: ef76556b8d5c1e740a07f75412f18ed7, type: 3}
