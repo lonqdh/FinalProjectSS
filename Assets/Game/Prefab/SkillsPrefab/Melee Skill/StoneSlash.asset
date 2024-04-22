@@ -18,8 +18,8 @@ MonoBehaviour:
   skillName: StoneSlash
   description: 
   damage: 2
-  cooldown: 2
-  rangeRadius: 2
+  cooldown: 5
+  rangeRadius: 1
   castTime: 3
   meleeSkill: {fileID: -170223619729680444, guid: 26c4017b16f5ba94987878028daa53e8, type: 3}
-  radius: 2
+  radius: 1

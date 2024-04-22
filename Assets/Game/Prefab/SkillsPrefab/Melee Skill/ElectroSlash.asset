@@ -18,8 +18,8 @@ MonoBehaviour:
   skillName: ElectroSlash
   description: 
   damage: 2
-  cooldown: 2
-  rangeRadius: 2
+  cooldown: 5
+  rangeRadius: 1
   castTime: 3
   meleeSkill: {fileID: -4566279730686237376, guid: 20b42619a421d3b43978f5374c94b764, type: 3}
-  radius: 2
+  radius: 1

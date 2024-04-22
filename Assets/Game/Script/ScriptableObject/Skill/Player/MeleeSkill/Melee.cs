@@ -9,16 +9,18 @@ public class Melee : Skill
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
+        //boxCollider = GetComponent<BoxCollider>();
     }
 
     void OnEnable()
     {
-        Invoke("OnDespawn", 0.1f);
+        boxCollider.enabled = true;
+        Invoke("OnDespawn", 1f);
     }
 
     void OnDespawn()
     {
+        boxCollider.enabled = false;
         LeanPool.Despawn(this);
     }
 

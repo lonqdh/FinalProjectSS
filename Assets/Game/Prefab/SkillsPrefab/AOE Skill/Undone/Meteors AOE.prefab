@@ -5007,7 +5007,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 6.38e-43, z: 1.37217e-40, w: 8.5949415e-38}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -5062,7 +5062,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297220453629098881}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -9944,6 +9944,7 @@ MonoBehaviour:
   attacker: {fileID: 0}
   capsuleCollider: {fileID: 3110083686606292818}
   delayBeforeActivation: 2
+  vfx: {fileID: 8022844873127327359}
 --- !u!136 &3110083686606292818
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9963,7 +9964,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 2.5
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

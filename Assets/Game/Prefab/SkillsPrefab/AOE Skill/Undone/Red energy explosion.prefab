@@ -53895,7 +53895,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -53915,3 +53915,4 @@ MonoBehaviour:
   attacker: {fileID: 0}
   capsuleCollider: {fileID: -7511400245301991049}
   delayBeforeActivation: 2
+  vfx: {fileID: 2810778813316733972}

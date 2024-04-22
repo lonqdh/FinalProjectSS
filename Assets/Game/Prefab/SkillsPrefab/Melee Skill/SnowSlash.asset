@@ -18,8 +18,8 @@ MonoBehaviour:
   skillName: SnowSlash
   description: 
   damage: 2
-  cooldown: 2
-  rangeRadius: 2
+  cooldown: 5
+  rangeRadius: 1
   castTime: 3
   meleeSkill: {fileID: 5776524488509758238, guid: 6958406f6a62795489ca4b33c61494d7, type: 3}
-  radius: 2
+  radius: 1

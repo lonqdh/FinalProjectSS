@@ -24,6 +24,9 @@ public class Character : MonoBehaviour
     private Vector3 knockbackDirection;
     private bool isKnockbackActive = false;
 
+    public float knockbackCooldown = 2.0f; // Cooldown period between knockbacks
+    private bool isKnockbackCooldown = false;
+
     protected virtual void OnInit()
     {
         //collider = GetComponent<Collider>();
@@ -33,20 +36,55 @@ public class Character : MonoBehaviour
         //anim = GetComponent<Animator>();
     }
 
+    //protected virtual void OnHit(int damage, Vector3 attackerPosition)
+    //{
+    //    // Reduce health
+    //    health -= damage;
+
+    //    // Instantiate hit VFX
+    //    GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform.position, Quaternion.identity);
+    //    LeanPool.Despawn(newHitVfx, 3f);
+
+    //    // Calculate knockback direction
+    //    knockbackDirection = (transform.position - attackerPosition).normalized;
+
+    //    // Start smooth knockback effect
+    //    StartCoroutine(StartKnockback());
+    //}
+
     protected virtual void OnHit(int damage, Vector3 attackerPosition)
     {
-        // Reduce health
-        health -= damage;
+        // Check if knockback is on cooldown
+        if (!isKnockbackCooldown)
+        {
+            // Reduce health
+            health -= damage;
 
-        // Instantiate hit VFX
-        GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform.position, Quaternion.identity);
-        LeanPool.Despawn(newHitVfx, 3f);
+            // Instantiate hit VFX
+            GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform.position, Quaternion.identity);
+            LeanPool.Despawn(newHitVfx, 3f);
 
-        // Calculate knockback direction
-        knockbackDirection = (transform.position - attackerPosition).normalized;
+            // Calculate knockback direction
+            knockbackDirection = (transform.position - attackerPosition).normalized;
 
-        // Start smooth knockback effect
-        StartCoroutine(StartKnockback());
+            // Start smooth knockback effect
+            StartCoroutine(StartKnockback());
+
+            // Start knockback cooldown
+            StartCoroutine(StartKnockbackCooldown());
+        }
+    }
+
+    protected IEnumerator StartKnockbackCooldown()
+    {
+        // Set knockback cooldown flag
+        isKnockbackCooldown = true;
+
+        // Wait for knockback cooldown duration
+        yield return new WaitForSeconds(knockbackCooldown);
+
+        // Reset knockback cooldown flag
+        isKnockbackCooldown = false;
     }
 
     protected IEnumerator StartKnockback()

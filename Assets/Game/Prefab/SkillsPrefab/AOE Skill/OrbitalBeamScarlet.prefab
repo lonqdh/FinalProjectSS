@@ -19716,7 +19716,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -24513,6 +24513,8 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 504be9e284d61a145828ad7f57375435, type: 2}
   attacker: {fileID: 0}
   capsuleCollider: {fileID: 4627170390864974084}
+  delayBeforeActivation: 1
+  vfx: {fileID: 4715250478095068125}
 --- !u!136 &4627170390864974084
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24532,8 +24534,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Height: 6.5
+  m_Radius: 0.75
+  m_Height: 3
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.95}
 --- !u!54 &8751875224878014783
