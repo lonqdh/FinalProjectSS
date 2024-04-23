@@ -19,7 +19,7 @@ MonoBehaviour:
     damage: 5
     movementSpeed: 2
     enemySkill: {fileID: 11400000, guid: 0a0e5afc2c4d6c64c99bf69e5462513b, type: 2}
-    enemyLevel: 2
+    enemyLevel: 1
     attackRange: 2
     hitVfx: {fileID: 8483431786890429648, guid: 465f1babeb34b234eb60e63aead7885e, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -29,7 +29,7 @@ MonoBehaviour:
     damage: 8
     movementSpeed: 2.5
     enemySkill: {fileID: 11400000, guid: c203a36e93669e04892f57a00093e386, type: 2}
-    enemyLevel: 2
+    enemyLevel: 1
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -39,7 +39,7 @@ MonoBehaviour:
     damage: 10
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 9718c91c586419e4e90b869cdc2094fc, type: 2}
-    enemyLevel: 2
+    enemyLevel: 1
     attackRange: 3
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -49,7 +49,7 @@ MonoBehaviour:
     damage: 12
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: b538f44a08caabd438f1cbbe83639b4f, type: 2}
-    enemyLevel: 2
+    enemyLevel: 1
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -59,7 +59,7 @@ MonoBehaviour:
     damage: 10
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 415365a6fb09de0429e07a904255533c, type: 2}
-    enemyLevel: 2
+    enemyLevel: 1
     attackRange: 3
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -69,7 +69,7 @@ MonoBehaviour:
     damage: 12
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 60318378563fa604e9ae9f1a7a292b86, type: 2}
-    enemyLevel: 2
+    enemyLevel: 1
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -79,7 +79,7 @@ MonoBehaviour:
     damage: 20
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 7655cc5ef699eae4a9ccd10eff915ecb, type: 2}
-    enemyLevel: 1
+    enemyLevel: 2
     attackRange: 3
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -89,7 +89,7 @@ MonoBehaviour:
     damage: 20
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 9f2cb1aef1a5e8b44baf9865fd481c7b, type: 2}
-    enemyLevel: 1
+    enemyLevel: 2
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -99,7 +99,7 @@ MonoBehaviour:
     damage: 20
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: af77ed50ac7bbec4d904f1517c0dd90f, type: 2}
-    enemyLevel: 1
+    enemyLevel: 2
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -109,7 +109,7 @@ MonoBehaviour:
     damage: 20
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 9718c91c586419e4e90b869cdc2094fc, type: 2}
-    enemyLevel: 1
+    enemyLevel: 2
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -119,7 +119,7 @@ MonoBehaviour:
     damage: 20
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 27567ac3e2f59ee40a23d54dd6b0ba36, type: 2}
-    enemyLevel: 1
+    enemyLevel: 2
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}
@@ -129,7 +129,7 @@ MonoBehaviour:
     damage: 20
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 589f7ebf4fdafb24680fa52fd771f96d, type: 2}
-    enemyLevel: 1
+    enemyLevel: 2
     attackRange: 5
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}

@@ -9,6 +9,7 @@ public enum GameState
     Finish = 2,
     LevelUp = 3,
     ChangingLevel = 4,
+    Pause = 5,
 }
 
 public class GameManager : Singleton<GameManager>

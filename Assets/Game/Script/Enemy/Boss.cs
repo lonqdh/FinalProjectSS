@@ -23,6 +23,9 @@ public class Boss : Character
     private float lessExpDropRate = 0.8f;
     public bool hasSprayingSkill;
 
+    public EnemyHealthBar bossHealthbar;
+    public float currentMaxHealth;
+
     private BossDashSkill dashSkill;
 
     private void Start()
@@ -82,6 +85,7 @@ public class Boss : Character
     {
         this.bossData = bossData;
         this.health = bossData.health + (LevelManager.Instance.player.playerExperience.level * 10);
+        currentMaxHealth = health;
         this.damage = bossData.damage + (LevelManager.Instance.player.playerExperience.level * 3);
         this.movementSpeed = bossData.movementSpeed + 0.25f;
         this.hitVfx = bossData.hitVfx;
@@ -102,7 +106,7 @@ public class Boss : Character
     protected override void OnHit(int damage, Vector3 attackerPosition)
     {
         base.OnHit(damage, attackerPosition);
-
+        bossHealthbar.UpdateEnemyHealthBar(currentMaxHealth, health);
         //health -= damage;
 
         if (health <= 0)

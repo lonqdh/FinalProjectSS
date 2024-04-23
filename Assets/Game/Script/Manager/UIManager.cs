@@ -15,11 +15,12 @@ public class UIManager : Singleton<UIManager>
     public GameObject levelUpUI;
     public GameObject openingGameUI;
     public GameObject mainMenuUI;
+    public GameObject pauseMenuUI;
     public GameObject gameplayUI;
     public GameObject finishGameUI;
     public GameObject heroShopUI;
     public GameObject loadingScreen;
-
+    public GameObject spellbookUI;
     public GameObject heroShopUITest;
 
     //SkillAcquiredIconCooldown
@@ -31,11 +32,13 @@ public class UIManager : Singleton<UIManager>
 
     //Buttons
     public Button openingStartGameButton;
+    public Button resumeGameButton;
     public Button startGameButton;
     public Button retryGameButton;
     public Button replaceSkillButton;
     public Button heroShopButton;
     public Button closeHeroShopButton;
+    public Button pauseToMenuButton;
 
     //Texts
     public TextMeshProUGUI nextLevelText;
@@ -49,7 +52,7 @@ public class UIManager : Singleton<UIManager>
     public List<SkillCooldown> skillCooldownUIList;
     public List<SkillRow> skillRowList;
 
-
+    public bool isPaused = false;
 
     private void Start()
     {
@@ -57,11 +60,51 @@ public class UIManager : Singleton<UIManager>
         openingStartGameButton.onClick.AddListener(EnterMainMenuUI);
         startGameButton.onClick.AddListener(EnterMatch);
         retryGameButton.onClick.AddListener(RestartMatch);
+        pauseToMenuButton.onClick.AddListener(EnterMainMenuUI);
         replaceSkillButton.onClick.AddListener(ChangeToReplaceSkillUI);
         heroShopButton.onClick.AddListener(OpenHeroShopUI);
+        resumeGameButton.onClick.AddListener(ResumeGame);
         //heroShopButton.onClick.AddListener(OpenHeroShopUITest);
 
         closeHeroShopButton.onClick.AddListener(CloseHeroShopUI);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+    }
+
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+        GameManager.Instance.ChangeState(GameState.Pause);
+        pauseMenuUI.SetActive(true);
+        spellbookUI.SetActive(true);
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        GameManager.Instance.ChangeState(GameState.Gameplay);
+        pauseMenuUI.SetActive(false);
+        spellbookUI.SetActive(false);
     }
 
     public void OpenLevelUpUI()
@@ -101,6 +144,13 @@ public class UIManager : Singleton<UIManager>
 
     public void EnterMainMenuUI()
     {
+        if(GameManager.Instance.IsState(GameState.Pause))
+        {
+            Time.timeScale = 1f;
+            pauseMenuUI.SetActive(false);
+            gameplayUI.SetActive(false);
+            LevelManager.Instance.EndGame();
+        }
         GameManager.Instance.ChangeState(GameState.MainMenu);
         openingGameUI.SetActive(false);
         mainMenuUI.SetActive(true);

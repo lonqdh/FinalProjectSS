@@ -114,7 +114,7 @@ public class Player : Character
         //health -= damage;
         Debug.Log("Player's health: " + health);
         healthBar.UpdateHealthBar(characterData.health, this.health);
-        if(health <= 0)
+        if (health <= 0)
         {
             //this.GetComponent<Collider>().enabled = false;
             GameObject newDeathVfx = LeanPool.Spawn(deathVfx, transform);
@@ -317,33 +317,58 @@ public class Player : Character
                     skill.Activate(castPosition, chargeSkillPos.transform, this);
                     skillCooldowns[skill] = skill.cooldown;
 
-                    SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
-                    if (cooldownUI != null)
-                    {
-                        cooldownUI.StartCooldown(skill.cooldown);
-                    }
+                    //SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
+                    //if (cooldownUI != null)
+                    //{
+                    //    cooldownUI.StartCooldown(skill.cooldown);
+                    //}
                 }
                 else if (skill.skillType == SkillType.AreaOfEffect)
                 {
-                    float distanceToMouse = GetMouseDirectionAoE().magnitude;
+                    //float distanceToMouse = GetMouseDirectionAoE().magnitude;
 
-                    if (distanceToMouse <= skill.rangeRadius)
+                    //if (distanceToMouse <= skill.rangeRadius)
+                    //{
+                    //    // Calculate the casting position based on the player's position and the mouse direction
+                    //    Vector3 castPosition = transform.position + GetMouseDirectionAoE().normalized * distanceToMouse;
+
+                    //    // Activate the skill at the calculated position
+                    //    skill.Activate(castPosition, chargeSkillPos.transform, this);
+                    //    skillCooldowns[skill] = skill.cooldown;
+                    //}
+
+                    Vector3 nearestEnemyPosition = FindNearestEnemyPosition(skill.rangeRadius);
+
+                    // If a valid nearest enemy position is found, activate the skill there
+                    if (nearestEnemyPosition != Vector3.zero)
                     {
-                        // Calculate the casting position based on the player's position and the mouse direction
-                        Vector3 castPosition = transform.position + GetMouseDirectionAoE().normalized * distanceToMouse;
-
-                        // Activate the skill at the calculated position
-                        skill.Activate(castPosition, chargeSkillPos.transform, this);
+                        skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
                         skillCooldowns[skill] = skill.cooldown;
-
-                        SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
-                        if (cooldownUI != null)
-                        {
-                            cooldownUI.StartCooldown(skill.cooldown);
-                        }
                     }
                 }
+
+                SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
+                if (cooldownUI != null)
+                {
+                    cooldownUI.StartCooldown(skill.cooldown);
+                }
             }
+        }
+    }
+
+    private Vector3 FindNearestEnemyPosition(float radius)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Enemy"));
+
+        if (colliders.Length > 0)
+        {
+            // Pick a random enemy's position within the radius
+            int randomIndex = Random.Range(0, colliders.Length);
+            return colliders[randomIndex].transform.position;
+        }
+        else
+        {
+            return Vector3.zero;
         }
     }
 

@@ -405,6 +405,16 @@ public class LevelManager : Singleton<LevelManager>
     //    }
     //}
 
+    public void EndGame()
+    {
+        LeanPool.DespawnAll();
+        StopAllCoroutines();
+        Destroy(currentLevel.gameObject);
+        if(player != null)
+        {
+            Destroy(player.gameObject);
+        }
+    }
 
     public void InitializePlayerSkills()
     {

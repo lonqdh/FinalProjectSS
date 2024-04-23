@@ -13,7 +13,7 @@ public class ChaseState : IState<Enemy>
     public void OnEnter(Enemy enemy)
     {
         // Start chasing the target
-        if (enemy.target.isAlive)
+        if (enemy.target.isAlive && GameManager.Instance.IsState(GameState.Gameplay))
         {
             enemy.agent.isStopped = false;
             enemy.ChangeAnim("IsIdle");

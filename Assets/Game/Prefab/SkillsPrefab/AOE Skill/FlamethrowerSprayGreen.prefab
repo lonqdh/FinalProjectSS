@@ -4943,6 +4943,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: 728be9fbc84bbdc4aac3828bd59a32ac, type: 2}
   attacker: {fileID: 0}
+  capsuleCollider: {fileID: 5197164105509718126}
+  delayBeforeActivation: 1
+  vfx: {fileID: 0}
   sprayPrefab: {fileID: 3857862056387307788}
   sprayDuration: 5
   damagePerSecond: 10

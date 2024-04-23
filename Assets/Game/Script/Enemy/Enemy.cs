@@ -15,7 +15,8 @@ public class Enemy : Character
     public ExperienceSphere redExpSphere;
     private float lessExpDropRate = 0.8f;
     public bool hasSprayingSkill;
-
+    public EnemyHealthBar enemyHealthBar;
+    public float currentMaxHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +81,7 @@ public class Enemy : Character
     {
         this.enemyData = enemyData;
         this.health = enemyData.health + (LevelManager.Instance.player.playerExperience.level * 10); // chinh stats enemy dua tren level hien tai cua nguoi choi
+        currentMaxHealth = health;
         this.damage = enemyData.damage + (LevelManager.Instance.player.playerExperience.level * 3);
         this.movementSpeed = enemyData.movementSpeed + 0.25f;
         this.hitVfx = enemyData.hitVfx;
@@ -96,7 +98,7 @@ public class Enemy : Character
     protected override void OnHit(int damage, Vector3 attackerPosition)
     {
         base.OnHit(damage, attackerPosition);
-
+        enemyHealthBar.UpdateEnemyHealthBar(currentMaxHealth , health);
         //health -= damage;
 
         if (health <= 0)

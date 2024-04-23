@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
   skillIcon: {fileID: 21300000, guid: a0167c0e9b279a342928ca9e64e496e2, type: 3}
-  skillType: 0
+  skillType: 2
   skillName: FireBreathing
   description: 
   damage: 3
