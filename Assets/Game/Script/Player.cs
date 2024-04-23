@@ -31,6 +31,8 @@ public class Player : Character
 
     public ExperienceBar experienceBar;
 
+    public int currentMaxHealth;
+
     //public List<SkillCooldown> skillCooldownUIList = new List<SkillCooldown>();
 
 
@@ -103,6 +105,7 @@ public class Player : Character
         ChangeCharacter();
         ChangeStats();
         healthBar.UpdateHealthBar(characterData.health, this.health);
+        experienceBar.UpdateUI();
     }
 
     protected override void OnHit(int damage, Vector3 attackerPosition)
@@ -126,7 +129,8 @@ public class Player : Character
 
     protected override void OnDespawn()
     {
-        base.OnDespawn();
+        //base.OnDespawn();
+        Destroy(this.gameObject);
         UIManager.Instance.FinishMatch();
     }
 
@@ -185,11 +189,14 @@ public class Player : Character
         this.health = characterData.health;
         this.movementSpeed = characterData.movementSpeed;
         this.damage = characterData.damage;
+
+        currentMaxHealth = this.health;
     }
 
     public void LevelUp()
     {
-        this.health += playerExperience.level * 10; // tang stats theo level
+        currentMaxHealth += playerExperience.level * 10; // tang stats theo level
+        this.health = currentMaxHealth; // len level la mau tu set thanh max cua maxhealth hien tai
         this.movementSpeed += 1f;
         this.damage += playerExperience.level * 2;
     }

@@ -18,6 +18,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject gameplayUI;
     public GameObject finishGameUI;
     public GameObject heroShopUI;
+    public GameObject loadingScreen;
 
     public GameObject heroShopUITest;
 
@@ -106,12 +107,41 @@ public class UIManager : Singleton<UIManager>
         //mainMenuBackgroundEffect.SetActive(true);
     }
 
+    //public void EnterMatch()
+    //{
+    //    GameManager.Instance.ChangeState(GameState.Gameplay);
+    //    loadingScreen.SetActive(true);
+    //    LevelManager.Instance.OnInit();
+
+
+    //    mainMenuUI.SetActive(false);
+    //    finishGameUI.SetActive(false);
+    //    gameplayUI.SetActive(true);
+    //}
+
     public void EnterMatch()
     {
-        GameManager.Instance.ChangeState(GameState.Gameplay);
+        mainMenuUI.SetActive(false);
+        loadingScreen.SetActive(true);
+        LevelManager.Instance.OnInit();
+        StartCoroutine(StartGame());
+    }
+
+    private IEnumerator StartGame()
+    {
+        // Wait for a few seconds before showing the game
+        yield return new WaitForSeconds(2.0f); // Adjust the delay time as needed
+        
+        // Initialize the level manager and other necessary components
         mainMenuUI.SetActive(false);
         finishGameUI.SetActive(false);
+        loadingScreen.SetActive(false);
         gameplayUI.SetActive(true);
+
+        // Hide the loading screen
+        loadingScreen.SetActive(false);
+
+        GameManager.Instance.ChangeState(GameState.Gameplay);
     }
 
     public void FinishMatch()
@@ -119,13 +149,23 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.ChangeState(GameState.Finish);
         LevelManager.Instance.FinishGameCalculations();
         
-        gameplayUI.SetActive(false);
+        //gameplayUI.SetActive(false);
         finishGameUI.SetActive(true);
     }
     
     private void RestartMatch()
     {
         LevelManager.Instance.RestartGame();
+    }
+
+    public void LoadingNextLevel()
+    {
+        mainMenuUI.SetActive(false);
+        finishGameUI.SetActive(false);
+        gameplayUI.SetActive(false);
+        loadingScreen.SetActive(true);
+
+        StartCoroutine(StartGame());
     }
 
     public void OpenHeroShopUITest()

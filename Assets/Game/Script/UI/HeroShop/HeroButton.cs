@@ -45,7 +45,7 @@ public class HeroButton : MonoBehaviour
     {
         HeroShopContent.Instance.userData.EquippedCharacter = characterData.characterType;
         SaveManager.Instance.SaveData(HeroShopContent.Instance.userData);
-        LevelManager.Instance.player.OnInit();
+        //LevelManager.Instance.player.OnInit();
         HeroShopContent.Instance.ShowSkinAvailability(this);
     }
 

@@ -50,7 +50,7 @@ public class AttackState : IState<Enemy>
     private IEnumerator CastSkillWithDelay(SkillData skillData, Enemy enemy)
     {
         isCasting = true;
-        enemy.ChangeAnim("IsAttack");
+        //enemy.ChangeAnim("IsAttack");
         //yield return new WaitForSeconds(skillData.castTime);
 
         if (enemy.isAlive)
@@ -59,7 +59,8 @@ public class AttackState : IState<Enemy>
             //{
                 // Cast the enemy skill at the target's position
                 enemy.enemyData.enemySkill.Activate(enemy.target.transform.position, enemy.chargeSkillPos, enemy);
-                yield return enemy.StartCoroutine(StartAttackCooldown(enemy.enemyData.enemySkill.cooldown, enemy)); // can phai co thang yield return o day, no co tac dung la bat buoc coroutine nay phai doi den khi coroutine startattackcooldown xong het moi tiep tuc execute ( de tranh bot spam cast skill, giup cooldown cho skill hoat dong )
+            enemy.ChangeAnim("IsAttack");
+            yield return enemy.StartCoroutine(StartAttackCooldown(enemy.enemyData.enemySkill.cooldown, enemy)); // can phai co thang yield return o day, no co tac dung la bat buoc coroutine nay phai doi den khi coroutine startattackcooldown xong het moi tiep tuc execute ( de tranh bot spam cast skill, giup cooldown cho skill hoat dong )
             //}
             //else
             //{
@@ -67,7 +68,7 @@ public class AttackState : IState<Enemy>
             //    enemy.ChangeState(new ChaseState());
             //}
             ////enemy.ChangeState(new ChaseState());
-            //enemy.ChangeAnim("IsIdle");
+            enemy.ChangeAnim("IsIdle");
             isCasting = false;
         }
     }
@@ -94,7 +95,7 @@ public class AttackState : IState<Enemy>
     private IEnumerator StartAttackCooldown(float cooldown, Enemy enemy)
     {
         canAttack = false;
-        enemy.ChangeAnim("IsIdle");
+        //enemy.ChangeAnim("IsIdle");
         yield return new WaitForSeconds(cooldown);
         canAttack = true;
     }

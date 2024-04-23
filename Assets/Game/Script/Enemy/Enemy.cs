@@ -107,6 +107,7 @@ public class Enemy : Character
             newDeathVfx.transform.position = transform.position;
             LeanPool.Despawn(newDeathVfx, 5f);
             ChangeAnim("IsDead");
+            agent.isStopped = true;
             agent.SetDestination(transform.position);
             DropExperienceSphere();
             StopAllCoroutines();

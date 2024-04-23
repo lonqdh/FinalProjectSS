@@ -1,7 +1,6 @@
 using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -31,7 +30,9 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private ExperienceBar experienceBar;
     public PlayerSkills currentSkillsList;
-    [SerializeField] private Transform playerSpawnPosition;
+    //[SerializeField] private Transform playerSpawnPosition;
+    public bool nextLevelOptionCheck = false;
+    public bool proceedToNextLevel = false;
 
     private Coroutine spawnEnemiesCoroutine;
     private Coroutine playerProgressCoroutine;
@@ -41,40 +42,51 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        OnInit();
+        //OnInit();
     }
 
     private void Update()
     {
-        // Check if the player has reached the kill count threshold for transitioning to the next level
-        if (killCount % 50 == 0)
+        if (GameManager.Instance.IsState(GameState.Gameplay))
         {
-            // Increment the level
-            //killCount = 1;
-            //level++;
-            //LoadNextLevel();
+            if (killCount % 50 == 0)
+            {
+                SpawnBoss();
+            }
 
-            SpawnBoss();
+            if (killCount >= currentLevel.killRequiredToNextLevel && nextLevelOptionCheck == false)
+            {
+                // Move to the next level
+                //nextLevelOptionCheck = true;
+                //if (spawnEnemiesCoroutine != null)
+                //{
+                //    StopCoroutine(spawnEnemiesCoroutine);
+                //}
+                //if (playerProgressCoroutine != null)
+                //{
+                //    StopCoroutine(playerProgressCoroutine);
+                //}
+                currentLevel.SpawnPortals();
+                level++;
+            }
         }
-        
+
         //if (killCount == 2)
         //{
         //    SpawnBoss();
         //}
     }
 
-    private void OnInit()
+    public void OnInit()
     {
         LoadLevel(level);
-        player = LeanPool.Spawn(playerPrefab);
+        //player = LeanPool.Spawn(playerPrefab);
+        //player.transform.position = currentLevel.spawnPoint.position;
+        player = Instantiate(playerPrefab);
         player.transform.position = currentLevel.spawnPoint.position;
 
-        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
-        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
-        CalculateEligibleEnemies();
-
         // Cache NavMesh triangulation data
-        navMeshData = NavMesh.CalculateTriangulation();
+        //navMeshData = NavMesh.CalculateTriangulation();
         player.healthBar = this.healthBar;
         player.experienceBar = this.experienceBar;
         player.experienceBar.player = this.player;
@@ -82,19 +94,23 @@ public class LevelManager : Singleton<LevelManager>
 
         camera.target = player.transform;
         player.Camera = camera.GetComponent<Camera>();
-        //player.OnInit();
+        player.OnInit();
 
         SpawnBoss();
     }
 
     private void LoadLevel(int level)
     {
-        if(currentLevel != null)
+        if (currentLevel != null)
         {
             Destroy(currentLevel.gameObject);
         }
 
         currentLevel = Instantiate(levelList[level - 1]);
+        navMeshData = NavMesh.CalculateTriangulation();
+        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
+        CalculateEligibleEnemies();
 
         //StartCoroutine(BakeNavMeshCoroutine());
     }
@@ -105,7 +121,7 @@ public class LevelManager : Singleton<LevelManager>
 
         while (true)
         {
-            if (GameManager.Instance.IsState(GameState.Gameplay) && killCount < 10)
+            if (GameManager.Instance.IsState(GameState.Gameplay)/* && killCount < 10*/)
             {
                 yield return new WaitForSeconds(currentSpawnInterval);
                 SpawnEnemies();
@@ -113,6 +129,7 @@ public class LevelManager : Singleton<LevelManager>
             else
             {
                 // Wait for a short duration before checking the game state again
+                Debug.Log("Ohshiet");
                 yield return new WaitForSeconds(1f);
             }
         }
@@ -174,7 +191,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void CalculatePlayerProgress()
     {
-        if (killCount % 10 == 0)
+        if (killCount % 20 == 0)
         {
             enemyLevel++;
             CalculateEligibleEnemies();
@@ -213,8 +230,11 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
+        GameManager.Instance.ChangeState(GameState.ChangingLevel);
+        UIManager.Instance.LoadingNextLevel();
+
         // Destroy the current level
         if (currentLevel != null)
         {
@@ -231,21 +251,22 @@ public class LevelManager : Singleton<LevelManager>
         }
 
         LeanPool.DespawnAll();
-        
+
 
         // Instantiate the next level
-        currentLevel = Instantiate(levelList[level - 1]);
+        LoadLevel(level);
 
-        navMeshData = NavMesh.CalculateTriangulation(); //calculate triangulation lai de spawn o tren navmesh cua map moi, khong thi se van spawn tren navmesh cua level cu~
-        
-        LeanPool.Spawn(playerPrefab);
+        /*navMeshData = NavMesh.CalculateTriangulation();*/ //calculate triangulation lai de spawn o tren navmesh cua map moi, khong thi se van spawn tren navmesh cua level cu~
+
+        //LeanPool.Spawn(playerPrefab);
         // Move the player to the spawn point
 
-        // Reset player's health and experience
-        player.health = player.characterData.health;
+        // Set player's health and experience
+        player.health = player.currentMaxHealth;
+        player.playerExperience.currentExp = 0;
         //player.playerExperience.ResetLevel();
 
-        // Update UI elements
+        // Update UI
         healthBar.UpdateHealthBar(player.characterData.health, playerPrefab.health);
         experienceBar.UpdateUI();
 
@@ -255,26 +276,11 @@ public class LevelManager : Singleton<LevelManager>
         // Reset player's kill count
         killCount = 1;
 
-        // Perform any other initialization for the new level
-        // For example:
-        // - Reset enemy level and spawn interval
-        // - Calculate eligible enemies
-        // - Restart spawning enemies routine
-        // - Restart player progress calculation routine
-        // - Update UI elements
-        // ...
+        //spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        //playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
 
-        // Initialize player skills
-        //InitializePlayerSkills();
-
-
-
-        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
-        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
-
-        // Update UI elements if needed
-        // ...
-
+        nextLevelOptionCheck = false;
+        GameManager.Instance.ChangeState(GameState.Gameplay);
         Debug.Log("Next level loaded: " + level);
     }
 
@@ -289,7 +295,7 @@ public class LevelManager : Singleton<LevelManager>
         //    }
         //}
 
-        for(int i = 0; i < enemyDataSO.enemyDataList.Count; i++)
+        for (int i = 0; i < enemyDataSO.enemyDataList.Count; i++)
         {
             if (!eligibleEnemies.Contains(enemyDataSO.enemyDataList[i]) && enemyDataSO.enemyDataList[i].enemyLevel <= enemyLevel)
             {
@@ -302,13 +308,23 @@ public class LevelManager : Singleton<LevelManager>
     {
         UIManager.Instance.totalKillText.SetText(killCount.ToString());
         UIManager.Instance.goldEarnedText.SetText((killCount * 10).ToString());
+        ResetGameProgress();
+    }
+
+    public void ResetGameProgress()
+    {
+        LeanPool.DespawnAll();
+        Destroy(player.gameObject);
+        level = 1;
+        killCount = 1;
+        enemyLevel = 1;
     }
 
     public void RestartGame()
     {
         killCount = 1;
         UIManager.Instance.totalKillText.SetText(killCount.ToString());
-        
+
         // Despawn all
         LeanPool.DespawnAll();
 
@@ -321,25 +337,35 @@ public class LevelManager : Singleton<LevelManager>
 
         StopAllCoroutines();
 
-        // Restart spawning enemies routine
-        StartCoroutine(SpawnEnemiesRoutine());
+        //// Restart spawning enemies routine
+        //StartCoroutine(SpawnEnemiesRoutine());
 
-        // Restart player progress calculation routine
-        StartCoroutine(CalculatePlayerProgressRoutine());
+        //// Restart player progress calculation routine
+        //StartCoroutine(CalculatePlayerProgressRoutine());
+
+        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
 
         RespawnPlayer();
 
-        UIManager.Instance.EnterMatch();
+        //UIManager.Instance.EnterMatch();
     }
 
 
     private void RespawnPlayer()
     {
-        if (playerSpawnPosition != null)
+        if (currentLevel.spawnPoint.position != null)
         {
-            LeanPool.Spawn(playerPrefab);
+            //LeanPool.Spawn(playerPrefab);
+            player = Instantiate(playerPrefab);
+            player.transform.position = currentLevel.spawnPoint.position;
+            player.healthBar = this.healthBar;
+            player.experienceBar = this.experienceBar;
+            player.experienceBar.player = this.player;
+            camera.target = player.transform;
+            player.Camera = camera.GetComponent<Camera>();
+
             // Move the player to the spawn point
-            playerPrefab.transform.position = playerSpawnPosition.position;
 
             // Reset player's health and experience
             //player.health = player.characterData.health;
@@ -347,9 +373,11 @@ public class LevelManager : Singleton<LevelManager>
             player.playerExperience.ResetLevel();
             //InitializePlayerSkills();
 
+            UIManager.Instance.finishGameUI.SetActive(false);
+            GameManager.Instance.ChangeState(GameState.Gameplay);
             // Update UI elements
-            healthBar.UpdateHealthBar(player.characterData.health, playerPrefab.health);
-            experienceBar.UpdateUI();
+            //healthBar.UpdateHealthBar(player.characterData.health, playerPrefab.health);
+            //experienceBar.UpdateUI();
         }
         else
         {

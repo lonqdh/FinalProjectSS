@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 1
   skillName: orbital beam
   description: xx
-  damage: 3
+  damage: 80
   cooldown: 3
   rangeRadius: 10
   castTime: 2
