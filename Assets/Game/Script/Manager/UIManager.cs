@@ -42,10 +42,13 @@ public class UIManager : Singleton<UIManager>
 
     //Texts
     public TextMeshProUGUI nextLevelText;
-    public TextMeshProUGUI killCountText;
+    //public TextMeshProUGUI killCountText;
+    public Text currentLevelText;
+    public Text killCountText;
     public TextMeshProUGUI totalKillText;
     public TextMeshProUGUI goldEarnedText;
     public TextMeshProUGUI addOrReplaceSkillsText;
+
 
     //Effects
     //public GameObject mainMenuBackgroundEffect;
@@ -57,6 +60,7 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         EnterMainMenuUI();
+
         openingStartGameButton.onClick.AddListener(EnterMainMenuUI);
         startGameButton.onClick.AddListener(EnterMatch);
         retryGameButton.onClick.AddListener(RestartMatch);
@@ -151,9 +155,11 @@ public class UIManager : Singleton<UIManager>
             gameplayUI.SetActive(false);
             LevelManager.Instance.EndGame();
         }
+        
         GameManager.Instance.ChangeState(GameState.MainMenu);
         openingGameUI.SetActive(false);
         mainMenuUI.SetActive(true);
+        //LevelManager.Instance.camera.enabled = true;
         //mainMenuBackgroundEffect.SetActive(true);
     }
 

@@ -14,14 +14,14 @@ public class SkillCooldown : MonoBehaviour
     private void Start()
     {
         // Subscribe to the SkillActivated event of the skill
-        skill.SkillActivated += OnSkillActivated;
+        //skill.SkillActivated += OnSkillActivated;
         //skillIcon = GetComponent<Image>();
     }
 
     private void OnDestroy()
     {
         // Unsubscribe from the SkillActivated event to avoid memory leaks
-        skill.SkillActivated -= OnSkillActivated;
+        //skill.SkillActivated -= OnSkillActivated;
     }
 
     private void Update()

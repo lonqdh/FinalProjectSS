@@ -9873,6 +9873,7 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 9718c91c586419e4e90b869cdc2094fc, type: 2}
   attacker: {fileID: 0}
   boxCollider: {fileID: 5246690100541681153}
+  vfx: {fileID: 4875511127744265913}
 --- !u!1 &3161911145358395536
 GameObject:
   m_ObjectHideFlags: 0

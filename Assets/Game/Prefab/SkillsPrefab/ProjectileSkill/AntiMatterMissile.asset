@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 0
   skillName: AntiMatterMissile
   description: 
-  damage: 8
+  damage: 80
   cooldown: 6
   rangeRadius: 20
   castTime: 2

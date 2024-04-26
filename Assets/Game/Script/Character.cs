@@ -27,10 +27,14 @@ public class Character : MonoBehaviour
     public float knockbackCooldown = 2.0f; // Cooldown period between knockbacks
     private bool isKnockbackCooldown = false;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     protected virtual void OnInit()
     {
         //collider = GetComponent<Collider>();
-        rb = GetComponent<Rigidbody>();
         isAlive = true;
         //this.GetComponent<Collider>().enabled = true;
         //anim = GetComponent<Animator>();
@@ -55,8 +59,8 @@ public class Character : MonoBehaviour
     protected virtual void OnHit(int damage, Vector3 attackerPosition)
     {
         // Check if knockback is on cooldown
-        if (!isKnockbackCooldown)
-        {
+        //if (!isKnockbackCooldown)
+        //{
             // Reduce health
             health -= damage;
 
@@ -64,43 +68,43 @@ public class Character : MonoBehaviour
             GameObject newHitVfx = LeanPool.Spawn(hitVfx, transform.position, Quaternion.identity);
             LeanPool.Despawn(newHitVfx, 3f);
 
-            // Calculate knockback direction
-            knockbackDirection = (transform.position - attackerPosition).normalized;
+            //// Calculate knockback direction
+            //knockbackDirection = (transform.position - attackerPosition).normalized;
 
-            // Start smooth knockback effect
-            StartCoroutine(StartKnockback());
+            //// Start smooth knockback effect
+            //StartCoroutine(StartKnockback());
 
-            // Start knockback cooldown
-            StartCoroutine(StartKnockbackCooldown());
-        }
+            //// Start knockback cooldown
+            //StartCoroutine(StartKnockbackCooldown());
+        //}
     }
 
-    protected IEnumerator StartKnockbackCooldown()
-    {
-        // Set knockback cooldown flag
-        isKnockbackCooldown = true;
+    //protected IEnumerator StartKnockbackCooldown()
+    //{
+    //    // Set knockback cooldown flag
+    //    isKnockbackCooldown = true;
 
-        // Wait for knockback cooldown duration
-        yield return new WaitForSeconds(knockbackCooldown);
+    //    // Wait for knockback cooldown duration
+    //    yield return new WaitForSeconds(knockbackCooldown);
 
-        // Reset knockback cooldown flag
-        isKnockbackCooldown = false;
-    }
+    //    // Reset knockback cooldown flag
+    //    isKnockbackCooldown = false;
+    //}
 
-    protected IEnumerator StartKnockback()
-    {
-        // Activate knockback flag
-        isKnockbackActive = true;
+    //protected IEnumerator StartKnockback()
+    //{
+    //    // Activate knockback flag
+    //    isKnockbackActive = true;
 
-        // Apply knockback force
-        rb.velocity = knockbackDirection * pushbackForce;
+    //    // Apply knockback force
+    //    rb.velocity = knockbackDirection * pushbackForce;
 
-        // Wait for knockback duration
-        yield return new WaitForSeconds(knockbackDuration);
+    //    // Wait for knockback duration
+    //    yield return new WaitForSeconds(knockbackDuration);
 
-        // Deactivate knockback flag
-        isKnockbackActive = false;
-    }
+    //    // Deactivate knockback flag
+    //    isKnockbackActive = false;
+    //}
 
     protected virtual void OnDespawn()
     {

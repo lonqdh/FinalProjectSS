@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 0
   skillName: ShamanGoblinSkill
   description: basic male goblin enemy skill
-  damage: 5
+  damage: 80
   cooldown: 5
   rangeRadius: 10
   castTime: 2

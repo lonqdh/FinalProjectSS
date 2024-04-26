@@ -22,6 +22,7 @@ public class PlayerExperience : MonoBehaviour
         LevelManager.Instance.player.AddSkill();
         LevelManager.Instance.player.LevelUp();
         UIManager.Instance.nextLevelText.text = level.ToString();
+        UIManager.Instance.currentLevelText.text = "LEVEL " + level.ToString();
         expToLevelUp = ExperienceForNextLevel();
         currentExp = 0;
     }

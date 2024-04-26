@@ -43,7 +43,6 @@ public class Player : Character
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
         OnInit();
     }
 
@@ -100,6 +99,7 @@ public class Player : Character
     public void OnInit()
     {
         base.OnInit();
+        //anim = GetComponent<Animator>();
         playerSkills = LevelManager.Instance.currentSkillsList;
         ChangeAnim("IsIdle");
         ChangeCharacter();
@@ -112,7 +112,7 @@ public class Player : Character
     {
         base.OnHit(damage, attackerPosition);
         //health -= damage;
-        Debug.Log("Player's health: " + health);
+        //Debug.Log("Player's health: " + health);
         healthBar.UpdateHealthBar(characterData.health, this.health);
         if (health <= 0)
         {
@@ -174,10 +174,12 @@ public class Player : Character
         if (characterModelInstance == null)
         {
             characterModelInstance = Instantiate(characterData.characterModelPrefab, transform.position, transform.rotation);
-
+            
             characterModelInstance.GetComponent<Animator>().runtimeAnimatorController = anim.runtimeAnimatorController;
+            //anim = GetComponent<Animator>();
             //characterData.characterModelPrefab.GetComponent<Animator>().runtimeAnimatorController = anim.runtimeAnimatorController;
-            anim = characterModelInstance.GetComponent<Animator>();
+            anim = characterModelInstance.GetComponent<Animator>(); // phai lay anim cua thg prefab model cua nhan vat, vi minh thay doi animation cho model
+
             characterModelInstance.transform.parent = transform;
         }
 

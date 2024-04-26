@@ -72,16 +72,20 @@ public class Enemy : Character
     {
         LeanPool.Despawn(this);
         LevelManager.Instance.killCount++;
-        UIManager.Instance.killCountText.SetText(LevelManager.Instance.killCount.ToString());
+        //UIManager.Instance.killCountText.SetText(LevelManager.Instance.killCount.ToString());
+        UIManager.Instance.killCountText.text = (LevelManager.Instance.killCount.ToString());
+
     }
 
     //Called where the SpawnEnemies method is called so once
     //spawned the enemy will call the OnInit method
     public void OnInit(EnemyData enemyData)
     {
+        base.OnInit();
         this.enemyData = enemyData;
         this.health = enemyData.health + (LevelManager.Instance.player.playerExperience.level * 10); // chinh stats enemy dua tren level hien tai cua nguoi choi
         currentMaxHealth = health;
+        enemyHealthBar.UpdateEnemyHealthBar(currentMaxHealth, health);
         this.damage = enemyData.damage + (LevelManager.Instance.player.playerExperience.level * 3);
         this.movementSpeed = enemyData.movementSpeed + 0.25f;
         this.hitVfx = enemyData.hitVfx;
@@ -116,7 +120,7 @@ public class Enemy : Character
             Invoke("OnDespawn", 3f);
             //this.GetComponent<Collider>().enabled = false;
         }
-        Debug.Log(this.name + "'s health : " + this.health);
+        //Debug.Log(this.name + "'s health : " + this.health);
     }
 
     public void ChangeState(IState<Enemy> state)

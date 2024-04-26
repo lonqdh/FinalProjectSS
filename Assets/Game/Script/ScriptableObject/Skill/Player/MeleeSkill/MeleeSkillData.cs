@@ -20,7 +20,7 @@ public class MeleeSkillData : SkillData
             //melee.transform.SetParent(attacker.transform);
             melee.attacker = attacker;
 
-            base.Activate(position, chargePos, attacker);
+            //base.Activate(position, chargePos, attacker);
         }
 
     }

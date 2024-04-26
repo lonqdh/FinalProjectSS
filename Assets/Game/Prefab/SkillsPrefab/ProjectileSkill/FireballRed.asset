@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 0
   skillName: Fireball
   description: 
-  damage: 5
+  damage: 60
   cooldown: 3
   rangeRadius: 10
   castTime: 1

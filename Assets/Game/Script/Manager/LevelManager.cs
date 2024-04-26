@@ -34,6 +34,8 @@ public class LevelManager : Singleton<LevelManager>
     public bool nextLevelOptionCheck = false;
     public bool proceedToNextLevel = false;
 
+    public bool bossSpawned = false;
+
     private Coroutine spawnEnemiesCoroutine;
     private Coroutine playerProgressCoroutine;
 
@@ -49,7 +51,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (GameManager.Instance.IsState(GameState.Gameplay))
         {
-            if (killCount % 50 == 0)
+            if (killCount % 50 == 0 && bossSpawned == false)
             {
                 SpawnBoss();
             }
@@ -216,6 +218,8 @@ public class LevelManager : Singleton<LevelManager>
             {
                 newBoss.target = player;
                 newBoss.OnInit(bossToSpawn);
+
+                bossSpawned = true;
                 Debug.Log("Boss Spawned");
                 //Debug.Log("Spawned Enemy: " + enemyToSpawn.enemyType);
             }

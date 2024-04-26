@@ -38,9 +38,9 @@ public class HeroShopContent : Singleton<HeroShopContent>
 
     public void ShowSkinAvailability(HeroButton heroBtn)
     {
-        for(int i = 0; i < heroesButtonList.Count; i++)
-        {
-            if (!GameManager.Instance.UserData.BoughtCharacters.Contains(heroesButtonList[i].characterData.characterType))
+        //for(int i = 0; i < heroesButtonList.Count; i++)
+        //{
+            if (!GameManager.Instance.UserData.BoughtCharacters.Contains(heroBtn.characterData.characterType))
             {
                 heroBtn.charPrice.SetText(heroBtn.characterData.characterCost.ToString());
             }
@@ -57,7 +57,7 @@ public class HeroShopContent : Singleton<HeroShopContent>
                     heroBtn.charPrice.SetText("Equip");
                 }
             }
-        }
+        //}
         //if (!GameManager.Instance.UserData.BoughtCharacters.Contains(heroBtn.characterData.characterType))
         //{
         //    heroBtn.charPrice.SetText(heroBtn.characterData.characterCost.ToString());

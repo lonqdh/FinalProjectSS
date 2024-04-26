@@ -40,7 +40,7 @@ public class ProjectileSkillData : SkillData
         // Apply force to the projectile in the modified direction
         newProjectile.rb.AddForce(direction * projectileSpeed);
 
-        base.Activate(position, chargePos, attacker);
+        //base.Activate(position, chargePos, attacker);
     }
 
     public override void BossActivate(Vector3 position, Transform chargePos, Boss attacker)
@@ -72,7 +72,7 @@ public class ProjectileSkillData : SkillData
             newProjectile.rb.AddForce(finalRotation * Vector3.forward * projectileSpeed);
         }
 
-        base.Activate(position, chargePos, attacker);
+        //base.Activate(position, chargePos, attacker);
     }
 
     public override void BossActivate2(Vector3 position, Transform chargePos, Boss attacker)

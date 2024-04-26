@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDataList:
   - characterType: 0
-    characterModelPrefab: {fileID: 1265346787747520, guid: 33327bc9948cc644ca0f4b1963219c08, type: 3}
-    health: 100
+    characterModelPrefab: {fileID: 5203924802990652972, guid: a0956928023a722499846bda1a923cdf, type: 3}
+    health: 1000
     damage: 5
     movementSpeed: 3
     characterCost: 0
-    basicSkill: {fileID: 11400000, guid: 0a0e5afc2c4d6c64c99bf69e5462513b, type: 2}
+    basicSkill: {fileID: 11400000, guid: 589f7ebf4fdafb24680fa52fd771f96d, type: 2}
   - characterType: 1
     characterModelPrefab: {fileID: 921037747157138857, guid: d06151b1df32db7489e2b391db88d7ee, type: 3}
-    health: 90
+    health: 1500
     damage: 10
     movementSpeed: 3
     characterCost: 1000
     basicSkill: {fileID: 11400000, guid: 504be9e284d61a145828ad7f57375435, type: 2}
   - characterType: 2
     characterModelPrefab: {fileID: 3537138265564915085, guid: e58f98123e4ff9a4abc5bdeb41666b63, type: 3}
-    health: 80
+    health: 1200
     damage: 8
     movementSpeed: 3
     characterCost: 500

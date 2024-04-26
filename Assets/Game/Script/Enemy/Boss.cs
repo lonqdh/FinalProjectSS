@@ -83,15 +83,16 @@ public class Boss : Character
     
     public void OnInit(BossData bossData)
     {
+        base.OnInit();
         this.bossData = bossData;
         this.health = bossData.health + (LevelManager.Instance.player.playerExperience.level * 10);
         currentMaxHealth = health;
+        bossHealthbar.UpdateEnemyHealthBar(currentMaxHealth, health);
         this.damage = bossData.damage + (LevelManager.Instance.player.playerExperience.level * 3);
         this.movementSpeed = bossData.movementSpeed + 0.25f;
         this.hitVfx = bossData.hitVfx;
         this.deathVfx = bossData.deathVfx;
         skill = bossData.bossSkills;
-        isAlive = true;
         ChangeState(new BossChaseState());
     }
 
@@ -99,7 +100,9 @@ public class Boss : Character
     {
         LeanPool.Despawn(this);
         LevelManager.Instance.killCount++;
-        UIManager.Instance.killCountText.SetText(LevelManager.Instance.killCount.ToString());
+        //UIManager.Instance.killCountText.SetText(LevelManager.Instance.killCount.ToString());
+        UIManager.Instance.killCountText.text = (LevelManager.Instance.killCount.ToString());
+
     }
 
 
@@ -123,7 +126,7 @@ public class Boss : Character
             Invoke("OnDespawn", 3f);
             //this.GetComponent<Collider>().enabled = false;
         }
-        Debug.Log(this.name + "'s health : " + this.health);
+        //Debug.Log(this.name + "'s health : " + this.health);
     }
 
     public void ChangeState(IState<Boss> state)

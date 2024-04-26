@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 0
   skillName: SkullMissile
   description: 
-  damage: 16
+  damage: 90
   cooldown: 5
   rangeRadius: 15
   castTime: 2

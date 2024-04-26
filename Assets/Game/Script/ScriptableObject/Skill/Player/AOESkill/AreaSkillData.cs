@@ -20,27 +20,27 @@ public class AreaSkillData : SkillData
             AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, position, aoeSkill.transform.rotation);
             aoe.attacker = attacker;
 
-            base.Activate(position, chargePos, attacker);
+            //base.Activate(position, chargePos, attacker);
         }
     }
 
     public override void BossActivate(Vector3 position, Transform chargePos, Boss attacker)
     {
-        Debug.Log("BossActivate called.");
+        //Debug.Log("BossActivate called.");
         // Start casting skills sequentially
         attacker.StartCoroutine(CastSequentialSkills(attacker));
     }
 
     public override void BossActivate2(Vector3 position, Transform chargePos, Boss attacker)
     {
-        Debug.Log("BossActivate2 called.");
+        //Debug.Log("BossActivate2 called.");
         // Start casting skills simultaneously around the boss
         attacker.StartCoroutine(CastSimultaneousSkills(attacker));
     }
 
     private IEnumerator CastSimultaneousSkills(Boss attacker)
     {
-        Debug.Log("Starting simultaneous skill casting.");
+        //Debug.Log("Starting simultaneous skill casting.");
 
         // Set the number of skills to cast
         int numberOfSkills = 10; // Adjust the number of skills as needed
@@ -64,17 +64,17 @@ public class AreaSkillData : SkillData
             AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, skillPosition, aoeSkill.transform.rotation);
             aoe.attacker = attacker;
 
-            Debug.Log("Skill casted at position: " + skillPosition);
+            //Debug.Log("Skill casted at position: " + skillPosition);
 
             yield return null;
         }
 
-        Debug.Log("Simultaneous skill casting ended.");
+        //Debug.Log("Simultaneous skill casting ended.");
     }
 
     private IEnumerator CastSequentialSkills(Boss attacker)
     {
-        Debug.Log("Starting sequential skill casting.");
+        //Debug.Log("Starting sequential skill casting.");
 
         // Set the number of skills to cast
         int numberOfSkills = 10; // Adjust the number of skills as needed
@@ -93,7 +93,7 @@ public class AreaSkillData : SkillData
             AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, playerPosition, aoeSkill.transform.rotation);
             aoe.attacker = attacker;
 
-            Debug.Log("Skill casted. Count: " + skillsCastCount);
+            //Debug.Log("Skill casted. Count: " + skillsCastCount);
 
             // Increment the skills cast counter
             skillsCastCount++;
@@ -102,7 +102,7 @@ public class AreaSkillData : SkillData
             yield return new WaitForSeconds(delayBetweenSkills);
         }
 
-        Debug.Log("Sequential skill casting ended.");
+        //Debug.Log("Sequential skill casting ended.");
     }
 }
 

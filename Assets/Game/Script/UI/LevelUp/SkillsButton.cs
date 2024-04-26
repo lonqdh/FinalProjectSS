@@ -11,8 +11,10 @@ public class SkillsButton : MonoBehaviour
     [SerializeField] private Button skillButton;
     [SerializeField] public SkillData skillData;
     public Image skillImage;
-    public TextMeshProUGUI skillName;
-    public TextMeshProUGUI skillDescription;
+    //public TextMeshProUGUI skillName;
+    public Text skillName;
+    //public TextMeshProUGUI skillDescription;
+    public Text skillDescription;
 
 
     private void Start()
@@ -48,6 +50,10 @@ public class SkillsButton : MonoBehaviour
             PlayerSkills.Instance.ReplaceSkill(SkillsChoosingContent.Instance.skillToReplaceIndex, skillData);
             UIManager.Instance.CloseLevelUpUI();
             //SkillsChoosingContent.Instance.replacingSkillSession = false;
+        }
+        else
+        {
+            Debug.Log("THE PROBLEM IS THE BUTTON");
         }
         //else
         //{

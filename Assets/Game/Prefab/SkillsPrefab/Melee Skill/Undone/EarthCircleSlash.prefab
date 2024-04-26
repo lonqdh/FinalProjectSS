@@ -9786,7 +9786,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4920368079464628547}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -14585,7 +14585,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ec0415e1a4c9e15449b3ed46b57a7c06, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -14705,6 +14705,7 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 589f7ebf4fdafb24680fa52fd771f96d, type: 2}
   attacker: {fileID: 0}
   boxCollider: {fileID: 1088821868073355656}
+  vfx: {fileID: 6298886378976809854}
 --- !u!1 &6792905407364410180
 GameObject:
   m_ObjectHideFlags: 0

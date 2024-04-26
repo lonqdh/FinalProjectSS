@@ -4948,6 +4948,7 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 415365a6fb09de0429e07a904255533c, type: 2}
   attacker: {fileID: 0}
   boxCollider: {fileID: 5745543268255313607}
+  vfx: {fileID: 7625825606853877622}
 --- !u!65 &5745543268255313607
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 0
   skillName: PurpleRocket
   description: 
-  damage: 20
+  damage: 100
   cooldown: 3
   rangeRadius: 20
   castTime: 2

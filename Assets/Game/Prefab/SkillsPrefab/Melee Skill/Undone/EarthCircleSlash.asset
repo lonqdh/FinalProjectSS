@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 3
   skillName: EarthCircleSlash
   description: 
-  damage: 5
+  damage: 60
   cooldown: 3
   rangeRadius: 2
   castTime: 2

@@ -6,23 +6,22 @@ using UnityEngine;
 public class Melee : Skill
 {
     public BoxCollider boxCollider;
+    public ParticleSystem vfx;
 
-    private void Start()
+    private void OnEnable()
     {
-        //boxCollider = GetComponent<BoxCollider>();
+        StartCoroutine(DespawnAfterVFX());
     }
 
-    void OnEnable()
+    private IEnumerator DespawnAfterVFX()
     {
-        boxCollider.enabled = true;
-        Invoke("OnDespawn", 1f);
-    }
+        // Wait for the duration of the VFX
+        yield return new WaitForSeconds(vfx.main.duration);
 
-    void OnDespawn()
-    {
-        boxCollider.enabled = false;
+        // Despawn the AreaOfEffect object
         LeanPool.Despawn(this);
     }
+
 
 
 }
