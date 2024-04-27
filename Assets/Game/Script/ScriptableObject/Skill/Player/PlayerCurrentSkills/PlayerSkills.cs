@@ -99,7 +99,7 @@ public class PlayerSkills : Singleton<PlayerSkills>
             SkillData upgradedSkillData = Instantiate(skill);
 
             // Modify the copied skill data
-            upgradedSkillData.damage += 10f * LevelManager.Instance.player.playerExperience.level; // phai lam the nay, vi minh dang tao 1 ban copy tu skill base, cho nen moi khi tao 1 thg clone no se lai lay lai stats cua skill base cho nen gay ra bug la up mai up mai thi no van chi + 10f stats so voi ban dau ( vi du base dmg = 60 --> up 1 ti lan thi van la dmg = 70 )
+            upgradedSkillData.damage += 5f * LevelManager.Instance.player.playerExperience.level; // phai lam the nay, vi minh dang tao 1 ban copy tu skill base, cho nen moi khi tao 1 thg clone no se lai lay lai stats cua skill base cho nen gay ra bug la up mai up mai thi no van chi + 10f stats so voi ban dau ( vi du base dmg = 60 --> up 1 ti lan thi van la dmg = 70 )
             upgradedSkillData.cooldown -= 0.25f;
             upgradedSkillData.rangeRadius += 2f;
 

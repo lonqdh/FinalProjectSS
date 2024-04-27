@@ -36,17 +36,16 @@ public class HeroButton : MonoBehaviour
             HeroShopContent.Instance.userData.BoughtCharacters.Add(characterData.characterType);
             HeroShopContent.Instance.userData.CurrentCoins -= characterData.characterCost;
             SaveManager.Instance.SaveData(HeroShopContent.Instance.userData);
-            HeroShopContent.Instance.ShowSkinAvailability(this);
+            HeroShopContent.Instance.ShowSkinAvailability(this); // Update all characters
+            UIManager.Instance.currentCoinText.text = GameManager.Instance.UserData.CurrentCoins.ToString();
         }
-
     }
 
     private void EquipCharacter()
     {
         HeroShopContent.Instance.userData.EquippedCharacter = characterData.characterType;
         SaveManager.Instance.SaveData(HeroShopContent.Instance.userData);
-        //LevelManager.Instance.player.OnInit();
-        HeroShopContent.Instance.ShowSkinAvailability(this);
+        HeroShopContent.Instance.ShowSkinAvailability(this); // Update all characters
     }
 
 }

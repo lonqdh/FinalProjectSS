@@ -419,45 +419,43 @@ public class Player : Character
     }
 
 
-    private Vector3 GetMouseDirectionAoE()
-    {
-        Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
-        Vector3 mouseDirection = Vector3.zero;
+    //private Vector3 GetMouseDirectionAoE()
+    //{
+    //    Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
+    //    Vector3 mouseDirection = Vector3.zero;
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
-        {
-            // Check if the hit collider belongs to the player
-            if (hitInfo.collider.CompareTag("Player"))
-            {
-                // Calculate the direction in front of the character
-                mouseDirection = transform.forward;
-            }
-            else
-            {
-                // Get the collider bounds of the hit object
-                Collider collider = hitInfo.collider;
-                Bounds bounds = collider.bounds;
+    //    if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+    //    {
+    //        // Check if the hit collider belongs to the player
+    //        if (hitInfo.collider.CompareTag("Player"))
+    //        {
+    //            // Calculate the direction in front of the character
+    //            mouseDirection = transform.forward;
+    //        }
+    //        else
+    //        {
+    //            // Get the collider bounds of the hit object
+    //            Collider collider = hitInfo.collider;
+    //            Bounds bounds = collider.bounds;
 
-                // Calculate the lowest point of the collider (the feet)
-                Vector3 lowestPoint = bounds.center - Vector3.up * bounds.extents.y;
+    //            // Calculate the lowest point of the collider (the feet)
+    //            Vector3 lowestPoint = bounds.center - Vector3.up * bounds.extents.y;
 
-                // Set the mouse direction to the lowest point of the collider
-                mouseDirection = lowestPoint - transform.position;
+    //            // Set the mouse direction to the lowest point of the collider
+    //            mouseDirection = lowestPoint - transform.position;
 
-                // Ensure that the direction is horizontal (ignoring the vertical component)
-                mouseDirection.y = 0f;
-            }
-        }
-        else
-        {
-            // If the raycast doesn't hit anything, just use the direction from the player to the mouse cursor
-            mouseDirection = _input.MousePosition - Camera.WorldToScreenPoint(transform.position);
-        }
+    //            // Ensure that the direction is horizontal (ignoring the vertical component)
+    //            mouseDirection.y = 0f;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        // If the raycast doesn't hit anything, just use the direction from the player to the mouse cursor
+    //        mouseDirection = _input.MousePosition - Camera.WorldToScreenPoint(transform.position);
+    //    }
 
-        return mouseDirection;
-    }
-
-
+    //    return mouseDirection;
+    //}
 
 
     bool IsSkillOnCooldown(SkillData skill)

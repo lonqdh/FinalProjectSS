@@ -98,9 +98,9 @@ public class LevelManager : Singleton<LevelManager>
         player.Camera = camera.GetComponent<Camera>();
         player.OnInit();
 
-        SpawnBoss();
+        //SpawnBoss();
     }
-
+    
     private void LoadLevel(int level)
     {
         if (currentLevel != null)
@@ -131,7 +131,6 @@ public class LevelManager : Singleton<LevelManager>
             else
             {
                 // Wait for a short duration before checking the game state again
-                Debug.Log("Ohshiet");
                 yield return new WaitForSeconds(1f);
             }
         }
@@ -411,6 +410,9 @@ public class LevelManager : Singleton<LevelManager>
 
     public void EndGame()
     {
+        level = 1;
+        enemyLevel = minEnemyLevel;
+        CalculateEligibleEnemies();
         LeanPool.DespawnAll();
         StopAllCoroutines();
         Destroy(currentLevel.gameObject);

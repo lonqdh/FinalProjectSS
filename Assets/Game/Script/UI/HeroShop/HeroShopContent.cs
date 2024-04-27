@@ -36,10 +36,34 @@ public class HeroShopContent : Singleton<HeroShopContent>
         }
     }
 
-    public void ShowSkinAvailability(HeroButton heroBtn)
+    //public void ShowSkinAvailability(HeroButton heroBtn)
+    //{
+    //    //for(int i = 0; i < heroesButtonList.Count; i++)
+    //    //{
+    //        if (!GameManager.Instance.UserData.BoughtCharacters.Contains(heroBtn.characterData.characterType))
+    //        {
+    //            heroBtn.charPrice.SetText(heroBtn.characterData.characterCost.ToString());
+    //        }
+    //        else
+    //        {
+    //            // Check if the character is equipped
+    //            if (GameManager.Instance.UserData.EquippedCharacter == heroBtn.characterData.characterType)
+    //            {
+    //                heroBtn.charPrice.SetText("Equipped");
+    //            }
+    //            else
+    //            {
+    //                // If the character is owned but not equipped, display "Equip"
+    //                heroBtn.charPrice.SetText("Equip");
+    //            }
+    //        }
+    //}
+
+
+    public void ShowSkinAvailability(HeroButton selectedHeroBtn = null)
     {
-        //for(int i = 0; i < heroesButtonList.Count; i++)
-        //{
+        foreach (HeroButton heroBtn in heroesButtonList)
+        {
             if (!GameManager.Instance.UserData.BoughtCharacters.Contains(heroBtn.characterData.characterType))
             {
                 heroBtn.charPrice.SetText(heroBtn.characterData.characterCost.ToString());
@@ -57,24 +81,22 @@ public class HeroShopContent : Singleton<HeroShopContent>
                     heroBtn.charPrice.SetText("Equip");
                 }
             }
-        //}
-        //if (!GameManager.Instance.UserData.BoughtCharacters.Contains(heroBtn.characterData.characterType))
-        //{
-        //    heroBtn.charPrice.SetText(heroBtn.characterData.characterCost.ToString());
-        //}
-        //else
-        //{
-        //    // Check if the character is equipped
-        //    if (GameManager.Instance.UserData.EquippedCharacter == heroBtn.characterData.characterType)
-        //    {
-        //        heroBtn.charPrice.SetText("Equipped");
-        //    }
-        //    else
-        //    {
-        //        // If the character is owned but not equipped, display "Equip"
-        //        heroBtn.charPrice.SetText("Equip");
-        //    }
-        //}
+        }
 
+        // Update the selected hero button separately
+        if (selectedHeroBtn != null)
+        {
+            // Check if the character is equipped
+            if (GameManager.Instance.UserData.EquippedCharacter == selectedHeroBtn.characterData.characterType)
+            {
+                selectedHeroBtn.charPrice.SetText("Equipped");
+            }
+            else
+            {
+                // If the character is owned but not equipped, display "Equip"
+                selectedHeroBtn.charPrice.SetText("Equip");
+            }
+        }
     }
+
 }

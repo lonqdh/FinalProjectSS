@@ -9,7 +9,6 @@ public class UIManager : Singleton<UIManager>
 {
     //Cameras
     public GameObject mainCamera;
-    public GameObject heroShopCamera;
 
     //Panels
     public GameObject levelUpUI;
@@ -45,6 +44,7 @@ public class UIManager : Singleton<UIManager>
     //public TextMeshProUGUI killCountText;
     public Text currentLevelText;
     public Text killCountText;
+    public Text currentCoinText;
     public TextMeshProUGUI totalKillText;
     public TextMeshProUGUI goldEarnedText;
     public TextMeshProUGUI addOrReplaceSkillsText;
@@ -122,6 +122,7 @@ public class UIManager : Singleton<UIManager>
     public void OpenHeroShopUI()
     {
         heroShopUI.SetActive(true);
+        currentCoinText.text = GameManager.Instance.UserData.CurrentCoins.ToString();
         HeroShopContent.Instance.SpawnCharacters();
     }
 
@@ -228,7 +229,7 @@ public class UIManager : Singleton<UIManager>
     {
         mainCamera.SetActive(false);
         heroShopUITest.SetActive(true);
-        heroShopCamera.SetActive(true);
+        //heroShopCamera.SetActive(true);
         mainMenuUI.SetActive(false);
         //HeroShopContent.Instance.SpawnCharacters();
     }
@@ -236,7 +237,7 @@ public class UIManager : Singleton<UIManager>
     public void CloseHeroShopUITest()
     {
         heroShopUITest.SetActive(false);
-        heroShopCamera.SetActive(false);
+        //heroShopCamera.SetActive(false);
         mainCamera.SetActive(true);
     }
 

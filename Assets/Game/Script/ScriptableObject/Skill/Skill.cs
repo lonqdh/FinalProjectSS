@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    public SkillData skillData;
+    public SkillData skillData; //these are attributes of the Skill class, however they are also seen as properties as their access modifiers are public and can be get and set publicly
     public Character attacker;
 
     //public AudioSource audioSource;
