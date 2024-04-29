@@ -3157,7 +3157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 7239535004500914229}
   bossSpawnPoint: {fileID: 3418028202068373822}
-  killRequiredToNextLevel: 1
+  killRequiredToNextLevel: 20
   endGamePortal: {fileID: 5991613855428445883, guid: 4cd491d43008c5c43a72c39f7ff33ab8, type: 3}
   nextLevelPortal: {fileID: 1742381342544703172, guid: 1d4fff24f2408a74da99a8d5e9672b2c, type: 3}
   endPortalPos: {fileID: 721324794785950913}
