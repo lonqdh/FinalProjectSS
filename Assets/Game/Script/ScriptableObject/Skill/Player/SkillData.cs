@@ -33,6 +33,16 @@ public abstract class SkillData : ScriptableObject
         //SkillActivated?.Invoke(this);
     }
 
+    public virtual void PlayerActivate(Vector3 position, Transform chargePos, Character attacker)
+    {
+
+    }
+
+    public virtual void PlayerActivate2(Vector3 position, Transform chargePos, Character attacker)
+    {
+
+    }
+
     public virtual void BossActivate(Vector3 position, Transform chargePos, Boss attacker)
     {
         //SkillActivated?.Invoke(this);

@@ -38,6 +38,8 @@ public class UIManager : Singleton<UIManager>
     public Button heroShopButton;
     public Button closeHeroShopButton;
     public Button pauseToMenuButton;
+    public Button changeProjectileCastButton;
+
 
     //Texts
     public TextMeshProUGUI nextLevelText;
@@ -45,6 +47,7 @@ public class UIManager : Singleton<UIManager>
     public Text currentLevelText;
     public Text killCountText;
     public Text currentCoinText;
+    public Text projectileCastTypeText;
     public TextMeshProUGUI totalKillText;
     public TextMeshProUGUI goldEarnedText;
     public TextMeshProUGUI addOrReplaceSkillsText;
@@ -68,9 +71,25 @@ public class UIManager : Singleton<UIManager>
         replaceSkillButton.onClick.AddListener(ChangeToReplaceSkillUI);
         heroShopButton.onClick.AddListener(OpenHeroShopUI);
         resumeGameButton.onClick.AddListener(ResumeGame);
+        changeProjectileCastButton.onClick.AddListener(ChangeProjectileCastType);
         //heroShopButton.onClick.AddListener(OpenHeroShopUITest);
 
         closeHeroShopButton.onClick.AddListener(CloseHeroShopUI);
+    }
+
+    private void ChangeProjectileCastType()
+    {
+        if(LevelManager.Instance.player.projectileCastType == 0)
+        {
+            LevelManager.Instance.player.projectileCastType = 1;
+            projectileCastTypeText.text = "All Directions Type";
+            
+        }
+        else
+        {
+            LevelManager.Instance.player.projectileCastType = 0;
+            projectileCastTypeText.text = "Cone Type";
+        }
     }
 
     private void Update()
@@ -115,6 +134,7 @@ public class UIManager : Singleton<UIManager>
     {
         GameManager.Instance.ChangeState(GameState.LevelUp);
         levelUpUI.SetActive(true);
+        replaceSkillButton.gameObject.SetActive(true);
         addOrReplaceSkillsText.text = "Choose Skill To Acquire";
         SkillsChoosingContent.Instance.SpawnSkills();
     }
@@ -135,6 +155,7 @@ public class UIManager : Singleton<UIManager>
     {
         //levelUpUI.SetActive(false);
         //replaceSkillUI.SetActive(true);
+        replaceSkillButton.gameObject.SetActive(false);
         addOrReplaceSkillsText.text = "Choose Skill To Replace";
         SkillsChoosingContent.Instance.replacingSkillSession = true;
         SkillsChoosingContent.Instance.SpawnCurrentSkillsCanBeReplaced();

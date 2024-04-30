@@ -33,6 +33,8 @@ public class Player : Character
 
     public int currentMaxHealth;
 
+    public int projectileCastType = 0;
+
     //public List<SkillCooldown> skillCooldownUIList = new List<SkillCooldown>();
 
 
@@ -174,7 +176,7 @@ public class Player : Character
         if (characterModelInstance == null)
         {
             characterModelInstance = Instantiate(characterData.characterModelPrefab, transform.position, transform.rotation);
-            
+
             characterModelInstance.GetComponent<Animator>().runtimeAnimatorController = anim.runtimeAnimatorController;
             //anim = GetComponent<Animator>();
             //characterData.characterModelPrefab.GetComponent<Animator>().runtimeAnimatorController = anim.runtimeAnimatorController;
@@ -199,7 +201,9 @@ public class Player : Character
     {
         currentMaxHealth += playerExperience.level * 10; // tang stats theo level
         this.health = currentMaxHealth; // len level la mau tu set thanh max cua maxhealth hien tai
-        this.movementSpeed += 1f;
+        healthBar.UpdateHealthBar(characterData.health, this.health);
+        experienceBar.UpdateUI();
+        this.movementSpeed += 0.25f;
         this.damage += playerExperience.level * 2;
     }
 
@@ -316,7 +320,22 @@ public class Player : Character
                     Vector3 castPosition = transform.position + mouseDirection.normalized * skill.rangeRadius;
 
                     // Activate the skill at the calculated position
-                    skill.Activate(castPosition, chargeSkillPos.transform, this);
+                    if (playerExperience.level >= 6)
+                    {
+                        if (projectileCastType == 0)
+                        {
+                            skill.PlayerActivate(castPosition, chargeSkillPos.transform, this);
+                        }
+                        else
+                        {
+                            skill.PlayerActivate2(castPosition, chargeSkillPos.transform, this);
+                        }
+                    }
+                    else
+                    {
+                        skill.Activate(castPosition, chargeSkillPos.transform, this);
+                    }
+
                     skillCooldowns[skill] = skill.cooldown;
 
                     //SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
@@ -339,12 +358,30 @@ public class Player : Character
                     //    skillCooldowns[skill] = skill.cooldown;
                     //}
 
+                    // Calculate the probability of casting the skill again based on player's level
+                    float castAgainChance = Mathf.Clamp01((float)playerExperience.level / playerExperience.level + 10);
+
+                    // Generate a random value to determine if the skill should be cast again
+                    float randomValue = Random.value;
+
                     Vector3 nearestEnemyPosition = FindNearestEnemyPosition(skill.rangeRadius);
 
-                    // If a valid nearest enemy position is found, activate the skill there
                     if (nearestEnemyPosition != Vector3.zero)
                     {
-                        skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
+                        // Check if the random value falls within the cast again chance
+                        if (randomValue <= castAgainChance)
+                        {
+                            if (nearestEnemyPosition != Vector3.zero)
+                            {
+                                Debug.Log("Double Double");
+                                skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
+                                skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
+                            }
+                        }
+                        else
+                        {
+                            skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
+                        }
                         skillCooldowns[skill] = skill.cooldown;
                     }
                 }

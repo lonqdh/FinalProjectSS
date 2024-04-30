@@ -22,7 +22,14 @@ public class MeleeSkillData : SkillData
 
             //base.Activate(position, chargePos, attacker);
         }
+    }
 
+    public override void PlayerActivate(Vector3 position, Transform chargePos, Character attacker)
+    {
+        Quaternion adjustedRotation = Quaternion.Euler(0, 180, 0) * attacker.transform.rotation;
+        Melee melee = LeanPool.Spawn(meleeSkill, chargePos.position, adjustedRotation, attacker.transform);
+        //melee.transform.SetParent(attacker.transform);
+        melee.attacker = attacker;
     }
 }
 

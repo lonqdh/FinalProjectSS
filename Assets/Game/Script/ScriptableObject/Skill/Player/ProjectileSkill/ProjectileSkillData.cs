@@ -1,8 +1,3 @@
-using Lean.Common;
-using Lean.Pool;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Projectile Skill", menuName = "Skills/Projectile Skill")]
@@ -41,6 +36,68 @@ public class ProjectileSkillData : SkillData
         newProjectile.rb.AddForce(direction * projectileSpeed);
 
         //base.Activate(position, chargePos, attacker);
+    }
+
+    public override void PlayerActivate(Vector3 position, Transform chargePos, Character attacker)
+    {
+        // Calculate direction towards the target position
+        Vector3 direction = (position - chargePos.position).normalized;
+        direction.y = 0f; // Ensure the vertical component is 0 (if projectiles don't use gravity)
+
+        // Calculate the angle between each projectile
+        float angleStep = 360f / 6;
+
+        // Iterate to spawn each projectile
+        for (int i = 0; i < 6; i++)
+        {
+            // Calculate the rotation for this projectile
+            Quaternion spreadRotation = Quaternion.Euler(0f, i * angleStep, 0f);
+            Vector3 spreadDirection = spreadRotation * direction;
+
+            // Instantiate the projectile with the correct rotation and position
+            Projectile newProjectile = Instantiate(projectile, chargePos.position, Quaternion.LookRotation(spreadDirection));
+
+            // Set the attacker of the projectile
+            newProjectile.attacker = attacker;
+
+            // Apply force to the projectile in the modified direction
+            //newProjectile.rb.velocity = spreadDirection * projectileSpeed;
+            newProjectile.rb.velocity = spreadDirection * 5f;
+
+        }
+    }
+
+    public override void PlayerActivate2(Vector3 position, Transform chargePos, Character attacker)
+    {
+        // Calculate direction towards the target position
+        Vector3 direction = (position - chargePos.position).normalized;
+        direction.y = 0f; // Ensure the vertical component is 0 (if projectiles don't use gravity)
+
+        // Calculate the angle between each projectile
+        float angleStep = spreadAngle / (LevelManager.Instance.player.playerExperience.level - 1);
+
+        // Calculate the initial rotation of the first projectile
+        Quaternion initialRotation = Quaternion.LookRotation(direction);
+
+        // Iterate to spawn each projectile
+        for (int i = 0; i < LevelManager.Instance.player.playerExperience.level; i++)
+        {
+            // Calculate the rotation for this projectile
+            Quaternion spreadRotation = Quaternion.AngleAxis(-spreadAngle / 2f + angleStep * i, Vector3.up);
+            Quaternion finalRotation = initialRotation * spreadRotation;
+
+            // Calculate the direction for this projectile based on the spread angle
+            Vector3 spreadDirection = finalRotation * Vector3.forward;
+
+            // Instantiate the projectile with the correct rotation and position
+            Projectile newProjectile = Instantiate(projectile, chargePos.position, Quaternion.LookRotation(spreadDirection));
+
+            // Set the attacker of the projectile
+            newProjectile.attacker = attacker;
+
+            // Apply force to the projectile in the modified direction
+            newProjectile.rb.velocity = spreadDirection * 5f;
+        }
     }
 
     public override void BossActivate(Vector3 position, Transform chargePos, Boss attacker)
