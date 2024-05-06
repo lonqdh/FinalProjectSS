@@ -225,8 +225,12 @@ public class UIManager : Singleton<UIManager>
     public void FinishMatch()
     {
         GameManager.Instance.ChangeState(GameState.Finish);
-        LevelManager.Instance.FinishGameCalculations();
-        
+        //LevelManager.Instance.FinishGameCalculations();
+
+        totalKillText.SetText(LevelManager.Instance.killCount.ToString());
+        goldEarnedText.SetText((LevelManager.Instance.killCount * 10).ToString());
+        //currentLevelText.text = "LEVEL " + LevelManager.Instance.player.playerExperience.level.ToString();
+
         //gameplayUI.SetActive(false);
         finishGameUI.SetActive(true);
     }

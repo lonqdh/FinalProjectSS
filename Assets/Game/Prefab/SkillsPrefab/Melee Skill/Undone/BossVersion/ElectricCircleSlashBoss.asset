@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b573159745c4c344bb54c05d23e1f83, type: 3}
+  m_Name: ElectricCircleSlashBoss
+  m_EditorClassIdentifier: 
+  chargeEffectPrefab: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: 2bea127a7264f0349b088dd214e10d9e, type: 3}
+  skillType: 3
+  skillName: IceCircleSlash
+  description: 
+  damage: 60
+  cooldown: 3
+  rangeRadius: 2
+  castTime: 1
+  meleeSkill: {fileID: -4041842606266262835, guid: fc2490a9b79c6e442a6236b220015961, type: 3}
+  radius: 2

@@ -23,3 +23,7 @@ MonoBehaviour:
   castTime: 2
   meleeSkill: {fileID: 1510780931612401731, guid: 3d3252896b812c446ad9d507eb47cabe, type: 3}
   radius: 2
+  numberOfStrikes: 5
+  spinDuration: 3
+  strikeDelay: 0.5
+  spinSpeed: 20

@@ -1,6 +1,4 @@
 using Lean.Pool;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Melee Skill", menuName = "Skills/Melee Skill")]
@@ -8,6 +6,9 @@ public class MeleeSkillData : SkillData
 {
     public Melee meleeSkill;
     public float radius;
+    //public int numberOfStrikes;
+    //public float strikeDelay;
+
     public override void Activate(Vector3 position, Transform chargePos, Character attacker)
     {
         // Implement area of effect skill activation logic here
@@ -31,5 +32,26 @@ public class MeleeSkillData : SkillData
         //melee.transform.SetParent(attacker.transform);
         melee.attacker = attacker;
     }
+
+    public override void BossActivate(Vector3 position, Transform chargePos, Boss attacker)
+    {
+        Vector3 spawnPosition = attacker.transform.position + Vector3.up * 1f;
+        // Instantiate the melee strike at the boss's position
+        Melee newMelee = LeanPool.Spawn(meleeSkill, spawnPosition, Quaternion.identity, attacker.transform);
+
+        newMelee.attacker = attacker;
+    }
+
+    public override void BossActivate2(Vector3 position, Transform chargePos, Boss attacker)
+    {
+        Debug.Log("BossMeleeAttack2");
+        Vector3 spawnPosition = attacker.transform.position + Vector3.up * 1f;
+        // Instantiate the melee strike at the boss's position
+        Melee newMelee = LeanPool.Spawn(meleeSkill, spawnPosition, Quaternion.identity, attacker.transform);
+
+        newMelee.attacker = attacker;
+    }
+
+
 }
 

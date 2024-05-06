@@ -98,7 +98,7 @@ public class LevelManager : Singleton<LevelManager>
         player.Camera = camera.GetComponent<Camera>();
         player.OnInit();
 
-        //SpawnBoss();
+        SpawnBoss();
     }
     
     private void LoadLevel(int level)
@@ -203,7 +203,9 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnBoss()
     {
         // Randomly select an enemy to spawn
-        BossData bossToSpawn = bossDataSO.bossDataList[Random.Range(0, bossDataSO.bossDataList.Count)];
+        //BossData bossToSpawn = bossDataSO.bossDataList[Random.Range(0, bossDataSO.bossDataList.Count)];
+        BossData bossToSpawn = bossDataSO.bossDataList[0];
+
 
         // Get a random point on the NavMesh
         //Vector3 spawnPoint = GetRandomNavMeshPoint();
@@ -309,22 +311,23 @@ public class LevelManager : Singleton<LevelManager>
 
     public void FinishGameCalculations()
     {
-        UIManager.Instance.totalKillText.SetText(killCount.ToString());
-        UIManager.Instance.goldEarnedText.SetText((killCount * 10).ToString());
         ResetGameProgress();
     }
 
     public void ResetGameProgress()
     {
-        LeanPool.DespawnAll();
-        Destroy(player.gameObject);
-        level = 1;
-        killCount = 1;
-        enemyLevel = 1;
+        //LeanPool.DespawnAll();
+        //Destroy(player.gameObject);
+        
+        //level = 1;
+        //killCount = 1;
+        //enemyLevel = 1;
     }
 
     public void RestartGame()
     {
+        
+
         killCount = 1;
         UIManager.Instance.totalKillText.SetText(killCount.ToString());
 
@@ -359,6 +362,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (currentLevel.spawnPoint.position != null)
         {
+            //Destroy(player.gameObject);
             //LeanPool.Spawn(playerPrefab);
             player = Instantiate(playerPrefab);
             player.transform.position = currentLevel.spawnPoint.position;
@@ -376,6 +380,7 @@ public class LevelManager : Singleton<LevelManager>
             player.playerExperience.ResetLevel();
             //InitializePlayerSkills();
 
+            UIManager.Instance.currentLevelText.text = "LEVEL " + player.playerExperience.level.ToString();
             UIManager.Instance.finishGameUI.SetActive(false);
             GameManager.Instance.ChangeState(GameState.Gameplay);
             // Update UI elements

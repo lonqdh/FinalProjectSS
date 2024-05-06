@@ -60,7 +60,6 @@ public class AreaSkillData : SkillData
             // Calculate the position around the boss using polar coordinates
             Vector3 skillPosition = attacker.transform.position + Quaternion.Euler(0f, angle, 0f) * Vector3.forward * radius;
 
-            // Spawn the AoE skill at the calculated position
             AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, skillPosition, aoeSkill.transform.rotation);
             aoe.attacker = attacker;
 

@@ -13,6 +13,21 @@ MonoBehaviour:
   m_Name: BossDataSO
   m_EditorClassIdentifier: 
   bossDataList:
+  - boss: {fileID: 647450906609736124, guid: 9fdd88f678a4f1c40bcb82f1e906a30c, type: 3}
+    bossType: 0
+    health: 1500
+    damage: 80
+    movementSpeed: 5
+    bossSkills:
+    - {fileID: 11400000, guid: 58c59eee9f339a34e9a2dcfd111dd693, type: 2}
+    - {fileID: 11400000, guid: 0e9998498e2635942a9b41e6dbe97995, type: 2}
+    - {fileID: 11400000, guid: 17964f6a2a5b387428e506e5ed1f6485, type: 2}
+    - {fileID: 11400000, guid: 766f5665138e61749b71259e670a5e2f, type: 2}
+    - {fileID: 11400000, guid: 2e6ae34442fc75746b912bff25b17fb7, type: 2}
+    - {fileID: 11400000, guid: 6cc76dee964c41b4198224ddd5fab877, type: 2}
+    hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
+    deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
+    attackRange: 5
   - boss: {fileID: 5942902101674709545, guid: 0f786e9a47ac41446b6254d24571b1f4, type: 3}
     bossType: 1
     health: 500

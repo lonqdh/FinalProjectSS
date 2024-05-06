@@ -83,10 +83,10 @@ public class Enemy : Character
     {
         base.OnInit();
         this.enemyData = enemyData;
-        this.health = enemyData.health + (LevelManager.Instance.player.playerExperience.level * 10); // chinh stats enemy dua tren level hien tai cua nguoi choi
+        this.health = enemyData.health + (LevelManager.Instance.player.playerExperience.level * 20); // chinh stats enemy dua tren level hien tai cua nguoi choi
         currentMaxHealth = health;
         enemyHealthBar.UpdateEnemyHealthBar(currentMaxHealth, health);
-        this.damage = enemyData.damage + (LevelManager.Instance.player.playerExperience.level * 3);
+        this.damage = enemyData.damage + (LevelManager.Instance.player.playerExperience.level * 10);
         this.movementSpeed = enemyData.movementSpeed + 0.25f;
         this.hitVfx = enemyData.hitVfx;
         this.deathVfx = enemyData.deathVfx;
