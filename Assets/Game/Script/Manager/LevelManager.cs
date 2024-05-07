@@ -326,8 +326,6 @@ public class LevelManager : Singleton<LevelManager>
 
     public void RestartGame()
     {
-        
-
         killCount = 1;
         UIManager.Instance.totalKillText.SetText(killCount.ToString());
 
@@ -338,6 +336,8 @@ public class LevelManager : Singleton<LevelManager>
 
         enemyLevel = minEnemyLevel;
         currentSpawnInterval = initialSpawnInterval;
+
+        eligibleEnemies.Clear();
 
         CalculateEligibleEnemies();
 
@@ -380,6 +380,7 @@ public class LevelManager : Singleton<LevelManager>
             player.playerExperience.ResetLevel();
             //InitializePlayerSkills();
 
+            UIManager.Instance.killCountText.text = killCount.ToString();
             UIManager.Instance.currentLevelText.text = "LEVEL " + player.playerExperience.level.ToString();
             UIManager.Instance.finishGameUI.SetActive(false);
             GameManager.Instance.ChangeState(GameState.Gameplay);

@@ -61,6 +61,17 @@ public class AreaSkillData : SkillData
             Vector3 skillPosition = attacker.transform.position + Quaternion.Euler(0f, angle, 0f) * Vector3.forward * radius;
 
             AreaOfEffect aoe = LeanPool.Spawn(aoeSkill, skillPosition, aoeSkill.transform.rotation);
+
+            if (i != 0)
+            {
+                //aoe.audioSource.playOnAwake = false;
+                aoe.audioSource.mute = true;
+            }
+            //else
+            //{
+            //    aoe.GetComponent<AudioSource>().Play();
+            //}
+
             aoe.attacker = attacker;
 
             //Debug.Log("Skill casted at position: " + skillPosition);

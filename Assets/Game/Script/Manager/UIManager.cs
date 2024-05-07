@@ -21,6 +21,11 @@ public class UIManager : Singleton<UIManager>
     public GameObject loadingScreen;
     public GameObject spellbookUI;
     public GameObject heroShopUITest;
+    public GameObject messageUIPanel;
+    public GameObject achievementUIPanel;
+    public GameObject settingUIPanel;
+
+
 
     //SkillAcquiredIconCooldown
     public SkillCooldown acquiredSkillPrefab;
@@ -39,6 +44,11 @@ public class UIManager : Singleton<UIManager>
     public Button closeHeroShopButton;
     public Button pauseToMenuButton;
     public Button changeProjectileCastButton;
+    public Button menuMessageButton;
+    public Button menuAchievementButton;
+    public Button menuSettingButton;
+    public Button closePanelsButton;
+
 
 
     //Texts
@@ -72,31 +82,63 @@ public class UIManager : Singleton<UIManager>
         heroShopButton.onClick.AddListener(OpenHeroShopUI);
         resumeGameButton.onClick.AddListener(ResumeGame);
         changeProjectileCastButton.onClick.AddListener(ChangeProjectileCastType);
-        //heroShopButton.onClick.AddListener(OpenHeroShopUITest);
+        menuAchievementButton.onClick.AddListener(OpenAchivementMenuPanel);
+        menuMessageButton.onClick.AddListener(OpenMessageMenuPanel);
+        menuSettingButton.onClick.AddListener(OpenSettingMenuPanel);
 
+        //heroShopButton.onClick.AddListener(OpenHeroShopUITest);
+        closePanelsButton.onClick.AddListener(ClosePanels);
         closeHeroShopButton.onClick.AddListener(CloseHeroShopUI);
     }
 
-    private void ChangeProjectileCastType()
+    private void ClosePanels()
     {
-        if(LevelManager.Instance.player.projectileCastType == 0)
+        if(settingUIPanel.activeSelf == true)
         {
-            LevelManager.Instance.player.projectileCastType = 1;
-            projectileCastTypeText.text = "All Directions Type";
-            
+            settingUIPanel.SetActive(false);
+            closePanelsButton.gameObject.SetActive(false);
         }
-        else
+        else if(messageUIPanel.activeSelf == true)
         {
-            LevelManager.Instance.player.projectileCastType = 0;
-            projectileCastTypeText.text = "Cone Type";
+            messageUIPanel.SetActive(false);
+            closePanelsButton.gameObject.SetActive(false);
         }
+        else if(achievementUIPanel.activeSelf == true)
+        {
+            achievementUIPanel.SetActive(false);
+            closePanelsButton.gameObject.SetActive(false);
+        }
+    }
+
+    private void OpenSettingMenuPanel()
+    {
+        settingUIPanel.SetActive(true);
+        closePanelsButton.gameObject.SetActive(true);
+        closePanelsButton.transform.parent = settingUIPanel.transform;
+    }
+
+    private void OpenMessageMenuPanel()
+    {
+        messageUIPanel.SetActive(true);
+        closePanelsButton.gameObject.SetActive(true);
+        closePanelsButton.transform.parent = messageUIPanel.transform;
+    }
+
+    private void OpenAchivementMenuPanel()
+    {
+        achievementUIPanel.SetActive(true);
+        closePanelsButton.gameObject.SetActive(true);
+        closePanelsButton.transform.parent = achievementUIPanel.transform;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause();
+            if (GameManager.Instance.IsState(GameState.Gameplay) || GameManager.Instance.IsState(GameState.Pause))
+            {
+                TogglePause();
+            }
         }
     }
 
@@ -161,6 +203,21 @@ public class UIManager : Singleton<UIManager>
         SkillsChoosingContent.Instance.SpawnCurrentSkillsCanBeReplaced();
     }
 
+    private void ChangeProjectileCastType()
+    {
+        if (LevelManager.Instance.player.projectileCastType == 0)
+        {
+            LevelManager.Instance.player.projectileCastType = 1;
+            projectileCastTypeText.text = "All Directions Type";
+
+        }
+        else
+        {
+            LevelManager.Instance.player.projectileCastType = 0;
+            projectileCastTypeText.text = "Cone Type";
+        }
+    }
+
     public void CloseLevelUpUI()
     {
         levelUpUI.SetActive(false);
@@ -170,14 +227,14 @@ public class UIManager : Singleton<UIManager>
 
     public void EnterMainMenuUI()
     {
-        if(GameManager.Instance.IsState(GameState.Pause))
+        if (GameManager.Instance.IsState(GameState.Pause))
         {
             Time.timeScale = 1f;
             pauseMenuUI.SetActive(false);
             gameplayUI.SetActive(false);
             LevelManager.Instance.EndGame();
         }
-        
+
         GameManager.Instance.ChangeState(GameState.MainMenu);
         openingGameUI.SetActive(false);
         mainMenuUI.SetActive(true);
@@ -209,7 +266,7 @@ public class UIManager : Singleton<UIManager>
     {
         // Wait for a few seconds before showing the game
         yield return new WaitForSeconds(2.0f); // Adjust the delay time as needed
-        
+
         // Initialize the level manager and other necessary components
         mainMenuUI.SetActive(false);
         finishGameUI.SetActive(false);
@@ -234,7 +291,7 @@ public class UIManager : Singleton<UIManager>
         //gameplayUI.SetActive(false);
         finishGameUI.SetActive(true);
     }
-    
+
     private void RestartMatch()
     {
         LevelManager.Instance.RestartGame();

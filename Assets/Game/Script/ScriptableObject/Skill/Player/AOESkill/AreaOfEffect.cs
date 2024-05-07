@@ -7,6 +7,8 @@ public class AreaOfEffect : Skill
     public CapsuleCollider capsuleCollider;
     public float delayBeforeActivation = 1f;
     public ParticleSystem vfx;
+    public AudioSource audioSource;
+
 
     private void OnEnable()
     {
@@ -41,9 +43,11 @@ public class AreaOfEffect : Skill
     {
         // Wait for the duration of the VFX
         yield return new WaitForSeconds(vfx.main.duration);
-
         // Despawn the AreaOfEffect object
         LeanPool.Despawn(this);
+        audioSource.playOnAwake = true;
+        audioSource.mute = false;
+
     }
 
 }

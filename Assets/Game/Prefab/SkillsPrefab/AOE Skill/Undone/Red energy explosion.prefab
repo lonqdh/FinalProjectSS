@@ -53917,6 +53917,7 @@ MonoBehaviour:
   capsuleCollider: {fileID: -7511400245301991049}
   delayBeforeActivation: 2
   vfx: {fileID: 2810778813316733972}
+  audioSource: {fileID: 1913086596827032204}
 --- !u!82 &1913086596827032204
 AudioSource:
   m_ObjectHideFlags: 0

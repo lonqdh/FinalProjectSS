@@ -520,20 +520,16 @@ public class Player : Character
         // Calculate the angle between the player's forward direction and the movement direction
         float angle = Vector3.SignedAngle(transform.forward, inputVector, Vector3.up);
 
-        // Set animation parameters based on the angle
         if (angle > 45f && angle < 135f)
         {
-            // Move right animation
             ChangeAnim("IsRunRight");
         }
         else if (angle < -45f && angle > -135f)
         {
-            // Move left animation
             ChangeAnim("IsRunLeft");
         }
         else if (angle >= 135f || angle <= -135f)
         {
-            // Move backward animation
             ChangeAnim("IsRunBackward");
         }
         else
@@ -549,7 +545,7 @@ public class Player : Character
 
         if (exp != null)
         {
-            playerExperience.AddExp(exp.experienceAmount);
+            playerExperience.AddExp(exp.experienceAmount * playerExperience.level);
             experienceBar.UpdateUI();
             LeanPool.Despawn(other);
         }
@@ -566,7 +562,7 @@ public class Player : Character
                 return cooldownUI;
             }
         }
-        return null; // Return null if no associated SkillCooldown component is found
+        return null;
     }
 
 }

@@ -13,10 +13,38 @@ MonoBehaviour:
   m_Name: BossDataSO
   m_EditorClassIdentifier: 
   bossDataList:
+  - boss: {fileID: -2512774208259366706, guid: 36659bb518820714ba3b5e0a913ba900, type: 3}
+    bossType: 1
+    health: 4000
+    damage: 65
+    movementSpeed: 5
+    bossSkills:
+    - {fileID: 11400000, guid: 9f2cb1aef1a5e8b44baf9865fd481c7b, type: 2}
+    - {fileID: 11400000, guid: 60318378563fa604e9ae9f1a7a292b86, type: 2}
+    - {fileID: 11400000, guid: 982a00e1f80b7a6479d85b738cf8cfc6, type: 2}
+    - {fileID: 11400000, guid: 747e4841a11131040b6f095484f9adaa, type: 2}
+    - {fileID: 11400000, guid: 768c34d2bb0d8674fa894c3c491f5e81, type: 2}
+    hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
+    deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
+    attackRange: 5
+  - boss: {fileID: 5691683202929919585, guid: ea32c83b2f3d51a41aefaa131512dd02, type: 3}
+    bossType: 1
+    health: 3500
+    damage: 80
+    movementSpeed: 5
+    bossSkills:
+    - {fileID: 11400000, guid: 9f2cb1aef1a5e8b44baf9865fd481c7b, type: 2}
+    - {fileID: 11400000, guid: 60318378563fa604e9ae9f1a7a292b86, type: 2}
+    - {fileID: 11400000, guid: 982a00e1f80b7a6479d85b738cf8cfc6, type: 2}
+    - {fileID: 11400000, guid: 747e4841a11131040b6f095484f9adaa, type: 2}
+    - {fileID: 11400000, guid: 768c34d2bb0d8674fa894c3c491f5e81, type: 2}
+    hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
+    deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
+    attackRange: 5
   - boss: {fileID: 647450906609736124, guid: 9fdd88f678a4f1c40bcb82f1e906a30c, type: 3}
     bossType: 0
-    health: 1500
-    damage: 80
+    health: 5000
+    damage: 200
     movementSpeed: 5
     bossSkills:
     - {fileID: 11400000, guid: 58c59eee9f339a34e9a2dcfd111dd693, type: 2}
@@ -30,8 +58,8 @@ MonoBehaviour:
     attackRange: 5
   - boss: {fileID: 5942902101674709545, guid: 0f786e9a47ac41446b6254d24571b1f4, type: 3}
     bossType: 1
-    health: 500
-    damage: 30
+    health: 2000
+    damage: 100
     movementSpeed: 5
     bossSkills:
     - {fileID: 11400000, guid: 9f2cb1aef1a5e8b44baf9865fd481c7b, type: 2}
@@ -41,4 +69,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 768c34d2bb0d8674fa894c3c491f5e81, type: 2}
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
-    attackRange: 10
+    attackRange: 5

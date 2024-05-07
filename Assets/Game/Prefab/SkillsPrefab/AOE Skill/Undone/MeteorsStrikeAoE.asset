@@ -23,3 +23,4 @@ MonoBehaviour:
   castTime: 2
   aoeSkill: {fileID: 8579544250859116851, guid: 3b77e8e680b370a498fcdd8fabd0d586, type: 3}
   radius: 5
+  audioSource: {fileID: 5204346047279938888, guid: 3b77e8e680b370a498fcdd8fabd0d586, type: 3}
