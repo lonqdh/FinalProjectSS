@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -48,6 +47,8 @@ public class UIManager : Singleton<UIManager>
     public Button menuAchievementButton;
     public Button menuSettingButton;
     public Button closePanelsButton;
+    public Button restartMatchButton;
+    public Button finishMatchToMenuButton;
 
 
 
@@ -58,6 +59,7 @@ public class UIManager : Singleton<UIManager>
     public Text killCountText;
     public Text currentCoinText;
     public Text projectileCastTypeText;
+    public TextMeshProUGUI scoreText;
     public TextMeshProUGUI totalKillText;
     public TextMeshProUGUI goldEarnedText;
     public TextMeshProUGUI addOrReplaceSkillsText;
@@ -85,25 +87,37 @@ public class UIManager : Singleton<UIManager>
         menuAchievementButton.onClick.AddListener(OpenAchivementMenuPanel);
         menuMessageButton.onClick.AddListener(OpenMessageMenuPanel);
         menuSettingButton.onClick.AddListener(OpenSettingMenuPanel);
-
+        restartMatchButton.onClick.AddListener(RestartMatch);
         //heroShopButton.onClick.AddListener(OpenHeroShopUITest);
         closePanelsButton.onClick.AddListener(ClosePanels);
         closeHeroShopButton.onClick.AddListener(CloseHeroShopUI);
+        finishMatchToMenuButton.onClick.AddListener(EnterMainMenuUI);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.Instance.IsState(GameState.Gameplay) || GameManager.Instance.IsState(GameState.Pause))
+            {
+                TogglePause();
+            }
+        }
     }
 
     private void ClosePanels()
     {
-        if(settingUIPanel.activeSelf == true)
+        if (settingUIPanel.activeSelf == true)
         {
             settingUIPanel.SetActive(false);
             closePanelsButton.gameObject.SetActive(false);
         }
-        else if(messageUIPanel.activeSelf == true)
+        else if (messageUIPanel.activeSelf == true)
         {
             messageUIPanel.SetActive(false);
             closePanelsButton.gameObject.SetActive(false);
         }
-        else if(achievementUIPanel.activeSelf == true)
+        else if (achievementUIPanel.activeSelf == true)
         {
             achievementUIPanel.SetActive(false);
             closePanelsButton.gameObject.SetActive(false);
@@ -131,16 +145,7 @@ public class UIManager : Singleton<UIManager>
         closePanelsButton.transform.parent = achievementUIPanel.transform;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameManager.Instance.IsState(GameState.Gameplay) || GameManager.Instance.IsState(GameState.Pause))
-            {
-                TogglePause();
-            }
-        }
-    }
+
 
     private void TogglePause()
     {
@@ -227,10 +232,11 @@ public class UIManager : Singleton<UIManager>
 
     public void EnterMainMenuUI()
     {
-        if (GameManager.Instance.IsState(GameState.Pause))
+        if (GameManager.Instance.IsState(GameState.Pause) || GameManager.Instance.IsState(GameState.Finish))
         {
             Time.timeScale = 1f;
             pauseMenuUI.SetActive(false);
+            finishGameUI.SetActive(false);
             gameplayUI.SetActive(false);
             LevelManager.Instance.EndGame();
         }
@@ -241,18 +247,6 @@ public class UIManager : Singleton<UIManager>
         //LevelManager.Instance.camera.enabled = true;
         //mainMenuBackgroundEffect.SetActive(true);
     }
-
-    //public void EnterMatch()
-    //{
-    //    GameManager.Instance.ChangeState(GameState.Gameplay);
-    //    loadingScreen.SetActive(true);
-    //    LevelManager.Instance.OnInit();
-
-
-    //    mainMenuUI.SetActive(false);
-    //    finishGameUI.SetActive(false);
-    //    gameplayUI.SetActive(true);
-    //}
 
     public void EnterMatch()
     {
@@ -273,9 +267,6 @@ public class UIManager : Singleton<UIManager>
         loadingScreen.SetActive(false);
         gameplayUI.SetActive(true);
 
-        // Hide the loading screen
-        loadingScreen.SetActive(false);
-
         GameManager.Instance.ChangeState(GameState.Gameplay);
     }
 
@@ -286,15 +277,32 @@ public class UIManager : Singleton<UIManager>
 
         totalKillText.SetText(LevelManager.Instance.killCount.ToString());
         goldEarnedText.SetText((LevelManager.Instance.killCount * 10).ToString());
+
+        // Calculate final score with random value within a range
+        int minScore = 100; // Adjust these values as needed
+        int maxScore = 500;
+        int finalScore = Random.Range(minScore, maxScore * LevelManager.Instance.killCount);
+
+        scoreText.SetText(finalScore.ToString());
         //currentLevelText.text = "LEVEL " + LevelManager.Instance.player.playerExperience.level.ToString();
 
         //gameplayUI.SetActive(false);
         finishGameUI.SetActive(true);
     }
 
+    private void StopGameToMenu()
+    {
+
+    }
+
     private void RestartMatch()
     {
         LevelManager.Instance.RestartGame();
+        pauseMenuUI.SetActive(false);
+        gameplayUI.SetActive(false);
+        loadingScreen.SetActive(true);
+        StartCoroutine(StartGame());
+        ResumeGame();
     }
 
     public void LoadingNextLevel()
@@ -307,21 +315,13 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(StartGame());
     }
 
-    public void OpenHeroShopUITest()
+    public void DestroySkillRow()
     {
-        mainCamera.SetActive(false);
-        heroShopUITest.SetActive(true);
-        //heroShopCamera.SetActive(true);
-        mainMenuUI.SetActive(false);
-        //HeroShopContent.Instance.SpawnCharacters();
+        foreach (SkillRow skillrow in skillRowList)
+        {
+            Destroy(skillrow.gameObject);
+        }
+
+        skillRowList.Clear();
     }
-
-    public void CloseHeroShopUITest()
-    {
-        heroShopUITest.SetActive(false);
-        //heroShopCamera.SetActive(false);
-        mainCamera.SetActive(true);
-    }
-
-
 }

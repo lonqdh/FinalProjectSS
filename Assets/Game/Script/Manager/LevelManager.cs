@@ -35,6 +35,7 @@ public class LevelManager : Singleton<LevelManager>
     public bool proceedToNextLevel = false;
 
     public bool bossSpawned = false;
+    public bool bossKilled = false;
 
     private Coroutine spawnEnemiesCoroutine;
     private Coroutine playerProgressCoroutine;
@@ -51,12 +52,12 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (GameManager.Instance.IsState(GameState.Gameplay))
         {
-            if (killCount % 50 == 0 && bossSpawned == false)
+            if (killCount % 20 == 0 && bossSpawned == false)
             {
                 SpawnBoss();
             }
 
-            if (killCount >= currentLevel.killRequiredToNextLevel && nextLevelOptionCheck == false)
+            if (bossKilled == true && nextLevelOptionCheck == false)
             {
                 // Move to the next level
                 //nextLevelOptionCheck = true;
@@ -72,11 +73,6 @@ public class LevelManager : Singleton<LevelManager>
                 level++;
             }
         }
-
-        //if (killCount == 2)
-        //{
-        //    SpawnBoss();
-        //}
     }
 
     public void OnInit()
@@ -98,9 +94,14 @@ public class LevelManager : Singleton<LevelManager>
         player.Camera = camera.GetComponent<Camera>();
         player.OnInit();
 
-        SpawnBoss();
+        level = 1;
+        killCount = 1;
+        UIManager.Instance.killCountText.text = (killCount - 1).ToString();
+        UIManager.Instance.currentLevelText.text = "LEVEL " + player.playerExperience.level.ToString();
+
+        //SpawnBoss();
     }
-    
+
     private void LoadLevel(int level)
     {
         if (currentLevel != null)
@@ -202,10 +203,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnBoss()
     {
-        // Randomly select an enemy to spawn
-        //BossData bossToSpawn = bossDataSO.bossDataList[Random.Range(0, bossDataSO.bossDataList.Count)];
-        BossData bossToSpawn = bossDataSO.bossDataList[0];
-
+        BossData bossToSpawn = bossDataSO.bossDataList[level - 1];
 
         // Get a random point on the NavMesh
         //Vector3 spawnPoint = GetRandomNavMeshPoint();
@@ -222,7 +220,6 @@ public class LevelManager : Singleton<LevelManager>
 
                 bossSpawned = true;
                 Debug.Log("Boss Spawned");
-                //Debug.Log("Spawned Enemy: " + enemyToSpawn.enemyType);
             }
             else
             {
@@ -278,12 +275,13 @@ public class LevelManager : Singleton<LevelManager>
         // Set the player's position to the spawn point of the new level
         player.transform.position = currentLevel.spawnPoint.position;
 
-        // Reset player's kill count
-        killCount = 1;
+        //// Reset player's kill count
+        //killCount = 1;
 
         //spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
         //playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
 
+        bossKilled = false;
         nextLevelOptionCheck = false;
         GameManager.Instance.ChangeState(GameState.Gameplay);
         Debug.Log("Next level loaded: " + level);
@@ -309,23 +307,14 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    public void FinishGameCalculations()
-    {
-        ResetGameProgress();
-    }
-
-    public void ResetGameProgress()
-    {
-        //LeanPool.DespawnAll();
-        //Destroy(player.gameObject);
-        
-        //level = 1;
-        //killCount = 1;
-        //enemyLevel = 1;
-    }
-
     public void RestartGame()
     {
+        if (player != null)
+        {
+            Destroy(player.gameObject);
+        }
+        nextLevelOptionCheck = false;
+        level = 1;
         killCount = 1;
         UIManager.Instance.totalKillText.SetText(killCount.ToString());
 
@@ -343,14 +332,11 @@ public class LevelManager : Singleton<LevelManager>
 
         StopAllCoroutines();
 
-        //// Restart spawning enemies routine
-        //StartCoroutine(SpawnEnemiesRoutine());
-
-        //// Restart player progress calculation routine
-        //StartCoroutine(CalculatePlayerProgressRoutine());
-
         spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
         playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
+        LoadLevel(level);
+        bossSpawned = false;
+        bossKilled = false;
 
         RespawnPlayer();
 
@@ -372,16 +358,16 @@ public class LevelManager : Singleton<LevelManager>
             camera.target = player.transform;
             player.Camera = camera.GetComponent<Camera>();
 
-            // Move the player to the spawn point
-
             // Reset player's health and experience
             //player.health = player.characterData.health;
             player.OnInit();
             player.playerExperience.ResetLevel();
             //InitializePlayerSkills();
 
+
             UIManager.Instance.killCountText.text = killCount.ToString();
             UIManager.Instance.currentLevelText.text = "LEVEL " + player.playerExperience.level.ToString();
+
             UIManager.Instance.finishGameUI.SetActive(false);
             GameManager.Instance.ChangeState(GameState.Gameplay);
             // Update UI elements
@@ -414,23 +400,62 @@ public class LevelManager : Singleton<LevelManager>
     //    }
     //}
 
+    //public void EndGame()
+    //{
+    //    level = 1;
+    //    enemyLevel = minEnemyLevel;
+    //    CalculateEligibleEnemies();
+    //    LeanPool.DespawnAll();
+    //    StopAllCoroutines();
+    //    Destroy(currentLevel.gameObject);
+    //    if (player != null)
+    //    {
+    //        Destroy(player.gameObject);
+    //    }
+    //}
+
     public void EndGame()
     {
-        level = 1;
-        enemyLevel = minEnemyLevel;
-        CalculateEligibleEnemies();
-        LeanPool.DespawnAll();
-        StopAllCoroutines();
-        Destroy(currentLevel.gameObject);
-        if(player != null)
+        if (player != null)
         {
             Destroy(player.gameObject);
         }
+
+        if (currentLevel != null)
+        {
+            Destroy(currentLevel.gameObject);
+        }
+        
+        level = 1;
+
+        // Despawn all
+        LeanPool.DespawnAll();
+
+        //InitializePlayerSkills();
+
+        enemyLevel = minEnemyLevel;
+        currentSpawnInterval = initialSpawnInterval;
+
+        eligibleEnemies.Clear();
+
+        CalculateEligibleEnemies();
+
+        StopAllCoroutines();
+
+        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
+        //LoadLevel(level);
+        bossSpawned = false;
+        bossKilled = false;
+        
+
+        //RespawnPlayer();
     }
 
     public void InitializePlayerSkills()
     {
         player.playerSkills.ResetSkill();
+        UIManager.Instance.DestroySkillRow();
         player.playerSkills.AddSkill(player.characterData.basicSkill);
     }
 }

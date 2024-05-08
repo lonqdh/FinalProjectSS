@@ -102,7 +102,13 @@ public class Boss : Character
         LevelManager.Instance.killCount++;
         //UIManager.Instance.killCountText.SetText(LevelManager.Instance.killCount.ToString());
         UIManager.Instance.killCountText.text = (LevelManager.Instance.killCount.ToString());
+        LevelManager.Instance.bossSpawned = false;
+        LevelManager.Instance.bossKilled = true;
 
+        if (LevelManager.Instance.bossDataSO.bossDataList.IndexOf(this.bossData) == LevelManager.Instance.bossDataSO.bossDataList.Count - 1)
+        {
+            UIManager.Instance.FinishMatch();
+        }
     }
 
 

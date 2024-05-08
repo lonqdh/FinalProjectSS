@@ -11,6 +11,7 @@ public class EndGamePortal : MonoBehaviour
         Player newPlayer = other.GetComponent<Player>();
         if (newPlayer != null)
         {
+            LevelManager.Instance.nextLevelOptionCheck = false;
             UIManager.Instance.FinishMatch();
         }
 

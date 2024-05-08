@@ -337,38 +337,17 @@ public class Player : Character
                     }
 
                     skillCooldowns[skill] = skill.cooldown;
-
-                    //SkillCooldown cooldownUI = FindSkillCooldownUI(skill);
-                    //if (cooldownUI != null)
-                    //{
-                    //    cooldownUI.StartCooldown(skill.cooldown);
-                    //}
                 }
                 else if (skill.skillType == SkillType.AreaOfEffect)
                 {
-                    //float distanceToMouse = GetMouseDirectionAoE().magnitude;
-
-                    //if (distanceToMouse <= skill.rangeRadius)
-                    //{
-                    //    // Calculate the casting position based on the player's position and the mouse direction
-                    //    Vector3 castPosition = transform.position + GetMouseDirectionAoE().normalized * distanceToMouse;
-
-                    //    // Activate the skill at the calculated position
-                    //    skill.Activate(castPosition, chargeSkillPos.transform, this);
-                    //    skillCooldowns[skill] = skill.cooldown;
-                    //}
-
-                    // Calculate the probability of casting the skill again based on player's level
                     float castAgainChance = Mathf.Clamp01((float)playerExperience.level / playerExperience.level + 10);
 
-                    // Generate a random value to determine if the skill should be cast again
                     float randomValue = Random.value;
 
                     Vector3 nearestEnemyPosition = FindNearestEnemyPosition(skill.rangeRadius);
 
                     if (nearestEnemyPosition != Vector3.zero)
                     {
-                        // Check if the random value falls within the cast again chance
                         if (randomValue <= castAgainChance)
                         {
                             if (nearestEnemyPosition != Vector3.zero)
@@ -418,82 +397,16 @@ public class Player : Character
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
-            //// Check if the hit collider belongs to the player
-            //if (hitInfo.collider.CompareTag("Player"))
-            //{
-            //    // Calculate the direction in front of the character
-            //    mouseDirection = transform.forward;
-            //}
-            //else
-            //{
-            //    // Get the collider bounds of the hit object
-            //    Collider collider = hitInfo.collider;
-            //    Bounds bounds = collider.bounds;
-
-            //    // Calculate the lowest point of the collider (the feet)
-            //    Vector3 lowestPoint = bounds.center - Vector3.up * bounds.extents.y;
-
-            //    // Set the mouse direction to the lowest point of the collider
-            //    mouseDirection = lowestPoint - transform.position;
-
-            //    // Ensure that the direction is horizontal (ignoring the vertical component)
-            //    mouseDirection.y = 0f;
-
-            //    //mouseDirection = transform.forward;
-
-            //}
-
             mouseDirection = transform.forward;
 
         }
         else
         {
-            // If the raycast doesn't hit anything, just use the direction from the player to the mouse cursor
             mouseDirection = _input.MousePosition - Camera.WorldToScreenPoint(transform.position);
         }
 
         return mouseDirection;
     }
-
-
-    //private Vector3 GetMouseDirectionAoE()
-    //{
-    //    Ray ray = Camera.ScreenPointToRay(_input.MousePosition);
-    //    Vector3 mouseDirection = Vector3.zero;
-
-    //    if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
-    //    {
-    //        // Check if the hit collider belongs to the player
-    //        if (hitInfo.collider.CompareTag("Player"))
-    //        {
-    //            // Calculate the direction in front of the character
-    //            mouseDirection = transform.forward;
-    //        }
-    //        else
-    //        {
-    //            // Get the collider bounds of the hit object
-    //            Collider collider = hitInfo.collider;
-    //            Bounds bounds = collider.bounds;
-
-    //            // Calculate the lowest point of the collider (the feet)
-    //            Vector3 lowestPoint = bounds.center - Vector3.up * bounds.extents.y;
-
-    //            // Set the mouse direction to the lowest point of the collider
-    //            mouseDirection = lowestPoint - transform.position;
-
-    //            // Ensure that the direction is horizontal (ignoring the vertical component)
-    //            mouseDirection.y = 0f;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        // If the raycast doesn't hit anything, just use the direction from the player to the mouse cursor
-    //        mouseDirection = _input.MousePosition - Camera.WorldToScreenPoint(transform.position);
-    //    }
-
-    //    return mouseDirection;
-    //}
-
 
     bool IsSkillOnCooldown(SkillData skill)
     {

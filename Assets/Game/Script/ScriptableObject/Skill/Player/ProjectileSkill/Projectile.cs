@@ -39,6 +39,8 @@ public class Projectile : Skill
             Destroy(muzzleParticle, 1.5f);
         }
 
+        Destroy(gameObject, 5f);
+
         //rb.velocity = transform.forward * projectileSpeed;
 
     }

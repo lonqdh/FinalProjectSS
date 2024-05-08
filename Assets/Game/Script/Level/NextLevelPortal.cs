@@ -10,6 +10,7 @@ public class NextLevelPortal : MonoBehaviour
         if (newPlayer != null)
         {
             //LevelManager.Instance.proceedToNextLevel = true;
+            LevelManager.Instance.nextLevelOptionCheck = false;
             LevelManager.Instance.LoadNextLevel();
         }
 
