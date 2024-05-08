@@ -214,7 +214,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  hitVfx: {fileID: 8234506402513817270, guid: 37ba71c4d4b78eb4687a804939a56097, type: 3}
+  hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
   deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
   anim: {fileID: 1773057320954545746}
   isAlive: 1
@@ -228,6 +228,7 @@ MonoBehaviour:
     damage: 10
     movementSpeed: 6
     characterCost: 1000
+    hitVfx: {fileID: 0}
     basicSkill: {fileID: 11400000, guid: 27567ac3e2f59ee40a23d54dd6b0ba36, type: 2}
   playerSkills: {fileID: 0}
   characterModelInstance: {fileID: 0}
@@ -239,6 +240,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   experienceBar: {fileID: 0}
   currentMaxHealth: 0
+  projectileCastType: 0
 --- !u!114 &5732489213411279556
 MonoBehaviour:
   m_ObjectHideFlags: 0

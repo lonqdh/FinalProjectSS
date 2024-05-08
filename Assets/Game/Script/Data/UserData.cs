@@ -35,6 +35,7 @@ public class UserData
         EquippedCharacter = CharacterType.Knight;
         CurrentCoins = 10000;
         BoughtCharacters.Add(CharacterType.Knight);
+        BoughtCharacters.Add(CharacterType.Gunner);
         Username = "Hoang Long Dz";
     }
 }

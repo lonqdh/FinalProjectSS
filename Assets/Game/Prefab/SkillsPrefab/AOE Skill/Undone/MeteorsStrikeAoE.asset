@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 1
   skillName: MeteorsStrikeAoE
   description: 
-  damage: 12
+  damage: 50
   cooldown: 3
   rangeRadius: 5
   castTime: 2

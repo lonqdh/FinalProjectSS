@@ -247,6 +247,7 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.ChangeState(GameState.MainMenu);
         openingGameUI.SetActive(false);
         mainMenuUI.SetActive(true);
+        ingameBackgroundMusic.SetActive(false);
         menuBackgroundMusic.SetActive(true);
         //LevelManager.Instance.camera.enabled = true;
         //mainMenuBackgroundEffect.SetActive(true);
@@ -283,6 +284,8 @@ public class UIManager : Singleton<UIManager>
 
         totalKillText.SetText(LevelManager.Instance.killCount.ToString());
         goldEarnedText.SetText((LevelManager.Instance.killCount * 10).ToString());
+        GameManager.Instance.UserData.CurrentCoins += LevelManager.Instance.killCount * 10;
+        SaveManager.Instance.SaveData(GameManager.Instance.UserData);
 
         // Calculate final score with random value within a range
         int minScore = 100; // Adjust these values as needed

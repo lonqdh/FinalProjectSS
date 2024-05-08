@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 1
   skillName: RedEnergyAoE
   description: 
-  damage: 12
+  damage: 55
   cooldown: 3
   rangeRadius: 5
   castTime: 2

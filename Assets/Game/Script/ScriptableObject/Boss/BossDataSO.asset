@@ -25,7 +25,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 747e4841a11131040b6f095484f9adaa, type: 2}
     - {fileID: 11400000, guid: 768c34d2bb0d8674fa894c3c491f5e81, type: 2}
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
-    deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
+    deathVfx: {fileID: 1126160920730200, guid: 7ae1d86c2db118940a3a5a8f8e59a43d, type: 3}
     attackRange: 5
   - boss: {fileID: -2512774208259366706, guid: 36659bb518820714ba3b5e0a913ba900, type: 3}
     bossType: 1
@@ -39,7 +39,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 747e4841a11131040b6f095484f9adaa, type: 2}
     - {fileID: 11400000, guid: 768c34d2bb0d8674fa894c3c491f5e81, type: 2}
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
-    deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
+    deathVfx: {fileID: 1680937006522702, guid: f5933e79cbb33c14cadcc4d779aa4245, type: 3}
     attackRange: 5
   - boss: {fileID: 647450906609736124, guid: 9fdd88f678a4f1c40bcb82f1e906a30c, type: 3}
     bossType: 0
@@ -54,5 +54,5 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2e6ae34442fc75746b912bff25b17fb7, type: 2}
     - {fileID: 11400000, guid: 6cc76dee964c41b4198224ddd5fab877, type: 2}
     hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
-    deathVfx: {fileID: 5952568995343997865, guid: ae3164a1b72b11a4aa3ad629b49aca3d, type: 3}
+    deathVfx: {fileID: 2143167993283692679, guid: 05e83b04bef7fa54889fd6d5221474f7, type: 3}
     attackRange: 5

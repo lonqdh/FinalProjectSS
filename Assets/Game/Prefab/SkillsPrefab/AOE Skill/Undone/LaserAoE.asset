@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 1
   skillName: LaserAoE
   description: 
-  damage: 15
+  damage: 60
   cooldown: 5
   rangeRadius: 8
   castTime: 2

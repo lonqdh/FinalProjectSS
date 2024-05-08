@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 1
   skillName: Snow AoE
   description: 
-  damage: 10
+  damage: 35
   cooldown: 3
   rangeRadius: 5
   castTime: 2

@@ -19,6 +19,7 @@ MonoBehaviour:
     damage: 15
     movementSpeed: 3
     characterCost: 0
+    hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     basicSkill: {fileID: 11400000, guid: 589f7ebf4fdafb24680fa52fd771f96d, type: 2}
   - characterType: 1
     characterModelPrefab: {fileID: 921037747157138857, guid: d06151b1df32db7489e2b391db88d7ee, type: 3}
@@ -26,6 +27,7 @@ MonoBehaviour:
     damage: 50
     movementSpeed: 3
     characterCost: 1000
+    hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     basicSkill: {fileID: 11400000, guid: 504be9e284d61a145828ad7f57375435, type: 2}
   - characterType: 2
     characterModelPrefab: {fileID: 3537138265564915085, guid: e58f98123e4ff9a4abc5bdeb41666b63, type: 3}
@@ -33,4 +35,5 @@ MonoBehaviour:
     damage: 30
     movementSpeed: 3
     characterCost: 500
+    hitVfx: {fileID: 2766746968088524496, guid: f0318accab9ad6749a85dcce2064722b, type: 3}
     basicSkill: {fileID: 11400000, guid: 982a00e1f80b7a6479d85b738cf8cfc6, type: 2}

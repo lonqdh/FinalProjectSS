@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 1
   skillName: PurpleMagicCircleAoE
   description: 
-  damage: 15
+  damage: 50
   cooldown: 5
   rangeRadius: 5
   castTime: 2
