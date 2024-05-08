@@ -331,7 +331,7 @@ public class LevelManager : Singleton<LevelManager>
         nextLevelOptionCheck = false;
         level = 1;
         killCount = 1;
-        UIManager.Instance.totalKillText.SetText(killCount.ToString());
+        UIManager.Instance.totalKillText.SetText((killCount - 1).ToString());
 
         // Despawn all
         LeanPool.DespawnAll();

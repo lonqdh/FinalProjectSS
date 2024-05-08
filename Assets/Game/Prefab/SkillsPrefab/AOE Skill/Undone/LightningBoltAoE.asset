@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LightningBoltAoE
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
-  skillIcon: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: 6e9807bf9cd89754cbbf36bd13b37256, type: 3}
   skillType: 1
   skillName: LightningBolt
   description: 
@@ -23,4 +23,3 @@ MonoBehaviour:
   castTime: 2
   aoeSkill: {fileID: 2782763228753293966, guid: e65e8f3c16155a5499f5b5cf1a8058f9, type: 3}
   radius: 5
-  audioSource: {fileID: 6985172369027898346, guid: e65e8f3c16155a5499f5b5cf1a8058f9, type: 3}

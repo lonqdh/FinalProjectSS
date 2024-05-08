@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RedEnergyAoE
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
-  skillIcon: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: a675ddfa1e9d9304ca226ddd64dc8ab5, type: 3}
   skillType: 1
   skillName: RedEnergyAoE
   description: 
@@ -23,4 +23,3 @@ MonoBehaviour:
   castTime: 2
   aoeSkill: {fileID: 1923786329065334390, guid: fe9aa7336519e334dbf3aea29ce0b6ec, type: 3}
   radius: 5
-  audioSource: {fileID: 1913086596827032204, guid: fe9aa7336519e334dbf3aea29ce0b6ec, type: 3}

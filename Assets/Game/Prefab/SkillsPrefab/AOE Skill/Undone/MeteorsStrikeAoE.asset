@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MeteorsStrikeAoE
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
-  skillIcon: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: 9c487b7f73d9e9949b78a753fc948120, type: 3}
   skillType: 1
   skillName: MeteorsStrikeAoE
   description: 
@@ -23,4 +23,3 @@ MonoBehaviour:
   castTime: 2
   aoeSkill: {fileID: 8579544250859116851, guid: 3b77e8e680b370a498fcdd8fabd0d586, type: 3}
   radius: 5
-  audioSource: {fileID: 5204346047279938888, guid: 3b77e8e680b370a498fcdd8fabd0d586, type: 3}

@@ -40,15 +40,28 @@ public class SkillsChoosingContent : Singleton<SkillsChoosingContent>
         skillsButtonList.Clear();
         skillsList.Clear();
 
-        foreach (SkillData skillData in PlayerSkills.Instance.currentSkills)
+        //foreach (SkillData skillData in PlayerSkills.Instance.currentSkills)
+        //{
+        //    SkillsButton skillButton = Instantiate(skillBtnPrefab, skillItemParent);
+        //    skillButton.skillData = skillData;
+        //    skillButton.skillImage.sprite = skillData.skillIcon;
+        //    skillButton.skillName.text = skillData.skillName;
+        //    skillsButtonList.Add(skillButton);
+        //    skillsList.Add(skillData);
+        //    //Debug.Log("Replacable Skills Button Added for : " + skillData.skillName);
+        //}
+
+        int skillIndex;
+
+        for(int i = 0; i < 3; i++)
         {
-            SkillsButton skillButton = Instantiate(skillBtnPrefab, skillItemParent);
-            skillButton.skillData = skillData;
-            skillButton.skillImage.sprite = skillData.skillIcon;
-            skillButton.skillName.text = skillData.skillName;
+            SkillsButton skillButton = Instantiate (skillBtnPrefab, skillItemParent);
+            skillIndex = Random.Range(0, PlayerSkills.Instance.currentSkills.Count);
+            skillButton.skillData = PlayerSkills.Instance.currentSkills[skillIndex];
+            skillButton.skillImage.sprite = PlayerSkills.Instance.currentSkills[skillIndex].skillIcon;
+            skillButton.skillName.text = PlayerSkills.Instance.currentSkills[skillIndex].skillName;
             skillsButtonList.Add(skillButton);
-            skillsList.Add(skillData);
-            //Debug.Log("Replacable Skills Button Added for : " + skillData.skillName);
+            skillsList.Add(PlayerSkills.Instance.currentSkills[skillIndex]);
         }
     }
 

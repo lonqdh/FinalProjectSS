@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireCircleSlashBoss
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
-  skillIcon: {fileID: 21300000, guid: 2bea127a7264f0349b088dd214e10d9e, type: 3}
+  skillIcon: {fileID: 21300000, guid: d052ba451cc920a4a817bd7201d7b0fd, type: 3}
   skillType: 3
   skillName: FireCircleSlash
   description: 

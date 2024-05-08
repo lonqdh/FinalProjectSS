@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SnowAoE
   m_EditorClassIdentifier: 
   chargeEffectPrefab: {fileID: 0}
-  skillIcon: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: 236c62a6dfd10ab4ca44a2c3d3466500, type: 3}
   skillType: 1
   skillName: Snow AoE
   description: 
@@ -23,4 +23,3 @@ MonoBehaviour:
   castTime: 2
   aoeSkill: {fileID: 2057713216366136771, guid: 7c61bda33f715c44d9ef7771193a9630, type: 3}
   radius: 5
-  audioSource: {fileID: 1371584857320687362, guid: 7c61bda33f715c44d9ef7771193a9630, type: 3}

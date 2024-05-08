@@ -3184,7 +3184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 7239535004500914229}
   bossSpawnPoint: {fileID: 3418028202068373822}
-  killRequiredToNextLevel: 20
   endGamePortal: {fileID: 5991613855428445883, guid: 4cd491d43008c5c43a72c39f7ff33ab8, type: 3}
   nextLevelPortal: {fileID: 1742381342544703172, guid: 1d4fff24f2408a74da99a8d5e9672b2c, type: 3}
   endPortalPos: {fileID: 721324794785950913}
@@ -5197,7 +5196,7 @@ Transform:
   m_GameObject: {fileID: 4719950262447817632}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.066799, y: -99.54, z: 64.79075}
+  m_LocalPosition: {x: -10.25, y: -99.54, z: 48.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8492,7 +8491,7 @@ Transform:
   m_GameObject: {fileID: 8633101177350695557}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.935156, y: -99.5061, z: 64.82872}
+  m_LocalPosition: {x: -7.1183567, y: -99.5061, z: 48.37797}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

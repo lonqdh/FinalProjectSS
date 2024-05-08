@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Game/CastleEntrance.unity
+    guid: 7c67c42a11c3bb54bbde775ece1482bc
   m_configObjects: {}

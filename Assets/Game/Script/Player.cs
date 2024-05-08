@@ -340,27 +340,27 @@ public class Player : Character
                 }
                 else if (skill.skillType == SkillType.AreaOfEffect)
                 {
-                    float castAgainChance = Mathf.Clamp01((float)playerExperience.level / playerExperience.level + 10);
+                    //float castAgainChance = Mathf.Clamp01((float)playerExperience.level / playerExperience.level + 10);
 
-                    float randomValue = Random.value;
+                    //float randomValue = Random.value;
 
                     Vector3 nearestEnemyPosition = FindNearestEnemyPosition(skill.rangeRadius);
 
                     if (nearestEnemyPosition != Vector3.zero)
                     {
-                        if (randomValue <= castAgainChance)
-                        {
-                            if (nearestEnemyPosition != Vector3.zero)
-                            {
-                                Debug.Log("Double Double");
-                                skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
-                                skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
-                            }
-                        }
-                        else
-                        {
+                        //if (randomValue <= castAgainChance)
+                        //{
+                        //    if (nearestEnemyPosition != Vector3.zero)
+                        //    {
+                        //        Debug.Log("Double Double");
+                        //        skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
+                        //        skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
+                        //    }
+                        //}
+                        //else
+                        //{
                             skill.Activate(nearestEnemyPosition, chargeSkillPos.transform, this);
-                        }
+                        //}
                         skillCooldowns[skill] = skill.cooldown;
                     }
                 }

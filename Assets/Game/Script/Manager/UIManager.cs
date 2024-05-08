@@ -25,6 +25,8 @@ public class UIManager : Singleton<UIManager>
     public GameObject settingUIPanel;
 
     public GameObject bossEncounterWarning;
+    public GameObject menuBackgroundMusic;
+    public GameObject ingameBackgroundMusic;
 
 
     //SkillAcquiredIconCooldown
@@ -75,7 +77,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Start()
     {
-        EnterMainMenuUI();
+        //EnterMainMenuUI();
 
         openingStartGameButton.onClick.AddListener(EnterMainMenuUI);
         startGameButton.onClick.AddListener(EnterMatch);
@@ -245,6 +247,7 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.ChangeState(GameState.MainMenu);
         openingGameUI.SetActive(false);
         mainMenuUI.SetActive(true);
+        menuBackgroundMusic.SetActive(true);
         //LevelManager.Instance.camera.enabled = true;
         //mainMenuBackgroundEffect.SetActive(true);
     }
@@ -267,6 +270,8 @@ public class UIManager : Singleton<UIManager>
         finishGameUI.SetActive(false);
         loadingScreen.SetActive(false);
         gameplayUI.SetActive(true);
+        menuBackgroundMusic.SetActive(false);
+        ingameBackgroundMusic.SetActive(true);
 
         GameManager.Instance.ChangeState(GameState.Gameplay);
     }
@@ -289,6 +294,7 @@ public class UIManager : Singleton<UIManager>
 
         //gameplayUI.SetActive(false);
         finishGameUI.SetActive(true);
+        ingameBackgroundMusic.SetActive(false);
     }
 
     private void StopGameToMenu()
