@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject achievementUIPanel;
     public GameObject settingUIPanel;
 
+    public GameObject bossEncounterWarning;
 
 
     //SkillAcquiredIconCooldown

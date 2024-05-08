@@ -40,6 +40,8 @@ public class LevelManager : Singleton<LevelManager>
     private Coroutine spawnEnemiesCoroutine;
     private Coroutine playerProgressCoroutine;
 
+    public GameObject bossSpawnEffect;
+
 
     private NavMeshTriangulation navMeshData; // for spawning enemies
 
@@ -213,6 +215,12 @@ public class LevelManager : Singleton<LevelManager>
         if (spawnPoint != Vector3.zero)
         {
             Boss newBoss = LeanPool.Spawn(bossToSpawn.boss, spawnPoint, Quaternion.identity);
+
+            UIManager.Instance.bossEncounterWarning.SetActive(true);
+            GameObject bossEffectWhenSpawn = LeanPool.Spawn(bossSpawnEffect, newBoss.transform.position, Quaternion.identity, newBoss.transform);
+            LeanPool.Despawn(bossEffectWhenSpawn, 3f);
+            StartCoroutine(DeactiveBossWarning());
+
             if (newBoss != null)
             {
                 newBoss.target = player;
@@ -230,6 +238,13 @@ public class LevelManager : Singleton<LevelManager>
         {
             Debug.LogWarning("Failed to find a valid spawn point on the NavMesh for the enemy.");
         }
+    }
+
+    public IEnumerator DeactiveBossWarning()
+    {
+        yield return new WaitForSeconds(5f);
+        UIManager.Instance.bossEncounterWarning.SetActive(false);
+
     }
 
     public void LoadNextLevel()
@@ -425,7 +440,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             Destroy(currentLevel.gameObject);
         }
-        
+
         level = 1;
 
         // Despawn all
@@ -442,12 +457,16 @@ public class LevelManager : Singleton<LevelManager>
 
         StopAllCoroutines();
 
-        spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
-        playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
+        //if (GameManager.Instance.IsState(GameState.Gameplay))
+        //{
+        //    spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        //    playerProgressCoroutine = StartCoroutine(CalculatePlayerProgressRoutine());
+        //}
+
         //LoadLevel(level);
         bossSpawned = false;
         bossKilled = false;
-        
+
 
         //RespawnPlayer();
     }
