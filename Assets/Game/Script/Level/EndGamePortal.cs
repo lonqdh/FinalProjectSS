@@ -11,6 +11,11 @@ public class EndGamePortal : MonoBehaviour
         Player newPlayer = other.GetComponent<Player>();
         if (newPlayer != null)
         {
+            if (LevelManager.Instance.enemyList.Count > 0)
+            {
+                Debug.Log("Slay all the remaining enemies before ending match !");
+                return;
+            }
             LevelManager.Instance.nextLevelOptionCheck = false;
             UIManager.Instance.FinishMatch();
         }

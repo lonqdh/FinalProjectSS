@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+//This class does the data related work for the game, including saving, loading, deleting and reading data
 public class SaveManager : Singleton<SaveManager>
 {
     public void SaveData<T>(T data)

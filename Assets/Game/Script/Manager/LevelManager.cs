@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
+//This class manages the level, the current gameplay flow, progress, etc..
 public class LevelManager : Singleton<LevelManager>
 {
     public SkillDatabase skillDatabase;
@@ -14,6 +15,8 @@ public class LevelManager : Singleton<LevelManager>
     public BossDataSO bossDataSO;
     public CameraFollow camera;
     public int killCount;
+
+    public List<Enemy> enemyList;
 
     public List<Level> levelList = new List<Level>();
     public Level currentLevel;
@@ -155,6 +158,7 @@ public class LevelManager : Singleton<LevelManager>
             {
                 newEnemy.target = player;
                 newEnemy.OnInit(enemyToSpawn);
+                enemyList.Add(newEnemy);
                 //Debug.Log("Spawned Enemy: " + enemyToSpawn.enemyType);
             }
             else
@@ -393,6 +397,11 @@ public class LevelManager : Singleton<LevelManager>
         {
             Debug.LogWarning("Player spawn point is not assigned.");
         }
+    }
+
+    public void StopSpawningEnemy()
+    {
+        StopAllCoroutines();
     }
 
     //private IEnumerator BakeNavMeshCoroutine()

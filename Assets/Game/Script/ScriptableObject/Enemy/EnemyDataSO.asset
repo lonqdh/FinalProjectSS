@@ -130,6 +130,6 @@ MonoBehaviour:
     movementSpeed: 3
     enemySkill: {fileID: 11400000, guid: 589f7ebf4fdafb24680fa52fd771f96d, type: 2}
     enemyLevel: 2
-    attackRange: 5
+    attackRange: 3
     hitVfx: {fileID: 8483431786890429648, guid: 465f1babeb34b234eb60e63aead7885e, type: 3}
     deathVfx: {fileID: 222686110360411185, guid: e9ec701c7af236d4fa8abbc3aaf38d05, type: 3}

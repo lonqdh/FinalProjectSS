@@ -65,13 +65,13 @@ public class Enemy : Character
             agent.SetDestination(transform.position);
             //agent.isStopped = true; k dung isStopped vi minh dung isStopped cho AttackState hoat dong intentionally
         }
-
     }
 
     protected override void OnDespawn()
     {
         LeanPool.Despawn(this);
         LevelManager.Instance.killCount++;
+        LevelManager.Instance.enemyList.Remove(this);
         //UIManager.Instance.killCountText.SetText(LevelManager.Instance.killCount.ToString());
         UIManager.Instance.killCountText.text = (LevelManager.Instance.killCount.ToString());
 

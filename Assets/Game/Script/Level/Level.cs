@@ -16,6 +16,7 @@ public class Level : MonoBehaviour
         if (LevelManager.Instance.bossKilled == true)
         {
             LevelManager.Instance.nextLevelOptionCheck = true;
+            LevelManager.Instance.StopSpawningEnemy();
             NextLevelPortal nextLevel = LeanPool.Spawn(nextLevelPortal, nextLevelPortalPos.transform.position, Quaternion.identity);
             EndGamePortal endLevel = LeanPool.Spawn(endGamePortal, endPortalPos.transform.position, Quaternion.identity);
         }
